@@ -17,8 +17,9 @@ describe('Recipe routes', () => {
   beforeEach(() => Recipe.sync({ force: true })
     .then(() => Recipe.create(recipe)));
   describe('GET /recipes', () => {
-    it('should get 200', () =>
-      agent.get('/recipes').expect(200)
+    it('should get 200', () => agent.post('/recipes')
+      .send(recipe)
+      .expect(200)
     );
   });
 });
