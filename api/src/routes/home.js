@@ -20,57 +20,32 @@ function firstHundred() {
 
 router.get("/", function (req, res) {
 
-    Recipe.create(
-        {
-            id: newId,
-            name: "title",
-            summary: " summary",
-            score: 98.0,
-            healthScore: 99.0,
-            steps: [
-                {
-                    "name": "",
-                    "steps": [
-                        {
-                            "number": 1,
-                            "step": "Preheat broiler.",
-                            "ingredients": [
+    // let recipesApi = firstHundred();
+    let recipesDb = Recipe.findAll()
+    // let recipes = recipesApi.concat(recipesDb);
 
-                            ],
-                            "equipment": [
-                                {
-                                    "id": 405914,
-                                    "name": "broiler",
-                                    "localizedName": "broiler",
-                                    "image": "oven.jpg"
-                                }
-                            ]
-                        }]
-                }]
-        }).then(res => { console.log("Precargado") });
-  
-
-    let recipesApi = firstHundred();
-    let recipesDb = Recipe.findAll().then(res => { return res });
-    let recipes = recipesApi.concat(recipesDb);
-
-    Promise.all(recipes)
+    // Promise.all(recipes)
+    //     .then(response => {
+    //         let result = response.map((e) => {
+    //             if (e.data) {
+    //                 return e = {
+    //                     image: e.data.image,
+    //                     name: e.data.title,
+    //                     dishTypes: e.data.dishTypes,
+    //                     dietsTypes: e.data.diets
+    //                 }
+    //             }
+    //             else {
+    //                 return e
+    //             }
+    //         })
+    //         res.send(result)
+    //     })
+    Promise.all([recipesDb])
         .then(response => {
-            let result = response.map((e) => {
-                if (e.data) {
-                    return e = {
-                        image: e.data.image,
-                        name: e.data.title,
-                        dishTypes: e.data.dishTypes,
-                        dietsTypes: e.data.diets
-                    }
-                }
-                else {
-                    return e
-                }
-            })
-            res.send(result)
+            res.send(response)
         })
+
 })
 
 module.exports = router;

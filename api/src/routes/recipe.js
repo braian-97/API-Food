@@ -17,7 +17,10 @@ router.get("/", function (req, res) {
                     res.status(404).send("No se encontro la receta")
                 }
             })
-            .catch(err => { console.log(err) })
+            .catch(err => { 
+                console.log(err); 
+                res.status(500).send("Opps! Hubo un Error") 
+            })
     }
     else {
         res.status(404).send("Ingrese el parametro ?name='...' seguido por el nombre de la receta para realizar la busqueda. Ejemplo : ?name=pasta")
@@ -57,7 +60,10 @@ router.get("/add", function (req, res) {
             )
             return res.send("Recipe created")
         })
-        .catch(err => {console.log(err)})
+        .catch(err => { 
+            console.log(err); 
+            res.status(500).send("Opps! Hubo un Error") 
+        })
 });
 // router.post("/add", function (req, res) {   
 //     axios.get("https://api.spoonacular.com/recipes/10/information?apiKey=d9dee7110a6e4e2fa772c3f765768567")
@@ -103,7 +109,10 @@ router.get("/:id", function (req, res) {
           
             return res.json(result)
         })
-        .catch(err => { console.log(err) })
+        .catch(err => { 
+            console.log(err); 
+            res.status(500).send("Opps! Hubo un Error") 
+        })
 });
 
 
