@@ -1,9 +1,9 @@
 import './App.css';
-import React, { useEffect } from "react"
+import React from "react"
 import { Route } from "react-router-dom"
-import { useDispatch, useSelector } from 'react-redux';
-import { getAllRecipes } from './actions/index';
-import  Home  from './components/home/home'
+import  Home  from './components/Home/Home'
+import LandingPage from './components/Landing_page/Landing_page'
+import AddRecipe from './components/AddRecipe/AddRecipe';
 
 function App() {
   // const dispach = useDispatch();
@@ -18,7 +18,9 @@ function App() {
   return (
     <div className="App">
       <h1>Henry Food</h1>
-      <Route path="/" exact component={Home} />
+      <Route path="/home" exact component={Home} />
+      <Route path="/" exact component={LandingPage} />
+      <Route path="/add" exact component={AddRecipe} />
     </div>
   );
 }

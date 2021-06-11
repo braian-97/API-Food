@@ -1,20 +1,49 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { connect, useDispatch, useSelector } from 'react-redux';
-import { getAllRecipes } from '../../actions/index';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { getAllRecipes, searchRecipe } from '../../actions/index';
 
 function Home(props) {
     const [recipe, setRecipes] = useState([]);
-    useEffect(() => {
-        props.getRecipes()
-    }, [recipe])
+    const [search, setSearch] = useState({
+        name : ""
+    });
 
-    console.log(props)
+    useEffect(()=> {
+        let all = props.getAllRecipes();
+       
+        setRecipes(el => [...el, all])
+    },[])
+
+    function handleInputChange(e){
+        setSearch({
+            ...search,
+            name : e.target.value
+        })
+    }
+
+    function handleSubmit(e){        
+        let searchR = props.searchRecipe(search.name);
+        setRecipes(el => [...el, searchR])
+        e.preventDefault();
+    }
+
+    console.log(recipe)
+    console.log(search)
     return (
         <div className="home">
             <h1>Home</h1>
+            <Link to="./add">
+            <h2>Add Recipe</h2>
+            </Link>
+            <form onSubmit={handleSubmit} >
+            <label>Search for Name</label>
+            <input type="text" name="search" onChange={handleInputChange}  value={search.name}></input>
+            <button>Search</button>
+            </form>
             {props.recipes ?
                 <ul>
-                    {props.recipes[0].map((recipe) => (
+                    {props.recipes.map((recipe) => (
                         <li key={recipe.id}>                       
                             <span>
                                 {recipe.name}
@@ -35,7 +64,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        getRecipes: () => dispatch(getAllRecipes()),
+        getAllRecipes: () => dispatch(getAllRecipes()),
+        searchRecipe: (name) => dispatch(searchRecipe(name)),
     }
 }
 
