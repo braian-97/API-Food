@@ -16,6 +16,7 @@ router.get("/", function (req, res) {
                         return recipe = {
                             id: recipe.id,
                             name: recipe.title,
+                            image: recipe.image,
                             summary: recipe.summary,
                             score: recipe.spoonacularScore,
                             healthScore: recipe.healthScore,

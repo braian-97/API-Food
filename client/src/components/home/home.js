@@ -2,27 +2,29 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getAllRecipes, searchRecipe } from '../../actions/index';
+import Recipe from '../Recipe/Recipe'
+import Pagination from '../Pagination/Pagination';
 
 function Home(props) {
     const [recipe, setRecipes] = useState([]);
     const [search, setSearch] = useState({
-        name : ""
+        name: ""
     });
 
-    useEffect(()=> {
+    useEffect(() => {
         let all = props.getAllRecipes();
-       
-        setRecipes(el => [...el, all])
-    },[])
 
-    function handleInputChange(e){
+        setRecipes(el => [...el, all])
+    }, [])
+
+    function handleInputChange(e) {
         setSearch({
             ...search,
-            name : e.target.value
+            name: e.target.value
         })
     }
 
-    function handleSubmit(e){        
+    function handleSubmit(e) {
         let searchR = props.searchRecipe(search.name);
         setRecipes(el => [...el, searchR])
         e.preventDefault();
@@ -30,25 +32,27 @@ function Home(props) {
 
     console.log(recipe)
     console.log(search)
+
     return (
         <div className="home">
             <h1>Home</h1>
             <Link to="./add">
-            <h2>Add Recipe</h2>
+                <h2>Add Recipe</h2>
             </Link>
             <form onSubmit={handleSubmit} >
-            <label>Search for Name</label>
-            <input type="text" name="search" onChange={handleInputChange}  value={search.name}></input>
-            <button>Search</button>
+                <label>Search for Name</label>
+                <input type="text" name="search" onChange={handleInputChange} value={search.name}></input>
+                <button>Search</button>
             </form>
             {props.recipes ?
                 <ul>
                     {props.recipes.map((recipe) => (
-                        <li key={recipe.id}>                       
-                            <span>
-                                {recipe.name}
-                            </span>                               
-                        </li>))}
+                        <Recipe
+                            key={recipe.id}
+                            name={recipe.name}
+                            image={recipe.image}
+                            diets={recipe.diets}
+                        />))}
                 </ul>
                 : <h1>Cargando...</h1>}
         </div>
