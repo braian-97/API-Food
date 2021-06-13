@@ -3,20 +3,19 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getAllRecipes, searchRecipe } from '../../actions/index';
 import Recipe from '../Recipe/Recipe'
-import Pagination from '../Pagination/Pagination';
+import Pagination from '../Pagination/Pagination'
 
-function Home(props) {
+function Home({recipes, getAllRecipes, searchRecipe }) {    
     const [recipe, setRecipes] = useState([]);
     const [search, setSearch] = useState({
         name: ""
     });
 
     useEffect(() => {
-        let all = props.getAllRecipes();
-
-        setRecipes(el => [...el, all])
+        getAllRecipes();
     }, [])
 
+    console.log(recipe)
     function handleInputChange(e) {
         setSearch({
             ...search,
@@ -25,13 +24,9 @@ function Home(props) {
     }
 
     function handleSubmit(e) {
-        let searchR = props.searchRecipe(search.name);
-        setRecipes(el => [...el, searchR])
+        searchRecipe(search.name);
         e.preventDefault();
     }
-
-    console.log(recipe)
-    console.log(search)
 
     return (
         <div className="home">
@@ -44,23 +39,24 @@ function Home(props) {
                 <input type="text" name="search" onChange={handleInputChange} value={search.name}></input>
                 <button>Search</button>
             </form>
-            {props.recipes ?
+             {/* {recipes ?
                 <ul>
-                    {props.recipes.map((recipe) => (
+                    {recipes.map((recipe) => (
                         <Recipe
                             key={recipe.id}
                             name={recipe.name}
                             image={recipe.image}
                             diets={recipe.diets}
-                        />))}
+                        />
+                    ))}
                 </ul>
-                : <h1>Cargando...</h1>}
+                : <h1>Cargando...</h1>}  */}
+            { recipes ? <Pagination recipes={recipes}/>: <h2>Cargando...</h2>}
         </div>
     )
 };
 // props.recipes[0].map( (el) => <div></div> )              
 function mapStateToProps(state) {
-    console.log(state)
     return {
         recipes: state.recipes
     };

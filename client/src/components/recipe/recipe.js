@@ -3,9 +3,9 @@ import React from "react"
 function Recipe ({name, image, diets}){
     return (
         <div>
-            <h1>{name}</h1>
+            <h2>{name}</h2>
             <img src={image} alt="imagen"/>
-            <span>{diets}</span>
+            <p>{diets}</p>
         </div>
     )
 }

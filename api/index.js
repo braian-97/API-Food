@@ -33,36 +33,8 @@ conn.sync({ force: true }).then(() => {
             id: newId,
             name: d
         })
-    });
-      
-    // Recipe.create(
-    //   {
-    //       id: newId,
-    //       name: "title",
-    //       summary: " summary",
-    //       score: 98.0,
-    //       healthScore: 99.0,
-    //       steps: [
-    //           {
-    //               "name": "",
-    //               "steps": [
-    //                   {
-    //                       "number": 1,
-    //                       "step": "Preheat broiler.",
-    //                       "ingredients": [
+    });    
 
-    //                       ],
-    //                       "equipment": [
-    //                           {
-    //                               "id": 405914,
-    //                               "name": "broiler",
-    //                               "localizedName": "broiler",
-    //                               "image": "oven.jpg"
-    //                           }
-    //                       ]
-    //                   }]
-    //           }]
-    //   }).then(res => { console.log("Precargado") });
- 
+
   });
 }).catch(err => console.log(err));
