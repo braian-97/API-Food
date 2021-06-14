@@ -4,8 +4,8 @@ function Recipe ({name, image, diets}){
     return (
         <div>
             <h2>{name}</h2>
-            <img src={image} alt="imagen"/>
-            <p>{diets}</p>
+            {image ? <img src={image } alt="imagen"/> : <p>Imagen no disponible</p> }
+            <p>Dietas : {diets}</p>
         </div>
     )
 }

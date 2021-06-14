@@ -26,13 +26,129 @@ conn.sync({ force: true }).then(() => {
   server.listen(3001, () => {
     console.log('%s listening at 3001'); // eslint-disable-line no-console
 
-    const diets = ["Gluten_Free","Ketogenic","Lacto_Vegetarian","Ovo_Vegetarian","Vegan","Pescetarian","Paleo","Primal","Whole30"]
-    diets.forEach(d => {
+   
+    const recipes = [{
+      id: 1,
+      name: "oats upma recipe",
+      image: "https://spoonacular.com/recipeImages/627977-312x231.jpg",
+      imageType: "jpg",
+      summary: "summary 1",
+      score:1,
+      healthScore: 9,
+      steps: ["pasos"],
+      diets: "gluten Free",
+    },
+    {
+      id: 2,
+      name: "Mardi Gras Cupcakes",
+      image: "https://spoonacular.com/recipeImages/650965-312x231.png",
+      imageType: "png",
+      summary: "summary 2",
+      score:5,
+      healthScore: 9,
+      steps: ["pasos"],
+      diets: "ketogenic",
+    },
+    {
+      id: 3,
+      name: "Wholemeal Cranberry With Multi-Grain Loaf",
+      image: "https://spoonacular.com/recipeImages/665302-312x231.jpg",
+      summary: "summary 3",
+      score:4,
+      healthScore: 9,
+      steps: ["pasos"],
+      diets: "vegan",
+    },
+    {
+      id: 4,
+      name: "Indian-Style Pumpkin Side Dish",
+      image: "https://spoonacular.com/recipeImages/643775-312x231.jpg",
+      summary: "summary 4",
+      score:8,
+      healthScore: 9,
+      steps: ["pasos"],
+      diets: "lacto vegetarian",
+    },
+    {
+      id: 5,
+      name: "Coconut & Pomogranate Ice Cream - Raw and Vegan",
+      image: "https://spoonacular.com/recipeImages/639708-312x231.jpg",
+      summary: "summary 5",
+      score:3,
+      healthScore: 9,
+      steps: ["pasos"],
+      diets: "pescetarian",
+    },
+    {
+      id: 6,
+      name: "Chocolate Whoopie Pies",
+      image: "https://spoonacular.com/recipeImages/68254-312x231.jpg",
+      summary: "summary 6",
+      score:7,
+      healthScore: 9,
+      steps: ["pasos"],
+      diets: "ovo vegetarian",
+    },
+    {
+      id: 7,
+      name: "Vermont Spelt Sourdough",
+      image: "https://spoonacular.com/recipeImages/664798-312x231.jpg",
+      summary: "summary 7",
+      score:2,
+      healthScore: 9,
+      steps: ["pasos"],
+      diets: "paleo",
+    },
+    {
+      id: 8,
+      name: "Plantain Pizza",
+      image: "https://spoonacular.com/recipeImages/716300-312x231.jpg",
+      summary: "summary 8",
+      score:10,
+      healthScore: 9,
+      steps: ["pasos"],
+      diets: "whole30",
+    },
+    {
+      id: 9,
+      name: "Rustic Blueberry Cake Clafoutis",
+      image: "https://spoonacular.com/recipeImages/658913-312x231.jpg",
+      summary: "summary 9",
+      score:1,
+      healthScore: 9,
+      steps: ["pasos"],
+      diets: "primal",
+    },
+  ]
+
+  var recipe = []
+
+  recipes.forEach((data,i) => {
         const newId = uuidv4();
-        Diet.create({
-            id: newId,
-            name: d
-        })
+        Recipe.findOrCreate({
+          where: {
+              id: newId,
+              name: data.name,
+              summary: data.summary,
+              score: data.score,
+              healthScore: data.healthScore,
+              steps: data.steps,
+          }
+      }).then(recipes => {
+          recipe.push(recipes[0])
+
+          return Diet.create(
+              {
+                  id: newId,
+                  name: data.diets,
+              })
+       
+      }).then(diet => {
+        return diet.setRecipes(recipe[i].id)
+
+      }).then(diet => {
+          console.log("created")
+      })
     });    
 
 

@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { addRecipe, getAllDiets, addDiet } from '../../actions'
 
 function AddRecipe({ addRecipe, result, getAllDiets, diets, addDiet }) {
-    const [recipe, setRecipe] = React.useState({
+    const [recipe, setRecipe] = useState({
         name: "",
         summary: "",
         score: "",
@@ -11,12 +11,13 @@ function AddRecipe({ addRecipe, result, getAllDiets, diets, addDiet }) {
         steps: "",
         diet: "",
     })
-    const [errors, setErrors] = React.useState({});
-    const [diet, setDiets] = React.useState([])
+    const [errors, setErrors] = useState({});
+    const [diet, setDiets] = useState([...diets])
 
     useEffect(() => {
         getAllDiets()
-    }, [setDiets]);
+    }, []);
+
 
     const handleInputChange = function (e) {
 

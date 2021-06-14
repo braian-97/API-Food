@@ -42,10 +42,10 @@ export function addDiet( diet ){
     } 
 }
 
-export function searchRecipe( name ){
+export function searchRecipe( {name, number} ){
     return (dispach) => {
         if(name){
-        axios.get(`http://localhost:3001/recipe/?name=${name}`)
+        axios.get(`http://localhost:3001/recipe/?name=${name}&number=${number}`)
         .then(response => {
             console.log(response)
             dispach({ type: SEARCH_RECIPE, payload: response.data})

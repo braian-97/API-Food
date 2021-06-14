@@ -8,11 +8,11 @@ const { v4: uuidv4 } = require('uuid');
 
 router.get("/", function (req, res) {
     if (req.query.name) {
-        axios.get(COMPLEX_SEARCH + `?query=${req.query.name}&apiKey=` + API_KEY + ADD_RECIPE_INFO + "&number=9")
+        axios.get(COMPLEX_SEARCH + `?query=${req.query.name}&apiKey=` + API_KEY + ADD_RECIPE_INFO + `&number=${req.body.number ? req.body.number : 9}`)
             .then(response => {
                 if (response.data.totalResults > 0) {
-                    console.log(response)
-                    let result = response.data.results.map( (recipe) => {
+
+                    let resultApi = response.data.results.map( (recipe) => {
                         return recipe = {
                             id: recipe.id,
                             name: recipe.title,
@@ -24,8 +24,46 @@ router.get("/", function (req, res) {
                             diets: recipe.diets,
                         };
                     })
+                    console.log(response.data.results.diets)
+                    response.data.results.forEach(data => {
+                        if(data.diets[0]){
+                            data.diets.forEach(diet => {
+                                const newId = uuidv4();
+                                
+                                Diet.findOrCreate({
+                                    where: {
+                                        name: diet,
+                                    },
+                                    defaults: {
+                                        id: newId,
+                                        name: diet,
+                                      }                    
+                                }).then(diet => {
+                                    console.log(diet)
+                                })
+                            })
+                        }
+                    }); 
 
-                    return res.send(result)
+                    let recipesDb = Recipe.findAll({include: Diet})
+
+                    Promise.all([recipesDb])
+                    .then(response => {            
+                        let result = response[0].map( (recipe) => {
+                            return recipe = {
+                                id: recipe.id,
+                                name: recipe.name,
+                                image: recipe.image,
+                                summary: recipe.summary,
+                                score: recipe.score,
+                                healthScore: recipe.healthScore,
+                                steps: recipe.steps,
+                                diets: recipe.diets.map(e =>  e.name ),
+                            };
+                        })
+            
+                        res.send(result.concat(resultApi))
+                    })
                 }
                 else {
                     res.status(404).send("No se encontro la receta")
@@ -71,7 +109,6 @@ router.post("/add", function (req, res) {
                         name: diet,
                     })
             }).then(diet => {
-                console.log(diet)
                 return diet.setRecipes(recipe.id)
             }).then(diet => {
                 console.log(diet)

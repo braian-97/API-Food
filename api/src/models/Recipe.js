@@ -28,8 +28,8 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     steps: {
-      //type: DataTypes.ARRAY(DataTypes.TEXT),
-      type: DataTypes.TEXT,
+      type: DataTypes.ARRAY(DataTypes.TEXT),
+      //type: DataTypes.TEXT,
       allowNull: false,
     },
   });

@@ -1,31 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getAllRecipes, searchRecipe } from '../../actions/index';
+import { getAllRecipes, searchRecipe, getAllDiets } from '../../actions/index';
 import Recipe from '../Recipe/Recipe'
 import Pagination from '../Pagination/Pagination'
 
-function Home({recipes, getAllRecipes, searchRecipe }) {    
+
+function Home({recipes, getAllRecipes, searchRecipe, getAllDiets, diets }) {    
     const [recipe, setRecipes] = useState([]);
     const [search, setSearch] = useState({
-        name: ""
+        name: "",
+        number: 9,
     });
 
     useEffect(() => {
         getAllRecipes();
+        getAllDiets();
     }, [])
 
-    console.log(recipe)
+    useEffect(() => {
+        if(recipes){
+            setRecipes([...recipes])
+        }
+    }, [recipes])
+
     function handleInputChange(e) {
         setSearch({
             ...search,
-            name: e.target.value
+            [e.target.name]: e.target.value,
         })
     }
 
     function handleSubmit(e) {
-        searchRecipe(search.name);
+        searchRecipe(search);
         e.preventDefault();
+         setRecipes([...recipe, ...recipes])
     }
 
     return (
@@ -36,7 +45,9 @@ function Home({recipes, getAllRecipes, searchRecipe }) {
             </Link>
             <form onSubmit={handleSubmit} >
                 <label>Search for Name</label>
-                <input type="text" name="search" onChange={handleInputChange} value={search.name}></input>
+                <input type="text" name="name" onChange={handleInputChange} value={search.name}></input>
+                <label>Number of recipes to search</label>
+                <input type="number" name="number" onChange={handleInputChange} value={search.number} size="5"></input>
                 <button>Search</button>
             </form>
              {/* {recipes ?
@@ -51,20 +62,24 @@ function Home({recipes, getAllRecipes, searchRecipe }) {
                     ))}
                 </ul>
                 : <h1>Cargando...</h1>}  */}
-            { recipes ? <Pagination recipes={recipes}/>: <h2>Cargando...</h2>}
+            { recipes ? <Pagination recipes={recipes} diets={diets}/>: <h2>Cargando...</h2>} 
+            
         </div>
     )
 };
 // props.recipes[0].map( (el) => <div></div> )              
 function mapStateToProps(state) {
+    console.log(state)
     return {
-        recipes: state.recipes
+        recipes: state.recipes,
+        diets: state.diets
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         getAllRecipes: () => dispatch(getAllRecipes()),
+        getAllDiets: () => dispatch(getAllDiets()),
         searchRecipe: (name) => dispatch(searchRecipe(name)),
     }
 }
