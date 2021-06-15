@@ -12,10 +12,7 @@ const newId = uuidv4();
 
 router.get("/", function (req, res) {
 
-
     let recipesDb = Recipe.findAll({include: Diet})
-
-
     // Promise.all(recipes)
     //     .then(response => {
     //         let result = response.map((e) => {
@@ -41,17 +38,16 @@ router.get("/", function (req, res) {
                     id: recipe.id,
                     name: recipe.name,
                     image: recipe.image,
-                    summary: recipe.summary,
+                    // summary: recipe.summary,
                     score: recipe.score,
-                    healthScore: recipe.healthScore,
-                    steps: recipe.steps,
+                    // healthScore: recipe.healthScore,
+                    // steps: recipe.steps,
                     diets: recipe.diets.map(e =>  e.name ),
                 };
             })
 
             res.send(result)
         })
-
 
 })
 

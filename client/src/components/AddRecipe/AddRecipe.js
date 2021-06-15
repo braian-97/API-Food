@@ -1,27 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { addRecipe, getAllDiets, addDiet } from '../../actions'
+import { addRecipe, getAllDiets } from '../../actions'
 
-function AddRecipe({ addRecipe, result, getAllDiets, diets, addDiet }) {
+function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
     const [recipe, setRecipe] = useState({
         name: "",
         summary: "",
         score: "",
         healthScore: "",
         steps: "",
-        diet: "",
+        diet: [""],
     })
     const [errors, setErrors] = useState({});
-    const [diet, setDiets] = useState([...diets])
 
     useEffect(() => {
         getAllDiets()
     }, []);
 
-
+    console.log(recipe)
+    console.log(diets)
     const handleInputChange = function (e) {
+        if (e.target.name !== "diet") {
 
-    //    if (e.target.name !== "diet") {
             setRecipe({
                 ...recipe,
                 [e.target.name]: e.target.value
@@ -30,22 +30,34 @@ function AddRecipe({ addRecipe, result, getAllDiets, diets, addDiet }) {
                 ...recipe,
                 [e.target.name]: e.target.value
             }));
-      //  }
-     //   else {
-            // setDiets(diets => [...diets, {
-            //     name: e.target.value
-            // }]
-            // )
-
-     //   }
-        console.log(recipe)
-        console.log(diet)
+        }
+        else {
+            if (e.target.type === "checkbox") {
+                if (e.target.checked === true) {
+                    setRecipe({
+                        ...recipe,
+                        [e.target.name]: [...recipe.diet].concat([e.target.value])
+                    })
+                }
+                else {
+                    setRecipe({
+                        ...recipe,
+                        [e.target.name]: [...recipe.diet].filter((d) => d !== e.target.value)
+                    })
+                }
+            }
+            else {
+                setRecipe({
+                    ...recipe,
+                    [e.target.name]: [...e.target.value.split(",")]
+                });
+            }
+        }
     }
 
+    console.log(recipe)
     const handleSubmit = function (e) {
         addRecipe(recipe);
-        addDiet(diet);
-
         e.preventDefault();
     }
 
@@ -79,13 +91,11 @@ function AddRecipe({ addRecipe, result, getAllDiets, diets, addDiet }) {
                 </div>
 
                 <div><ul>
-                    {diets.map((d) => (
-                        <div>
-                            <li key={d.id}>
-                                <input type="checkbox" name="diet" onChange={handleInputChange} value={d.name}></input>
-                                <label>{d.name}</label>
-                            </li>
-                        </div>
+                    {diets.map((d, i) => (
+                        <li key={d.id}>
+                            <input type="checkbox" name="diet" onChange={handleInputChange} value={d.name}></input>
+                            <label>{d.name}</label>
+                        </li>
                     )
                     )}
                 </ul>
@@ -131,7 +141,6 @@ function mapDispatchToProps(dispatch) {
     return {
         addRecipe: (recipe) => { dispatch(addRecipe(recipe)) },
         getAllDiets: () => { dispatch(getAllDiets()) },
-        addDiet: (diet) => { dispatch(addDiet(diet)) },
     }
 }
 

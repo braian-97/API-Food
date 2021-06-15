@@ -7,28 +7,22 @@ function Pagination({ recipes, diets }) {
     dataStartingIndex: null,
     dataLastIndex: 0,
     currentClickedNumber: 1,
-    pageData: null,    
+    pageData: null,
   })
   const [dataFromPaginate, setDataFromPaginate] = useState(null);
-  const [recipePerPage] = useState(4);
-  const [search, setSearch] = useState('');
+  const [recipePerPage, setRecipePerPage] = useState(null);
   const [data, setData] = useState([]);
-  const [sortType, setSortType] = useState('predeterminado');
-  const [sort, setSort] = useState('Ascendente');
-  const [diet, setDiet] = useState("none");
 
   var { currentClickedNumber, pageData, totalPages } = page;
 
-  console.log("recipes", recipes)
-  console.log("dietas", diets)
   useEffect(() => {
-     setData([...recipes]);
+    setData([...recipes]);
   }, [recipes])
 
 
   useEffect(() => {
     determineNumberOfPages();
-  }, [data])
+  }, [data, recipePerPage])
 
 
   useEffect(
@@ -38,90 +32,8 @@ function Pagination({ recipes, diets }) {
         setDataFromPaginate(pageData[currentClickedNumber]);
       }
     },
-    [page.currentClickedNumber, pageData]
+    [page.currentClickedNumber, pageData,]
   );
-
-
-  useEffect(() => {
-    
-    const sortArray = (type) => {
-      const types = {
-        predeterminado: 'predeterminado',
-        name: 'name',
-        score: 'score',
-      };
-      const sortProperty = types[type];
-      if (sortProperty === "predeterminado") {
-        setData(recipes);  
-      }
-      else {
-        const sortProperty = types[type];
-
-        const sorted = [...data].sort(function (a, b) {
-          if (a[sortProperty] > b[sortProperty]) {
-            return 1;
-          }
-          if (a[sortProperty] < b[sortProperty]) {
-            return -1;
-          }
-          return 0;
-        });
-        setData(sorted);    
-
-        // if (pageData) {
-        //   const sortedFromPaginate = [...pageData[currentClickedNumber]].sort(function (a, b) {
-        //     if (a[sortProperty] > b[sortProperty]) {
-        //       return 1;
-        //     }
-        //     if (a[sortProperty] < b[sortProperty]) {
-        //       return -1;
-        //     }
-        //     return 0;
-        //   });
-        //   setDataFromPaginate(sortedFromPaginate);
-        // }
-      }
-    };
-    sortArray(sortType);
-  }, [sortType]);
-
-
-  useEffect(() => {
-    const filterByDiet = (type) => {
-      if(type !== "none"){
-        let result = [...recipes].filter(d => d.diets.includes(type))
-        setData(result);
-
-        // if (pageData) {
-        //   const sortedFromPaginate = [...pageData[currentClickedNumber]].filter(d => d.diets.includes(type))
-        //   setDataFromPaginate(sortedFromPaginate);
-        // }
-      }
-      else{ setData(recipes); }
-      }      
-      filterByDiet(diet)      
-  }, [diet]);
-
-
-  const handleClick = () => {
-    const reverseOrder = () => {
-      const reverse = [...data].reverse();
-      setData(reverse);
-      
-      // if (pageData) {
-      //   const sortedFromPaginate = [...pageData[currentClickedNumber]].reverse();
-      //   setDataFromPaginate(sortedFromPaginate);
-      // }
-    }
-    reverseOrder() 
-    setSort(sort === "Ascendente" ? "Descendente" : "Ascendente")  
-  }
-
-
-  const handleInputChange = function (e) {
-    setSearch(e.target.value);
-  }
-
 
   const determineNumberOfPages = () => {
     let paginatedDataObject = {};
@@ -129,9 +41,10 @@ function Pagination({ recipes, diets }) {
     let index = 0;
     let dataLength = data.length;
     let chunkArray = [];
-
-    for (index = 0; index < dataLength; index += recipePerPage) {
-      let newChunk = data.slice(index, index + recipePerPage);
+    let number = recipePerPage ? parseInt(recipePerPage) : 4
+    for (index = 0; index < dataLength; index += number) {
+      let end = index + number
+      let newChunk = data.slice(index, end);
       chunkArray.push(newChunk);
     }
 
@@ -210,110 +123,73 @@ function Pagination({ recipes, diets }) {
         <button onClick={(e) => {
           setCurrentClickedNumber(e);
         }}
-          isClicked={currentClickedNumber === i ? true : false}
+          //isClicked={currentClickedNumber === i ? true : false}
           key={i}
         >{i}
         </button>
       );
     }
-    let currentPage = ( <button 
+    let currentPage = (<button
       className="currentPage"
       onClick={(e) => { setCurrentClickedNumber(e); }}
-      isClicked={true}
+      //isClicked={true}
       key={currentClickedNumber}
     >{currentClickedNumber}
     </button>)
     let points = <button> ... </button>
- 
-    return [pages[currentClickedNumber-3] ? points : null ,pages[currentClickedNumber-2], currentPage, pages[currentClickedNumber] ,pages[currentClickedNumber+1] ? points : null];   
+
+    return [pages[currentClickedNumber - 3] ? points : null, pages[currentClickedNumber - 2], currentPage, pages[currentClickedNumber], pages[currentClickedNumber + 1] ? points : null];
   };
 
-
-  // const renderUserList = () =>
-  //   dataFromPaginate
-  //     ? dataFromPaginate.map((recipe, i) => (
-  //       <Recipe
-  //         key={recipe.id}
-  //         name={recipe.name}
-  //         image={recipe.image}
-  //         diets={recipe.diets}
-  //       />
-  //     ))
-  //     : data.filter(d => d.name.toLowerCase().includes(search.toLowerCase())).map((recipe, i) => {
-  //       if (i < recipePerPage) {
-  //         return (
-  //           <Recipe
-  //             key={recipe.id}
-  //             name={recipe.name}
-  //             image={recipe.image}
-  //             diets={recipe.diets}
-  //           />
-  //         );
-  //       } else {
-  //         return null;
-  //       }
-  //     });
-
+  const handleInputChangeSearch = function (e) {
+    if (e.target.value) {
+      setRecipePerPage(e.target.value);
+    }
+    else {
+      setRecipePerPage(null);
+    }
+    e.preventDefault();
+  }
 
   return (
     <div>
-      <div>
-      <input
-        type="text"
-        className="mb-2 form-control"
-        placeholder="Buscar Receta"
-        value={search}
-        onChange={handleInputChange}
-      />
-      </div>
-      <div>
-        <select onChange={(e) => setSortType(e.target.value)}>
-          <option value="predeterminado">Predeterminado</option>
-          <option value="name">Alfabeto</option>
-          <option value="score">Puntuación</option>
-        </select>
-      </div>
-      <div>
-        <button name={sort} onClick={() => handleClick()}
-        > {sort}
-        </button>
-      </div>
-
-      <div>
-        <select onChange={(e) => setDiet(e.target.value)}>
-        <option  value="none" >None</option>
-        {diets.map((d) => (
-             <option key={d.id} value={d.name} >{d.name}</option>
-        )
-        )}   
-        </select>
-      </div>
-      <div>  
-       {   dataFromPaginate
-      ? dataFromPaginate.map((recipe, i) => (
-        <Recipe
-          key={recipe.id}
-          name={recipe.name}
-          image={recipe.image}
-          diets={recipe.diets}
+      <form>
+        <label >Show number of recipes per Page: </label>
+        <input
+          type="number"
+          className="mb-2 form-control"
+          placeholder="Recipes per Page"
+          value={recipePerPage ? recipePerPage : null}
+          onChange={handleInputChangeSearch}
         />
-      ))
-      : data.filter(d => d.name.toLowerCase().includes(search.toLowerCase())).map((recipe, i) => {
-        if (i < recipePerPage) {
-          return (
+      </form>
+      <div>
+        {dataFromPaginate ?
+          dataFromPaginate.map((recipe, i) => (
             <Recipe
               key={recipe.id}
+              id={recipe.id}
               name={recipe.name}
               image={recipe.image}
               diets={recipe.diets}
             />
-          );
-        } else {
-          return null;
-        }
-      })
-      }
-      </div> 
+          ))
+          : data.map((recipe, i) => {
+            if (i < recipePerPage) {
+              return (
+                <Recipe
+                  key={recipe.id}
+                  id={recipe.id}
+                  name={recipe.name}
+                  image={recipe.image}
+                  diets={recipe.diets}
+                />
+              );
+            } else {
+              return null;
+            }
+          })}
+      </div>
       <div>
         <div>
           {currentClickedNumber > 1 ? (
@@ -328,16 +204,16 @@ function Pagination({ recipes, diets }) {
                 <button onClick={() => moveOnePageBackward()}>
                   &lt;
                 </button>
-              </span>              
+              </span>
             </div>
           ) : (
             <div />
-          )}                  
-        </div>        
-        <div>{pageNumberRender()}</div>        
+          )}
+        </div>
+        <div>{pageNumberRender()}</div>
         <div>
           {currentClickedNumber !== totalPages ? (
-            <div>          
+            <div>
               <span>
                 <button onClick={() => moveOnePageForward()}
                 > &gt;

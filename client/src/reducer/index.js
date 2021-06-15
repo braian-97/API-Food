@@ -1,9 +1,10 @@
-import { SET_RECIPES, ADD_RECIPE, SET_DIETS, ADD_DIET, SEARCH_RECIPE } from "../actions/index";
+import { SET_RECIPES, ADD_RECIPE, SET_DIETS, ADD_DIET, SEARCH_RECIPE, GET_DETAILS } from "../actions/index";
 
 const initialState = {
     recipes: undefined,
     result: "",
     diets: [],
+    recipeDetails: {},
 };
 
 const recipes = (state = initialState, action) => {
@@ -32,6 +33,11 @@ const recipes = (state = initialState, action) => {
             return {
                 ...state,
                 recipes: action.payload
+            }
+        case GET_DETAILS:
+            return {
+                ...state,
+                recipeDetails: action.payload
             }
         default:
             return state
