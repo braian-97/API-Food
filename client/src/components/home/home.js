@@ -4,18 +4,21 @@ import { Link } from 'react-router-dom';
 import { getAllRecipes, searchRecipe, getAllDiets } from '../../actions/index';
 import Recipe from '../Recipe/Recipe'
 import Pagination from '../Pagination/Pagination'
+import s from './Home.css';
 
-
-function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets }) {
+function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRecipes }) {
     const [recipe, setRecipes] = useState();
     const [search, setSearch] = useState({
         name: "",
-        number: 9,
+        number: undefined,
     });
     const [sortType, setSortType] = useState('predeterminado');
     const [sort, setSort] = useState('Ascendente');
     const [diet, setDiet] = useState("none");
-    const [searchName, setSearchName] = useState('');
+    const [filterbyName, setFilterbyName] = useState("");
+    const [showRecipes, setShowRecipes] = useState();
+
+    console.log(recipes)
 
     useEffect(() => {
         getAllRecipes();
@@ -23,10 +26,36 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets }) {
     }, [])
 
     useEffect(() => {
+        getAllDiets();
+    }, [recipes])
+
+    useEffect(() => {
         if (recipes) {
             setRecipes(recipes)
         }
     }, [recipes])
+
+    console.log(newRecipes)
+    useEffect(() => {
+        if(newRecipes && recipes){
+        const hundredRecipes = () => {
+            var iguales = [];
+            for (let i = 0; i < newRecipes.length; i++) {
+                for (var j = 0; j < recipes.length; j++) {
+                    if (newRecipes[i].name === recipes[j].name) {
+                        iguales.push(j)
+                    }
+                }
+            }
+            for (let i = 0; i < recipes.length; i++) {
+                setShowRecipes(newRecipes.concat(recipes.filter((r, i) => i !== iguales[i])))
+            }
+        }
+        hundredRecipes()
+    }
+    }, [newRecipes])
+
+    console.log(showRecipes)
 
     useEffect(() => {
         const sortArray = (type) => {
@@ -64,58 +93,72 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets }) {
     useEffect(() => {
         const filterByDiet = (type) => {
             if (type !== "none") {
-                let result = [...recipes].filter(d => d.diets.includes(type))
+                let result = recipes.filter(d => d.diets.some(d => d.toLowerCase() === type.toLowerCase()))
                 setRecipes(result);
             }
             else { setRecipes(recipes); }
         }
-        filterByDiet(diet)
+        if (recipes) {
+            filterByDiet(diet)
+        }
     }, [diet]);
 
 
     const handleClick = (e) => {
-        console.log(e)
         const reverseOrder = () => {
             const reverse = [...recipe].reverse();
             setRecipes(reverse);
         }
-        if(recipe){
-        reverseOrder()
+        if (recipe) {
+            reverseOrder()
         }
-        setSort(sort === "Ascendente" ? "Descendente" : "Ascendente")     
+        setSort(sort === "Ascendente" ? "Descendente" : "Ascendente")
     }
 
     useEffect(() => {
-        const filterByName = (type) => {
-            if (type === "") { setRecipes([...recipe]); }
+        const recipesByName = (type) => {
+            if (type === "") {
+                setRecipes([...recipes]);
+            }
             else {
-                let result = [...recipe].filter(d => d.name.toLowerCase().includes(searchName.toLowerCase()))
+                let result = recipes.filter(d => d.name.toLowerCase().includes(filterbyName.toLowerCase()))
                 setRecipes(result);
             }
         }
-        if (recipe) {
-            filterByName(searchName)
+        if (recipes) {
+            recipesByName(filterbyName)
         }
-    }, [searchName]);
+    }, [filterbyName]);
 
 
     const handleInputChange = (e) => {
-        setSearch({
-            ...search,
-            [e.target.name]: e.target.value,
-        })
+        if (e.target.value) {
+            setSearch({
+                ...search,
+                [e.target.name]: e.target.value,
+            })
+        }
+        else {
+            setSearch({
+                ...search,
+                [e.target.name]: null,
+            })
+        };
+        e.preventDefault();
     };
 
     const handleSubmit = (e) => {
         searchRecipe(search);
         e.preventDefault();
-        setSearch("");
+        setSearch({
+            name: "",
+            number: undefined,
+        })
     }
 
     const handleInputChangeSearch = function (e) {
-        setSearchName(e.target.value);
+        setFilterbyName(e.target.value);
     }
-
 
     return (
         <div className="home">
@@ -124,11 +167,11 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets }) {
                 <h2>Add new Recipe</h2>
             </Link>
             <form onSubmit={handleSubmit} >
-                <label> <h3>Search Recipe:</h3> </label>
-                <label>Search for Name: </label>
-                <input type="text" name="name" onChange={handleInputChange} value={search.name}></input><br></br>
-                <label>Number of recipes to search: </label>
-                <input type="number" name="number" onChange={handleInputChange} value={search.number} size="4"></input>
+                <label> <h3>Load more recipes:</h3> </label>
+                <label>Load for Name: </label>
+                <input type="text" name="name" onChange={handleInputChange} value={search.name ? search.name : undefined}></input><br></br>
+                <label>Number of recipes to load: </label>
+                <input type="number" name="number" onChange={handleInputChange} value={search.number ? search.number : undefined} size="4"></input>
                 <button type="submit">Search</button>
             </form>
             <form>
@@ -139,7 +182,7 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets }) {
                         type="text"
                         className="mb-2 form-control"
                         placeholder="Buscar Receta"
-                        value={searchName}
+                        value={filterbyName}
                         onChange={handleInputChangeSearch}
                     />
                 </div>
@@ -175,9 +218,11 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets }) {
 };
 
 function mapStateToProps(state) {
+    console.log(state)
     return {
         recipes: state.recipes,
-        diets: state.diets
+        diets: state.diets,
+        newRecipes: state.newRecipes,
     };
 }
 

@@ -11,7 +11,7 @@ function Pagination({ recipes, diets }) {
   })
   const [dataFromPaginate, setDataFromPaginate] = useState(null);
   const [recipePerPage, setRecipePerPage] = useState(null);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(recipes);
 
   var { currentClickedNumber, pageData, totalPages } = page;
 
@@ -41,9 +41,9 @@ function Pagination({ recipes, diets }) {
     let index = 0;
     let dataLength = data.length;
     let chunkArray = [];
-    let number = recipePerPage ? parseInt(recipePerPage) : 4
-    for (index = 0; index < dataLength; index += number) {
-      let end = index + number
+    let displayRecipes = recipePerPage ? parseInt(recipePerPage) : 10
+    for (index = 0; index < dataLength; index += displayRecipes) {
+      let end = index + displayRecipes
       let newChunk = data.slice(index, end);
       chunkArray.push(newChunk);
     }
@@ -122,8 +122,7 @@ function Pagination({ recipes, diets }) {
       pages.push(
         <button onClick={(e) => {
           setCurrentClickedNumber(e);
-        }}
-          //isClicked={currentClickedNumber === i ? true : false}
+        }}        
           key={i}
         >{i}
         </button>
@@ -131,8 +130,7 @@ function Pagination({ recipes, diets }) {
     }
     let currentPage = (<button
       className="currentPage"
-      onClick={(e) => { setCurrentClickedNumber(e); }}
-      //isClicked={true}
+      onClick={(e) => { setCurrentClickedNumber(e); }}    
       key={currentClickedNumber}
     >{currentClickedNumber}
     </button>)
@@ -190,6 +188,7 @@ function Pagination({ recipes, diets }) {
             }
           })}
       </div>
+      {data.length > 0 ?
       <div>
         <div>
           {currentClickedNumber > 1 ? (
@@ -230,7 +229,7 @@ function Pagination({ recipes, diets }) {
           )}
         </div>
       </div>
-
+      : null}
     </div>
   );
 };

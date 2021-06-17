@@ -1,10 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Image from '../../img/img2.jpg'
+import s from  './LandingPage.css';
 
 function LandingPage () {
     return (
-        <div>
-            <img src="https://initiate.alphacoders.com/images/396/cropped-1360-768-396169.jpg?4533" alt="food" />
+        <div className="page">
+            <img className={s.img} src={Image} alt="food" width="900" height="500"/>
             <Link to="./home">
             <h2>Ir a la pagina principal</h2>
             </Link>

@@ -5,7 +5,8 @@ module.exports = (sequelize) => {
   sequelize.define('diet', {
     id: {
       type: DataTypes.UUID,
-      primaryKey: true
+      primaryKey: true,
+      unique: true, 
     },
     name: {
       type: DataTypes.TEXT,

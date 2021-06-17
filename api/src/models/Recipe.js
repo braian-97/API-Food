@@ -10,28 +10,25 @@ module.exports = (sequelize) => {
       unique: true, 
     },
     name: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
       unique: true, 
     },
     summary: {
       type: DataTypes.TEXT,
       allowNull: false,
-      unique: true, 
+    },
+    image: {
+      type: DataTypes.TEXT,
     },
     score: {
       type: DataTypes.DECIMAL,
-      allowNull: false,
     },
     healthScore: {
-      type: DataTypes.DECIMAL,
-      allowNull: false,
+      type: DataTypes.DECIMAL,  
     },
     steps: {
       type: DataTypes.ARRAY(DataTypes.TEXT),
-      //type: DataTypes.TEXT,
-      allowNull: false,
     },
   });
 };
-// name, summary, score, healthScore, steps

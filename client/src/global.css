@@ -1,0 +1,13 @@
+
+.jumbotron.jumbotron-fluid{
+  background-color: #acd7fa96;
+  height: 200px;
+}
+
+p {
+  font-weight: 600;
+}
+
+.lead {
+  font-weight: 600;
+}

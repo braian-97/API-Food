@@ -3,21 +3,19 @@ import { connect } from 'react-redux';
 import { getRecipeDetail } from '../../actions';
 
 function RecipeDetail({ id, getRecipeDetail, details }) {
-    const [loading, setLoading] = useState("Cargando...")
+
     useEffect(() => {
         getRecipeDetail(id);
     }, [id])
 
-    useEffect(() => {
-        setLoading(details === "Error: 404" ? "Error: 404" : "Cargando...")
-    }, [details])
 
+    console.log(details)
     return (
         <div>
-            {typeof details === "object" && Object.keys(details).length !== 0 && details.id === id?
+            {details.id === id ?
                 <div>
                     <h2>{details.name}</h2>
-                    {details.image ? <img src={details.image} alt="imagen" /> : <p>Imagen no disponible</p>}
+                    {details.image ? <img src={ details.image } alt="imagen" height="600" width="600"/> : <p>Imagen no disponible</p>}
                     <p>Resumen: {details.summary}</p>
                     <p>Puntuación: {details.score}</p>
                     <p>Nivel de "comida saludable": {details.healthScore}</p>
@@ -25,8 +23,8 @@ function RecipeDetail({ id, getRecipeDetail, details }) {
                     {details.dishTypes ? <span>Tipo de plato: <ul>{details.dishTypes.map((e, i) => <li key={i}>{e}</li>)}</ul></span> : <p>Esta receta no pertenece a ninguna tipo de plato</p>}
                     {details.diets ? <span>Tipos de dietas : <ul>{details.diets.map(e => <li key={e.id}>{e.name}</li>)}</ul></span> : <p>Esta receta no pertenece a ninguna dieta</p>}
                 </div>
-                : <h1>{ loading }</h1>
-                }
+                :  <h2>Cargando...</h2>
+                }                          
         </div>
     )
 }
