@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Recipe from '../Recipe/Recipe'
+import './Pagination.css';
 
 function Pagination({ recipes, diets }) {
   const [page, setPage] = useState({
@@ -122,7 +123,7 @@ function Pagination({ recipes, diets }) {
       pages.push(
         <button onClick={(e) => {
           setCurrentClickedNumber(e);
-        }}        
+        }}
           key={i}
         >{i}
         </button>
@@ -130,7 +131,7 @@ function Pagination({ recipes, diets }) {
     }
     let currentPage = (<button
       className="currentPage"
-      onClick={(e) => { setCurrentClickedNumber(e); }}    
+      onClick={(e) => { setCurrentClickedNumber(e); }}
       key={currentClickedNumber}
     >{currentClickedNumber}
     </button>)
@@ -150,8 +151,8 @@ function Pagination({ recipes, diets }) {
   }
 
   return (
-    <div>
-      <form>
+    <div className="pagination">
+      <form className="searchName">
         <label >Show number of recipes per Page: </label>
         <input
           type="number"
@@ -161,7 +162,7 @@ function Pagination({ recipes, diets }) {
           onChange={handleInputChangeSearch}
         />
       </form>
-      <div>
+      <div className="recipes">
         {dataFromPaginate ?
           dataFromPaginate.map((recipe, i) => (
             <Recipe
@@ -189,47 +190,47 @@ function Pagination({ recipes, diets }) {
           })}
       </div>
       {data.length > 0 ?
-      <div>
-        <div>
-          {currentClickedNumber > 1 ? (
-            <div>
-              <span>
-                <button
-                  onClick={() => moveToFirstPage()}>
-                  &lt;&lt;
-                </button>
-              </span>
-              <span>
-                <button onClick={() => moveOnePageBackward()}>
-                  &lt;
-                </button>
-              </span>
-            </div>
-          ) : (
-            <div />
-          )}
+        <div className="numberPage">
+          <div>
+            {currentClickedNumber > 1 ? (
+              <div>
+                <span>
+                  <button
+                    onClick={() => moveToFirstPage()}>
+                    &lt;&lt;
+                  </button>
+                </span>
+                <span>
+                  <button onClick={() => moveOnePageBackward()}>
+                    &lt;
+                  </button>
+                </span>
+              </div>
+            ) : (
+              <div />
+            )}
+          </div>
+          <div>{pageNumberRender()}</div>
+          <div>
+            {currentClickedNumber !== totalPages ? (
+              <div>
+                <span>
+                  <button onClick={() => moveOnePageForward()}
+                  > &gt;
+                  </button>
+                </span>
+                <span>
+                  <button onClick={() => moveToLastPage()}>
+                    &gt;&gt;
+                  </button>
+                </span>
+              </div>
+            ) : (
+              <div></div>
+            )}
+          </div>
         </div>
-        <div>{pageNumberRender()}</div>
-        <div>
-          {currentClickedNumber !== totalPages ? (
-            <div>
-              <span>
-                <button onClick={() => moveOnePageForward()}
-                > &gt;
-                </button>
-              </span>
-              <span>
-                <button onClick={() => moveToLastPage()}>
-                  &gt;&gt;
-                </button>
-              </span>
-            </div>
-          ) : (
-            <div></div>
-          )}
-        </div>
-      </div>
-      : null}
+        : null}
     </div>
   );
 };

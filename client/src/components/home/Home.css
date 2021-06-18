@@ -1,0 +1,119 @@
+.home .title {
+    padding-top: 1px;
+    margin-bottom : 10px;
+    width: 200px;
+    position: relative;
+    left: 42vw;
+    font-weight: 600;
+}
+
+.home .add {
+    margin: 30px;
+    font-size: 30px;
+}
+
+.home .content{
+    background-color: #f1f1f1bd;   
+    padding: 1px;
+
+    box-shadow: 3px 3px 15px 3px;
+}
+
+.home .add a {
+    background-color: #357ae8;
+    color: black;
+    padding: 15px;
+    text-decoration: none;
+
+    border-radius: 30px;
+    font-weight: 600;
+}
+
+.home .add :hover{
+    background-color: #808080;
+    color: white;   
+}
+
+.home .content .form{
+    display: flex;
+    border-radius: 50px;
+    margin: 20px;
+    height: 220px;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    font-weight: 600;
+}
+
+.home .content .form h3 {
+    color: lightgray;
+}
+
+.home .content .form .search {   
+    display: flex;  
+    width: 500px;
+    height: 220px;
+    margin-right: 10px;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 3px 3px 15px 3px;
+    background-color: rgb(0 0 0 / 50%);
+}
+
+.home .content .form  input{
+    margin-top: 5px;
+    background-color: #303236;
+    color: lightgray;
+}
+
+.home .content .form  input::placeholder{
+    color: lightgray;
+}
+
+.home .content .form  button {
+    background-color: rgba(255, 255, 255, 0.856); 
+    color: #303236;
+    margin-left: 20px;
+    transition-duration: 0.4s;
+    padding : 5px;
+    border-radius: 10px;
+    margin: 10px;
+}
+  
+.home .content .form button:hover {
+    background-color: black; 
+    color: white;
+  }
+
+.home .content .form label {
+    padding-right: 10px;
+}
+.home .content .form .filters {  
+    width: 500px;
+    height: 220px;
+    margin-left: 10px;
+    box-shadow: 3px 3px 15px 3px;
+    background-color: rgb(0 0 0 / 50%);
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+.home .content .sort{
+
+    display: flex;
+    justify-content: space-evenly;
+    height: 50px; 
+    align-items: center;
+    margin : 10px;
+    box-shadow: 3px 3px 15px 3px;
+    font-weight: 600;
+}

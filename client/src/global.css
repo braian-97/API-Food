@@ -1,13 +1,7 @@
-
-.jumbotron.jumbotron-fluid{
-  background-color: #acd7fa96;
-  height: 200px;
-}
-
-p {
-  font-weight: 600;
-}
-
-.lead {
-  font-weight: 600;
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+          font-family: sans-serif;
+  
 }

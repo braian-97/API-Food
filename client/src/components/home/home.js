@@ -12,13 +12,13 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
         name: "",
         number: undefined,
     });
-    const [sortType, setSortType] = useState('predeterminado');
-    const [sort, setSort] = useState('Ascendente');
-    const [diet, setDiet] = useState("none");
+    const [sortType, setSortType] = useState(null);
+    const [sort, setSort] = useState(null);
+    const [diet, setDiet] = useState(null);
     const [filterbyName, setFilterbyName] = useState("");
     const [showRecipes, setShowRecipes] = useState();
 
-    console.log(recipes)
+
 
     useEffect(() => {
         getAllRecipes();
@@ -35,27 +35,30 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
         }
     }, [recipes])
 
-    console.log(newRecipes)
+
     useEffect(() => {
-        if(newRecipes && recipes){
-        const hundredRecipes = () => {
-            var iguales = [];
-            for (let i = 0; i < newRecipes.length; i++) {
-                for (var j = 0; j < recipes.length; j++) {
-                    if (newRecipes[i].name === recipes[j].name) {
-                        iguales.push(j)
+        if (newRecipes && recipes) {
+            const hundredRecipes = () => {
+                var iguales = [];
+                for (let i = 0; i < newRecipes.length; i++) {
+                    for (var j = 0; j < recipes.length; j++) {
+                        if (newRecipes[i].name === recipes[j].name) {
+                            iguales.push(j)
+                        }
                     }
                 }
+                for (let i = 0; i < recipes.length; i++) {
+                    let noRepeat = newRecipes.concat(recipes.filter((r, i) => i !== iguales[i]))
+                    setShowRecipes(noRepeat)
+                    setRecipes(noRepeat)
+                }
             }
-            for (let i = 0; i < recipes.length; i++) {
-                setShowRecipes(newRecipes.concat(recipes.filter((r, i) => i !== iguales[i])))
-            }
+            hundredRecipes()
         }
-        hundredRecipes()
-    }
     }, [newRecipes])
 
     console.log(showRecipes)
+    console.log(recipe)
 
     useEffect(() => {
         const sortArray = (type) => {
@@ -65,7 +68,7 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
                 score: 'score',
             };
             const sortProperty = types[type];
-            if (sortProperty === "predeterminado") {
+            if (sortProperty === "predeterminado" || !type) {
                 setRecipes(recipes);
             }
             else {
@@ -92,8 +95,8 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
 
     useEffect(() => {
         const filterByDiet = (type) => {
-            if (type !== "none") {
-                let result = recipes.filter(d => d.diets.some(d => d.toLowerCase() === type.toLowerCase()))
+            if (type !== "none" && type) {
+                let result = showRecipes.filter(d => d.diets.some(d => d.toLowerCase() === type.toLowerCase()))
                 setRecipes(result);
             }
             else { setRecipes(recipes); }
@@ -121,8 +124,16 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
                 setRecipes([...recipes]);
             }
             else {
-                let result = recipes.filter(d => d.name.toLowerCase().includes(filterbyName.toLowerCase()))
-                setRecipes(result);
+                if (showRecipes && showRecipes.length >= 100) {
+                    let result = showRecipes.filter(d => d.name.toLowerCase().includes(filterbyName.toLowerCase()))
+                    console.log(result)
+                    setRecipes(result);
+                }
+                else{
+                    let result = recipes.filter(d => d.name.toLowerCase().includes(filterbyName.toLowerCase()))
+                    console.log(result)
+                    setRecipes(result);
+                }   
             }
         }
         if (recipes) {
@@ -162,54 +173,63 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
 
     return (
         <div className="home">
-            <h1>Home</h1>
-            <Link to="./add">
-                <h2>Add new Recipe</h2>
-            </Link>
-            <form onSubmit={handleSubmit} >
-                <label> <h3>Load more recipes:</h3> </label>
-                <label>Load for Name: </label>
-                <input type="text" name="name" onChange={handleInputChange} value={search.name ? search.name : undefined}></input><br></br>
-                <label>Number of recipes to load: </label>
-                <input type="number" name="number" onChange={handleInputChange} value={search.number ? search.number : undefined} size="4"></input>
-                <button type="submit">Search</button>
-            </form>
-            <form>
-                <label> <h3>Recipe list filters :</h3> </label>
-                <div>
-                    <label >Filter by name: </label>
-                    <input
-                        type="text"
-                        className="mb-2 form-control"
-                        placeholder="Buscar Receta"
-                        value={filterbyName}
-                        onChange={handleInputChangeSearch}
-                    />
+            <div className="content">
+                <h1 className="title">Home</h1>
+
+                <div className="form">
+                    <form onSubmit={handleSubmit} className="search">
+                        <label> <h3>Load more recipes:</h3> </label>
+                        <label>Load for Name: </label>
+                        <input type="text" name="name" onChange={handleInputChange} value={search.name ? search.name : undefined} placeholder="Nombre de la receta..."></input><br></br>
+                        <label>Number of recipes to load: </label>
+                        <input type="number" name="number" onChange={handleInputChange} value={search.number ? search.number : undefined} placeholder="Cantidad de recetas..." size="4"></input>
+                        <button type="submit">Search</button>
+                    </form>
+                    <form className="filters">
+                        <label> <h3>Recipe list filters :</h3> </label>
+                        <div>
+                            <label >Filter by name: </label>
+                            <input
+                                type="text"
+                                className="mb-2 form-control"
+                                placeholder="Buscar receta..."
+                                value={filterbyName}
+                                onChange={handleInputChangeSearch}
+                            />
+                        </div>
+                        <div>
+                            <label >Filter by diet type: </label>
+                            <select onChange={(e) => setDiet(e.target.value)}>
+                                <option value="none" >None</option>
+                                {diets.map((d) => (
+                                    <option key={d.id} value={d.name} >{d.name}</option>
+                                )
+                                )}
+                            </select>
+                        </div>
+                    </form>
                 </div>
-                <div>
-                    <label >Choose an order type: </label>
-                    <select onChange={(e) => setSortType(e.target.value)}>
-                        <option value="predeterminado">Predeterminado</option>
-                        <option value="name">Alfabeto</option>
-                        <option value="score">Puntuación</option>
-                    </select>
+                <div className="sort">
+                    <div>
+                        <label >Choose an order type: </label>
+                        <select onChange={(e) => setSortType(e.target.value)}>
+                            <option value="predeterminado">Predeterminado</option>
+                            <option value="name">Alfabeto</option>
+                            <option value="score">Puntuación</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label >Choose a sort way: </label>
+                        <button name={sort} onClick={(e) => handleClick(e)}
+                        > {sort ? sort : "Ascendente"}
+                        </button>
+                    </div>
+                </div >
+                <div className="add">
+                    <Link to="./add">
+                        Add new Recipe
+                    </Link>
                 </div>
-                <div>
-                    <label >Filter by diet type: </label>
-                    <select onChange={(e) => setDiet(e.target.value)}>
-                        <option value="none" >None</option>
-                        {diets.map((d) => (
-                            <option key={d.id} value={d.name} >{d.name}</option>
-                        )
-                        )}
-                    </select>
-                </div>
-            </form>
-            <div>
-                <label >Choose a sort way: </label>
-                <button name={sort} onClick={(e) => handleClick(e)}
-                > {sort}
-                </button>
             </div>
             {recipe ? <Pagination recipes={recipe} diets={diets} /> : <h2>Cargando...</h2>}
 

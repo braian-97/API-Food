@@ -1,0 +1,47 @@
+.recipe {
+    background-image: url('../../img/card.png');
+    background-repeat: no-repeat;
+    background-size: 400px 650px;
+    border: solid;
+    width: 400px;
+    height: 650px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    margin: 15px;
+}
+
+.recipe .img{
+    width: 270px;
+    height: 270px;
+}
+
+.recipe a{
+    padding-left: 15px;
+    padding-right: 15px;
+    text-decoration:none;
+    color: white;
+}
+
+.recipe a:hover{
+    color:#357ae8;
+}
+
+.recipe .diets{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.recipe .diets h4{
+    color:aliceblue;
+}
+
+.recipe .diets {   
+    color: green;
+}
