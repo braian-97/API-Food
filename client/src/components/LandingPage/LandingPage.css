@@ -14,6 +14,14 @@ body {
     align-items: center;
 }
 
+
+.page .logoCooking{
+    border: solid;
+    background-color: #f5deb391;
+    border-radius: 999px;
+    margin-top: 40px;
+}
+
 .page .title{
     background-image: url('../../img/img_small3.jpg');
     background-repeat: no-repeat;

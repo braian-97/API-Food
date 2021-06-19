@@ -1,0 +1,121 @@
+.details {
+    background: linear-gradient(45deg,  #42a5f5 0%,#478ed1 50%,#0d47a1 100%);
+
+    display        : flex;
+    align-items    : center;
+    flex-direction : column;
+    justify-content: center;
+    padding-top    : 100px;
+    padding-bottom : 100px;
+}
+
+.recipe {
+    background-color: #ffffff85;
+    border: solid 1px;
+    width: 700px;
+}
+
+/* ----------------------------------- */
+.nameDetails {
+    border-bottom: solid 1px;
+    width: 700px;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    padding        : 50px;
+}
+
+/* ----------------------------------- */
+.imageDetails {
+    border-bottom: solid 1px;
+    width: 700px;
+    height         : 500px;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    padding        : 50px;
+}
+
+
+.image:hover {
+
+}
+
+.imageDetails {
+
+}
+
+/* ----------------------------------- */
+
+.summaryDetails {
+    border-bottom: solid 1px;
+    width: 700px;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    padding        : 50px;
+}
+
+/* ----------------------------------- */
+
+.scoreDetails {
+    border-bottom: solid 1px;
+    width: 700px;
+    height: 100px;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    padding        : 50px;
+}
+
+/* ----------------------------------- */
+
+.healthScoreDetails {
+    border-bottom: solid 1px;
+    width: 700px;
+    height: 100px;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    padding        : 50px;
+}
+
+/* ----------------------------------- */
+
+.stepsDetails {
+    border-bottom: solid 1px;
+    width: 700px;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    padding        : 50px;
+}
+
+/* ----------------------------------- */
+
+.dishTypesDetails {
+    border-bottom: solid 1px;
+    width: 700px;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    padding        : 50px;
+}
+
+/* ----------------------------------- */
+
+.dietsDetails {
+    width: 700px;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    padding        : 50px;
+}
+
+/* ----------------------------------- */
+
+.notFound {
+    border : solid red;
+    width  : 800px;
+    padding: 50px;
+}

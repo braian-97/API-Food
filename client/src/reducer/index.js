@@ -4,6 +4,7 @@ const initialState = {
     recipes: undefined,
     newRecipes: undefined,
     addRecipeResult: "",
+    result: undefined,
     diets: [],    
     recipeDetails: {},
 };

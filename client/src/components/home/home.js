@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { getAllRecipes, searchRecipe, getAllDiets } from '../../actions/index';
 import Recipe from '../Recipe/Recipe'
 import Pagination from '../Pagination/Pagination'
-import s from './Home.css';
+import s from './Home.module.css';
 
 function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRecipes }) {
     const [recipe, setRecipes] = useState();
@@ -117,7 +117,7 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
         }
         setSort(sort === "Ascendente" ? "Descendente" : "Ascendente")
     }
-
+    console.log(sort)
     useEffect(() => {
         const recipesByName = (type) => {
             if (type === "") {
@@ -129,11 +129,11 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
                     console.log(result)
                     setRecipes(result);
                 }
-                else{
+                else {
                     let result = recipes.filter(d => d.name.toLowerCase().includes(filterbyName.toLowerCase()))
                     console.log(result)
                     setRecipes(result);
-                }   
+                }
             }
         }
         if (recipes) {
@@ -171,13 +171,21 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
         setFilterbyName(e.target.value);
     }
 
-    return (
-        <div className="home">
-            <div className="content">
-                <h1 className="title">Home</h1>
+    const reload = () => {
+        getAllRecipes();
+        setSortType(null);
+        setSort(null);
+        setDiet(null);
+        setFilterbyName("");
+    }
 
-                <div className="form">
-                    <form onSubmit={handleSubmit} className="search">
+    return (
+        <div className={s.home}>
+            <div className={s.content}>
+                <h1 className={s.title}>Home</h1>
+
+                <div className={s.form}>
+                    <form onSubmit={handleSubmit} className={s.search}>
                         <label> <h3>Load more recipes:</h3> </label>
                         <label>Load for Name: </label>
                         <input type="text" name="name" onChange={handleInputChange} value={search.name ? search.name : undefined} placeholder="Nombre de la receta..."></input><br></br>
@@ -185,7 +193,7 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
                         <input type="number" name="number" onChange={handleInputChange} value={search.number ? search.number : undefined} placeholder="Cantidad de recetas..." size="4"></input>
                         <button type="submit">Search</button>
                     </form>
-                    <form className="filters">
+                    <form className={s.filters}>
                         <label> <h3>Recipe list filters :</h3> </label>
                         <div>
                             <label >Filter by name: </label>
@@ -209,7 +217,7 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
                         </div>
                     </form>
                 </div>
-                <div className="sort">
+                <div className={s.sort}>
                     <div>
                         <label >Choose an order type: </label>
                         <select onChange={(e) => setSortType(e.target.value)}>
@@ -221,14 +229,17 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
                     <div>
                         <label >Choose a sort way: </label>
                         <button name={sort} onClick={(e) => handleClick(e)}
-                        > {sort ? sort : "Ascendente"}
+                        > {sort ? sort : "Ascendente/Descendente"}
                         </button>
                     </div>
                 </div >
-                <div className="add">
+                <div className={s.buttons}>
+                <div className={s.add}>
                     <Link to="./add">
                         Add new Recipe
                     </Link>
+                </div>
+                <button className={s.refresh} onClick={() => reload()}>Refresh</button>
                 </div>
             </div>
             {recipe ? <Pagination recipes={recipe} diets={diets} /> : <h2>Cargando...</h2>}
@@ -238,7 +249,6 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
 };
 
 function mapStateToProps(state) {
-    console.log(state)
     return {
         recipes: state.recipes,
         diets: state.diets,

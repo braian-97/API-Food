@@ -1,43 +1,30 @@
 module.exports = {
-  entry: './index.js', // ruta al entry point
-  output: {
-    path: __dirname + '/dist', // path donde webpack dejarǻ los archivos.
-    filename: 'bundle.js', // archivo del bundle
+  entry: [
+    './index.js'
+  ],
+  externals: {
+    jquery: 'jQuery'
   },
   module: {
-    rules: [
-             {
-         test: /\.(js|jsx)$/,
-         exclude: /node_modules/,
-         use: {
-           loader: 'babel-loader',
-           options: {
-             presets: ['@babel/preset-react', '@babel/preset-env']
-           }
-         }
-       },
-       {
-        // css modules
-        test: /\.css$/,
-        use: [
-          {
-            loader: "style-loader"
-          },
-          {
-            loader: "css-loader",
-            options: 
-              {
-                modules: {
-                  localIdentName: "[local]___[hash:base64:5]"
-                }
-              }
-          }
-        ]
-      },{
-        // global
-        test: /\.gcss$/,
-        use: ['style-loader', 'css-loader'],
+    loaders: [
+      {
+        test: /(\.js|\.jsx)$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/,
+        query: { presets: ['es2015', 'react'] }
       },
-    ],
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
+      },
+      {
+        test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+        loader: 'url-loader?limit=100000'
+      }
+    ]
   },
-};
+  output: {
+    filename: "index_bundle.js",
+    path: __dirname + '/dist'
+  }
+}

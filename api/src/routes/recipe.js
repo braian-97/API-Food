@@ -12,7 +12,7 @@ router.get("/", function (req, res) {
             .then(response => {
                 if (response.data.totalResults > 0) {
 
-                    let resultApi = response.data.results.map( (recipe) => {
+                    let resultApi = response.data.results.map((recipe) => {
                         return recipe = {
                             id: recipe.id,
                             name: recipe.title,
@@ -21,12 +21,12 @@ router.get("/", function (req, res) {
                             diets: recipe.diets,
                         };
                     })
-                   
+
                     response.data.results.forEach(data => {
-                        if(data.diets[0]){
+                        if (data.diets[0]) {
                             data.diets.forEach(diet => {
                                 const newId = uuidv4();
-                                
+
                                 Diet.findOrCreate({
                                     where: {
                                         name: diet,
@@ -34,17 +34,17 @@ router.get("/", function (req, res) {
                                     defaults: {
                                         id: newId,
                                         name: diet,
-                                      }                    
+                                    }
                                 }).then(diet => {
                                     console.log("diet add")
                                 })
                             })
                         }
-                    });             
-                    
+                    });
+
                     return res.send(resultApi)
                 }
-                else {                    
+                else {
                     return res.status(err.response.status ? err.response.status : 404).send(err.response.statusText ? err.response.statusText : "Esta receta ya no existe")
                 }
             })
@@ -53,7 +53,7 @@ router.get("/", function (req, res) {
             })
     }
     else {
-           return res.status(err.response.status ? err.response.status : 404).send(err.response.statusText ? err.response.statusText : "Ingrese el parametro ?name='...' seguido por el nombre de la receta para realizar la busqueda. Ejemplo : ?name=pasta")
+        return res.status(err.response.status ? err.response.status : 404).send(err.response.statusText ? err.response.statusText : "Ingrese el parametro ?name='...' seguido por el nombre de la receta para realizar la busqueda. Ejemplo : ?name=pasta")
     }
 });
 
@@ -72,70 +72,85 @@ router.post("/add", function (req, res) {
             var recipe;
             Recipe.findOrCreate({
                 where: {
+                    name,
+                },
+                defaults: {
                     id: newId,
                     name,
                     image,
                     summary,
                     score,
                     healthScore,
-                    steps : [steps]
+                    steps: [{step:steps}]
                 }
-            }).then(recipes => {               
+                
+            }).then(recipes => {
                 recipe = recipes[0]
-        
+
+                if(recipes[1]){
                 let result = diet.map(diet => {
-                  if(diet !== "" && diet) {
-                  return Diet.findOrCreate({
-                    where: {
-                      name: diet,
-                    },
-                    defaults: {
-                      id: newId,
-                      name: diet,
+                    if (diet !== "" && diet) {
+                        return Diet.findOrCreate({
+                            where: {
+                                name: diet,
+                            },
+                            defaults: {
+                                id: newId,
+                                name: diet,
+                            }
+                        }).then(diet => {
+                            return diet
+                        })
                     }
-                  }).then(diet => {
-                    return diet
-                  })}
                 })
                 return result
-              }).then(diets => {
-                diets.forEach(e => {
-                  e.then(diet => { 
-                    return diet[0].setRecipes(recipe.id)
-                  }).then(diet => {
-                    if(diet){
-                        Recipe.findByPk(newId, { include: Diet })
+            }
+            else{
+                Recipe.findByPk(recipe.id, { include: Diet })
+                .then(recipe => {
+                    console.log("result", recipe)
+                    return res.send(["Esta receta ya existe", recipe])
+                })
+            }
+            }).then(diets => {
+                console.log("seach", diets[0])
+                if (!diets[0]) {
+                    console.log("seach", diets[0])
+                    Recipe.findByPk(newId, { include: Diet })
                         .then(recipe => {
-                            console.log("find", recipe)
-                            if(recipe){
+                            console.log("result", recipe)
                             return res.send(recipe)
-                            }
-                            else{
-                                return res.send("Esta receta ya no existe")
-                            }
                         })
                         .catch(err => {
-                            res.status(err.response.status).send(err.response.statusText)
-                        })             
-                    }                   
-                  })
-                })
-              })
+                            res.status(err.response.status ? err.response.statu : 500).send(err.response.statusText ? err.response.statusText : "Error" + err)
+                        })
+                }
+                else {
+                    diets.forEach(e => {
+                        e.then(diet => {
+                            return diet[0].setRecipes(recipe.id)
+                        }).then(diet => {
+                            if (diet) {
+                                console.log("seach", diet)
+                                Recipe.findByPk(newId, { include: Diet })
+                                    .then(recipe => {
+                                        console.log("result", recipe)
+                                        if (recipe) {
+                                            return res.send(recipe)
+                                        }
+                                        else {
+                                            return res.send("Esta receta ya no existe")
+                                        }
+                                    })
+                                    .catch(err => {
+                                        res.status(err.response.status ? err.response.statu : 500).send(err.response.statusText ? err.response.statusText : "Error" + err)
+                                    })
+                            }
+                        })
+                    })
+                }
 
-
-            //.then(recipes => {
-            //     recipe = recipes[0]
-            //     return Diet.create(
-            //         {
-            //             id: newId,
-            //             name: diet,
-            //         })
-            // }).then(diet => {
-            //     return diet.setRecipes(recipe.id)
-            // }).then(diet => {
-            //     console.log(diet)
-            // })
-
+            }).catch(err => {console.log("err",err)})
         }
         else {
             return res.send("Debe llenar el name y summary antes de enviar")
@@ -143,7 +158,12 @@ router.post("/add", function (req, res) {
     }
     catch (err) {
         console.log(err);
-        res.status(err.response.status).send(err.response.statusText)
+        if (err.response) {
+            res.status(err.response.status ? err.response.status : 500).send(err.response.statusText ? err.response.statusText : "Error al crear la receta" + err)
+        }
+        else {
+            res.status(500).send("Error al crear la receta" + err)
+        }
     }
 });
 
@@ -164,14 +184,15 @@ router.get("/:id", function (req, res) {
     console.log(req.params.id)
     axios.get(BASE_URL + `/${req.params.id}/information?apiKey=` + API_KEY)
         .then(response => {
+
             result = {
                 name: response.data.title,
-                image: recipe.image,
+                image: response.data.image,
                 summary: response.data.summary,
                 score: response.data.spoonacularScore,
                 healthScore: response.data.healthScore,
-                steps: response.data.analyzedInstructions[0].steps,
-                dishTypes: recipe.dishTypes,
+                steps: response.data.analyzedInstructions[0] ? response.data.analyzedInstructions[0].steps : response.data.analyzedInstructions,
+                dishTypes: response.data.dishTypes,
                 diets: response.data.diets,
             };
 
@@ -179,24 +200,24 @@ router.get("/:id", function (req, res) {
         })
         .catch(err => {
             console.log(err)
-            if(err.response){
-            if (err.response.status === 404) {
-                Recipe.findByPk(req.params.id, { include: Diet })
-                    .then(recipe => {
-                        if(recipe){
-                        return res.send(recipe)
-                        }
-                        else{
-                            return res.send("Esta receta ya no existe")
-                        }
-                    })
-                    .catch(err => {
-                        return res.status(404).send("La receta no existe")
-                    })
+            if (err.response) {
+                if (err.response.status === 404) {
+                    Recipe.findByPk(req.params.id, { include: Diet })
+                        .then(recipe => {
+                            if (recipe) {
+                                return res.send(recipe)
+                            }
+                            else {
+                                return res.send("Esta receta ya no existe")
+                            }
+                        })
+                        .catch(err => {
+                            return res.status(404).send("La receta no existe")
+                        })
                 }
                 else {
                     res.status(err.response.status).send(err.response.statusText)
-                }             
+                }
             }
             else {
                 return res.status(err.response.status ? err.response.status : 500).send(err.response.statusText ? err.response.statusText : "La receta no existe")
@@ -207,3 +228,5 @@ router.get("/:id", function (req, res) {
 
 
 module.exports = router;
+
+

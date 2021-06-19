@@ -1,4 +1,4 @@
-.home .title {
+.title {
     padding-top: 1px;
     margin-bottom : 10px;
     width: 200px;
@@ -7,19 +7,21 @@
     font-weight: 600;
 }
 
-.home .add {
+
+
+.content{
+    background-color: #f1f1f1bd;   
+    padding: 1px;
+    box-shadow: 3px 3px 15px 3px;
+}
+
+
+.add {
     margin: 30px;
     font-size: 30px;
 }
 
-.home .content{
-    background-color: #f1f1f1bd;   
-    padding: 1px;
-
-    box-shadow: 3px 3px 15px 3px;
-}
-
-.home .add a {
+.add a {
     background-color: #357ae8;
     color: black;
     padding: 15px;
@@ -29,12 +31,12 @@
     font-weight: 600;
 }
 
-.home .add :hover{
+.add a:hover{
     background-color: #808080;
     color: white;   
 }
 
-.home .content .form{
+.form{
     display: flex;
     border-radius: 50px;
     margin: 20px;
@@ -47,11 +49,11 @@
     font-weight: 600;
 }
 
-.home .content .form h3 {
+.form h3 {
     color: lightgray;
 }
 
-.home .content .form .search {   
+.search {   
     display: flex;  
     width: 500px;
     height: 220px;
@@ -65,17 +67,17 @@
     background-color: rgb(0 0 0 / 50%);
 }
 
-.home .content .form  input{
+.form  input{
     margin-top: 5px;
     background-color: #303236;
     color: lightgray;
 }
 
-.home .content .form  input::placeholder{
+.form  input::placeholder{
     color: lightgray;
 }
 
-.home .content .form  button {
+.form  button {
     background-color: rgba(255, 255, 255, 0.856); 
     color: #303236;
     margin-left: 20px;
@@ -85,15 +87,16 @@
     margin: 10px;
 }
   
-.home .content .form button:hover {
+.form button:hover {
     background-color: black; 
     color: white;
   }
 
-.home .content .form label {
+.form label {
     padding-right: 10px;
 }
-.home .content .form .filters {  
+
+.filters {  
     width: 500px;
     height: 220px;
     margin-left: 10px;
@@ -107,7 +110,7 @@
     align-content: center;
 }
 
-.home .content .sort{
+.sort{
 
     display: flex;
     justify-content: space-evenly;
@@ -116,4 +119,26 @@
     margin : 10px;
     box-shadow: 3px 3px 15px 3px;
     font-weight: 600;
+}
+
+.refresh{
+    display    : flex;
+    background-color: rgba(255, 255, 255, 0.856); 
+    color: #303236;
+    padding : 15px;
+    border-radius: 50px;
+    font-size: 20px;
+    height: 50px;
+    align-items: center;
+}
+
+.refresh:hover {
+    background-color: black; 
+    color: white;
+  }
+
+.buttons{
+    display    : flex;
+    justify-content: center;
+    align-items: center;
 }

@@ -13,12 +13,6 @@
     align-items: center;
     margin: 15px;
 }
-
-.recipe .img{
-    width: 270px;
-    height: 270px;
-}
-
 .recipe a{
     padding-left: 15px;
     padding-right: 15px;
@@ -30,18 +24,45 @@
     color:#357ae8;
 }
 
-.recipe .diets{
+.img{
+    width: 270px;
+    height: 270px;
+}
+
+.diets{
     display: flex;
     flex-direction: column;
     align-content: center;
     flex-wrap: wrap;
     align-items: flex-start;
+    margin: 0;
 }
 
-.recipe .diets h4{
+
+
+.diets h4{
     color:aliceblue;
+    height: 20px;
+    margin: 0;
 }
 
-.recipe .diets {   
-    color: green;
+.diets {   
+    color: #36ff00;
 }
+
+
+.titleContainer{
+    width:330px;
+    height: 125px;
+}
+
+.imgContainer{
+    width:350px;
+    height: 300px;
+}
+.dietsContainer{
+    width:350px;
+    height: 225px;
+}
+
+

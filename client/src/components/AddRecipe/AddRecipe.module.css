@@ -1,0 +1,293 @@
+.addRecipe {
+    background-image     : url('../../img/fondo4.jpg');
+    background-repeat    : no-repeat;
+    background-size      : cover;
+    background-attachment: fixed;
+    padding              : 1px;
+}
+
+#addForm {
+    display         : flex;
+    flex-direction  : column;
+    margin          : 100px;
+    padding         : 30px;
+    background-color: #00000078;
+    align-items     : center;
+    flex-wrap       : nowrap;
+    background-color: rgb(158 158 158 / 50%);
+    box-shadow      : 0px 0px 5px 0px black;
+    color           : black;
+}
+
+#addForm textarea {
+    resize: none;
+}
+
+
+#addForm label {
+    font-size: 19px;
+    color: #000000;
+    font-weight: 600;
+    background-color: #f8f8f880;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#addForm input{
+    font-size  : 20px;
+}
+
+
+.addButton {
+    background-color: #00b73e;
+    color: white;
+    width    : 150px;
+    height   : 50px;
+    font-size: 20px;
+    border-radius: 50px;
+}
+
+.addButton:hover{
+    background-color: #4d90fe;
+    color: white;
+}
+
+
+
+/* ---------------------------------- */
+
+.addName{
+    width: 600px;
+    height: 80px;
+    margin-bottom: 40px;
+    padding-left: 20px;
+}
+
+.inputName {
+    display    : flex;
+    align-items: center;
+    font-size: 20px;   
+    padding-top: 15px; 
+    padding-left: 20px;
+}
+
+/* ---------------------------------- */
+
+.addSummary{
+    width: 420px;
+    height: 150px;
+    margin-bottom: 40px;
+    padding-left: 20px;
+}
+
+
+.inputSummary {
+    display    : flex;
+    align-items: center;
+    font-size: 20px;   
+    padding-top: 15px; 
+    
+}
+
+/* ---------------------------------- */
+
+.danger {
+    color      : red;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+.good {
+    color      : green;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+.help {
+    color           : white;
+    background-color: gray;
+    border          : solid;
+    padding         : 15px;
+    border-radius   : 20px;
+}
+
+/* ---------------------------------- */
+
+.addImage{
+    width: 860px;
+    margin-bottom: 30px;
+}
+
+.img{    
+    display    : flex;
+    align-items: center;
+    padding-top: 15px; 
+}
+
+.addImg {
+    padding: 5px 20px 5px 20px;
+    box-shadow   : 0px 0px 2px 0px black;
+    width: 800px;
+}
+
+.addImg h5 {
+    font-size  : 18px;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+/* ---------------------------------- */
+
+.diet{
+    display    : flex;    
+}
+
+.addDiet {
+    padding      : 20px;
+    box-shadow   : 0px 0px 2px 0px black;
+    margin-bottom: 20px;
+    padding-left: 20px;
+}
+
+.ulDiet{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    align-content: center;
+    margin-bottom: 20px;
+}
+
+.listAddDiet {    
+    list-style: none;
+}
+
+.newDiets {
+    
+}
+
+.newDietsInput{
+    padding-top: 10px;
+}
+
+.check {
+    width : 20px;
+    height: 20px;
+}
+
+#addForm .addDiet .labelDiet {
+    font-size  : 18px;
+    color      : black;
+    font-weight: normal;
+    background-color: #ffffff00;
+    padding: 0;
+}
+
+.addDiet h5 {
+    font-size  : 18px;
+    color      : #1e6609;
+    font-weight: 600;
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+/* ---------------------------------- */
+
+.addScore{
+    width: 300px;
+    height: 65px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.addScoreInput{
+    display    : flex;  
+    flex-direction: row;
+    align-items: center;
+    padding-left: 20px;
+    padding-top: 15px; 
+}
+
+
+/* ---------------------------------- */
+
+
+.addHealthScore{
+    width: 300px;
+    height: 65px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.addHealthScoreInput{
+    display    : flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 20px;
+    padding-top: 15px; 
+}
+
+/* ---------------------------------- */
+
+.addSteps{
+    display    : flex;
+    align-items: center;
+    width: 415px;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    margin-top: 20px;
+}
+
+.addStepsInput{
+    padding-top: 15px; 
+}
+
+
+/* ---------------------------------- */
+
+
+.checkImg{
+    background-color: #ffffff91;
+    border-radius: 999px;
+}
+
+.crossImg{
+    margin-top: 20px;
+}
+
+.goButton {
+    width    : 150px;
+    height   : 50px;
+    font-size: 20px;
+    border-radius: 50px;
+}
+
+.goButton:hover{
+    background-color: #4d90fe;
+    color: white;
+}
+
+.restartInput{
+    width    : 150px;
+    height   : 50px;
+    font-size: 20px;
+    border-radius: 50px;
+}
+
+.restartInput:hover{
+    background-color: #4d90fe;
+    color: white;
+}
+
+.buttonsContainer{
+    display    : flex;
+    width: 500px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.created {
+    margin-top: 20px;
+}
+

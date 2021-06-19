@@ -29,8 +29,9 @@ export function addRecipe(recipe) {
     return (dispach) => {
         axios.post("http://localhost:3001/recipe/add", recipe)
             .then(response => {
+                console.log(response)
                 dispach({ type: ADD_RECIPE, payload: response.data })
-            }).catch(err => { console.log(err) })
+            }).catch(err => {dispach({ type: ADD_RECIPE, payload: err })})
     }
 }
 
