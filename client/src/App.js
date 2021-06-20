@@ -6,6 +6,7 @@ import LandingPage from './components/LandingPage/LandingPage'
 import AddRecipe from './components/AddRecipe/AddRecipe';
 import RecipeDetail from './components/RecipeDetail/RecipeDetail'
 import Nav from './components/Nav/Nav'
+
 import './global.css';
 
 function App() {
@@ -16,7 +17,6 @@ function App() {
       <Route exact path="/home" component={Home} />
       <Route exact path="/add"  component={AddRecipe} />
       <Route exact path="/recipe/:id" render={({ match }) => <RecipeDetail id={match.params.id} />}/>
-
     </div>
   );
 }

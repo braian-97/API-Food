@@ -1,28 +1,22 @@
-.addRecipe {
-    background-image     : url('../../img/fondo4.jpg');
-    background-repeat    : no-repeat;
-    background-size      : cover;
-    background-attachment: fixed;
-    padding              : 1px;
-}
 
 #addForm {
     display         : flex;
     flex-direction  : column;
     margin          : 100px;
     padding         : 30px;
-    background-color: #00000078;
     align-items     : center;
     flex-wrap       : nowrap;
-    background-color: rgb(158 158 158 / 50%);
+    background-color: #adadad;
     box-shadow      : 0px 0px 5px 0px black;
     color           : black;
 }
 
 #addForm textarea {
     resize: none;
+    font-size: 19px;
+    font-weight: 600;
+    padding-left: 10px;
 }
-
 
 #addForm label {
     font-size: 19px;
@@ -34,7 +28,9 @@
 }
 
 #addForm input{
-    font-size  : 20px;
+    font-size  : 19px;
+    font-weight: 600;
+    padding-left: 10px;
 }
 
 
@@ -45,6 +41,7 @@
     height   : 50px;
     font-size: 20px;
     border-radius: 50px;
+    cursor: pointer;
 }
 
 .addButton:hover{
@@ -52,15 +49,19 @@
     color: white;
 }
 
-
-
 /* ---------------------------------- */
 
 .addName{
     width: 600px;
-    height: 80px;
     margin-bottom: 40px;
     padding-left: 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    box-shadow: 0px 0px 5px 2px;
+    padding: 20px;
 }
 
 .inputName {
@@ -74,10 +75,16 @@
 /* ---------------------------------- */
 
 .addSummary{
-    width: 420px;
-    height: 150px;
+    width: 650px;
+
     margin-bottom: 40px;
     padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    box-shadow: 0px 0px 5px 2px;
+    padding: 20px;
 }
 
 
@@ -95,39 +102,58 @@
     color      : red;
     font-weight: 600;
     margin-bottom: 0;
+    font-size: 19px;
 }
 
 .good {
     color      : green;
     font-weight: 600;
     margin-bottom: 0;
+    font-size: 19px;
 }
 
 .help {
-    color           : white;
+    color: black;
     background-color: gray;
-    border          : solid;
-    padding         : 15px;
-    border-radius   : 20px;
+    border: solid;
+    padding: 15px;
+    border-radius: 20px;
+    font-size: 19px;
+    font-weight: 600;
 }
 
 /* ---------------------------------- */
 
 .addImage{
+    display    : flex;
+    flex-direction: column;
+    align-items: center;
     width: 860px;
     margin-bottom: 30px;
+
+    box-shadow: 0px 0px 5px 2px;
+    padding: 20px;
 }
 
 .img{    
-    display    : flex;
+    width: 860px;
+    display: flex;
     align-items: center;
-    padding-top: 15px; 
+    padding-top: 15px;
+    justify-content: center;
+
 }
 
 .addImg {
     padding: 5px 20px 5px 20px;
-    box-shadow   : 0px 0px 2px 0px black;
-    width: 800px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.url{
+    display: flex;
 }
 
 .addImg h5 {
@@ -140,14 +166,22 @@
 /* ---------------------------------- */
 
 .diet{
-    display    : flex;    
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    box-shadow: 0px 0px 5px 2px;
+    padding: 20px;
 }
 
 .addDiet {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding      : 20px;
-    box-shadow   : 0px 0px 2px 0px black;
+
     margin-bottom: 20px;
-    padding-left: 20px;
+    padding-left: 20px;    
 }
 
 .ulDiet{
@@ -159,22 +193,30 @@
     margin-bottom: 20px;
 }
 
-.listAddDiet {    
-    list-style: none;
-}
-
 .newDiets {
-    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .newDietsInput{
     padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.check {
-    width : 20px;
-    height: 20px;
+.allDiets{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
+.listAddDiet {    
+    list-style: none;
+    padding: 8px;
+}
+
 
 #addForm .addDiet .labelDiet {
     font-size  : 18px;
@@ -182,6 +224,8 @@
     font-weight: normal;
     background-color: #ffffff00;
     padding: 0;
+    font-weight: 600;
+    margin-left: 8px;
 }
 
 .addDiet h5 {
@@ -192,13 +236,23 @@
     padding-bottom: 10px;
 }
 
+.check {
+    width : 20px;
+    height: 20px;
+}
+
 /* ---------------------------------- */
 
 .addScore{
     width: 300px;
-    height: 65px;
     margin-bottom: 20px;
     margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    box-shadow: 0px 0px 5px 2px;
+    padding: 20px;
 }
 
 .addScoreInput{
@@ -215,9 +269,14 @@
 
 .addHealthScore{
     width: 300px;
-    height: 65px;
     margin-bottom: 20px;
     margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    box-shadow: 0px 0px 5px 2px;
+    padding: 20px;
 }
 
 .addHealthScoreInput{
@@ -233,11 +292,23 @@
 .addSteps{
     display    : flex;
     align-items: center;
-    width: 415px;
+    flex-direction: column;
+
+    width: 650px;
     margin-bottom: 20px;
     padding-left: 20px;
     margin-top: 20px;
+
+    box-shadow: 0px 0px 5px 2px;
+    padding: 20px;
 }
+
+.steps{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 
 .addStepsInput{
     padding-top: 15px; 
@@ -273,6 +344,7 @@
     height   : 50px;
     font-size: 20px;
     border-radius: 50px;
+    cursor: pointer;
 }
 
 .restartInput:hover{
@@ -283,11 +355,16 @@
 .buttonsContainer{
     display    : flex;
     width: 500px;
-    display: flex;
+    margin-top: 25px;
     justify-content: space-evenly;
 }
 
 .created {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
     margin-top: 20px;
 }
 

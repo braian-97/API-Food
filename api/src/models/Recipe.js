@@ -28,7 +28,7 @@ module.exports = (sequelize) => {
       type: DataTypes.DECIMAL,  
     },
     steps: {
-      type: DataTypes.ARRAY(DataTypes.TEXT),
+      type: DataTypes.ARRAY(DataTypes.JSON),
     },
   });
 };

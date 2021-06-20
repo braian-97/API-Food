@@ -6,8 +6,6 @@ const { Recipe , Diet} = require('../db');
 const { v4: uuidv4 } = require('uuid');
 const newId = uuidv4();
 
-
-
 //Los campos mostrados en la ruta principal para cada receta (imagen, nombre, tipo de plato y tipo de dieta)
 
 router.get("/", function (req, res) {
@@ -90,11 +88,8 @@ router.get("/", function (req, res) {
         .catch( err => {  
             console.log(err)
         }) 
-    })
-       
+    })    
   
-
-
 })
 
 module.exports = router;

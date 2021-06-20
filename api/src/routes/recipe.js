@@ -61,11 +61,12 @@ router.get("/", function (req, res) {
 // Nombre *
 // Resumen del plato *
 router.post("/add", function (req, res) {
-    console.log(req.body)
+
     try {
         const isEmpty = str => !str.trim().length;
         let { name, image, summary, score, healthScore, steps, diet } = req.body
-
+        console.log(steps)
+        console.log(typeof steps)
         if ((!isEmpty(name)) && (!isEmpty(summary))) {
             const newId = uuidv4();
 
@@ -81,7 +82,9 @@ router.post("/add", function (req, res) {
                     summary,
                     score,
                     healthScore,
-                    steps: [{step:steps}]
+                    steps: [{
+                        step:[steps]
+                    }],
                 }
                 
             }).then(recipes => {
@@ -109,7 +112,7 @@ router.post("/add", function (req, res) {
                 Recipe.findByPk(recipe.id, { include: Diet })
                 .then(recipe => {
                     console.log("result", recipe)
-                    return res.send(["Esta receta ya existe", recipe])
+                    return res.send(["Ya existe una receta con ese nombre", recipe])
                 })
             }
             }).then(diets => {
@@ -208,7 +211,7 @@ router.get("/:id", function (req, res) {
                                 return res.send(recipe)
                             }
                             else {
-                                return res.send("Esta receta ya no existe")
+                                return res.send(recipe)
                             }
                         })
                         .catch(err => {

@@ -2,7 +2,6 @@ body {
     background-image: url('../../img/fondo1.jpg');
     background-size: 100vw 100vh;
     background-attachment: fixed;
-
 }
 
 .page{
@@ -14,7 +13,6 @@ body {
     align-items: center;
 }
 
-
 .page .logoCooking{
     border: solid;
     background-color: #f5deb391;
@@ -22,23 +20,6 @@ body {
     margin-top: 40px;
 }
 
-.page .title{
-    background-image: url('../../img/img_small3.jpg');
-    background-repeat: no-repeat;
-    background-size: 600px 400px;
-    background-blend-mode: darken;
-
-    display: flex;
-    justify-content: center;
-
-    border: 3px solid black;
-    border-radius: 20px;
-    background-color: #0000005e;
-    color: white;
-    height: 400px;
-    width: 600px;
-    align-items: center;
-}
 
 .goHome {
   text-decoration:none;

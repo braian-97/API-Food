@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getAllRecipes, searchRecipe, getAllDiets } from '../../actions/index';
-import Recipe from '../Recipe/Recipe'
+
 import Pagination from '../Pagination/Pagination'
 import s from './Home.module.css';
+
 
 function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRecipes }) {
     const [recipe, setRecipes] = useState();
@@ -57,9 +58,7 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
         }
     }, [newRecipes])
 
-    console.log(showRecipes)
     console.log(recipe)
-
     useEffect(() => {
         const sortArray = (type) => {
             const types = {
@@ -69,26 +68,42 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
             };
             const sortProperty = types[type];
             if (sortProperty === "predeterminado" || !type) {
-                setRecipes(recipes);
+                if (showRecipes && showRecipes.length >= 100) {
+                    setRecipes(showRecipes);
+                }
+                else {
+                    setRecipes(recipes);
+                }
             }
             else {
                 const sortProperty = types[type];
-
                 const sorted = [...recipe].sort(function (a, b) {
-                    if (a[sortProperty] > b[sortProperty]) {
-                        return 1;
+                    if (sortProperty === 'name') {
+                        if (a.name.toLowerCase() > b.name.toLowerCase()) {
+                            return 1;
+                        }
+                        if (a.name.toLowerCase() < b.name.toLowerCase()) {
+                            return -1;
+                        }
+                        return 0;
                     }
-                    if (a[sortProperty] < b[sortProperty]) {
-                        return -1;
+                    else {
+                        if (a[sortProperty] > b[sortProperty]) {
+                            return 1;
+                        }
+                        if (a[sortProperty] < b[sortProperty]) {
+                            return -1;
+                        }
+                        return 0;
                     }
-                    return 0;
                 });
-
                 setRecipes(sorted);
+
             }
         };
-        if (recipe) {
+        if (recipe || showRecipes) {
             sortArray(sortType);
+            setSort("Ascendente")
         }
     }, [sortType]);
 
@@ -96,10 +111,23 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
     useEffect(() => {
         const filterByDiet = (type) => {
             if (type !== "none" && type) {
-                let result = showRecipes.filter(d => d.diets.some(d => d.toLowerCase() === type.toLowerCase()))
-                setRecipes(result);
+                if (showRecipes && showRecipes.length >= 100) {
+                    let result = showRecipes.filter(d => d.diets.some(d => d.toLowerCase() === type.toLowerCase()))
+                    setRecipes(result);
+                }
+                else {
+                    let result = recipes.filter(d => d.diets.some(d => d.toLowerCase() === type.toLowerCase()))
+                    setRecipes(result);
+                }
             }
-            else { setRecipes(recipes); }
+            else {
+                if (showRecipes && showRecipes.length >= 100) {
+                    setRecipes(showRecipes);
+                }
+                else {
+                    setRecipes(recipes);
+                }
+            }
         }
         if (recipes) {
             filterByDiet(diet)
@@ -117,7 +145,7 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
         }
         setSort(sort === "Ascendente" ? "Descendente" : "Ascendente")
     }
-    console.log(sort)
+
     useEffect(() => {
         const recipesByName = (type) => {
             if (type === "") {
@@ -234,16 +262,16 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
                     </div>
                 </div >
                 <div className={s.buttons}>
-                <div className={s.add}>
-                    <Link to="./add">
-                        Add new Recipe
-                    </Link>
-                </div>
-                <button className={s.refresh} onClick={() => reload()}>Refresh</button>
+                    <div className={s.add}>
+                        <Link to="./add">
+                            Add new Recipe
+                        </Link>
+                    </div>
+                    <button className={s.refresh} onClick={() => reload()}>Refresh</button>
                 </div>
             </div>
-            {recipe ? <Pagination recipes={recipe} diets={diets} /> : <h2>Cargando...</h2>}
-
+            {recipe && <Pagination recipes={recipe} />}
+            {recipes ? null : <div className={s.loading}><h2>Loading...</h2>  </div>}
         </div >
     )
 };

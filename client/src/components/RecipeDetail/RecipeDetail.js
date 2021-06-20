@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux';
 import { getRecipeDetail } from '../../actions';
 import s from './RecipeDetails.module.css'
@@ -16,7 +16,8 @@ function RecipeDetail({ id, getRecipeDetail, details }) {
         <div className={s.details}>
             {details ?
                 <div className={s.recipe}>
-                    <span className={s.nameDetails}> <h2 >{details.name}</h2> </span>
+                    <span className={s.nameDetails}> <h3 >{details.name}</h3> </span>
+
                     <div className={s.imageDetails}>
                         {details.image ?
                             <img className={s.image} src={details.image} alt="imagen" height="400" width="400" />
@@ -24,31 +25,31 @@ function RecipeDetail({ id, getRecipeDetail, details }) {
                     </div>
 
                     <div className={s.summaryDetails}>
-                        <div className={s.summary} ><p>Resumen:</p> <span>{details.summary}</span></div>                    
+                        <div className={s.summary} ><h3>Resumen: </h3> <span>{details.summary}</span></div>                    
                     </div>
 
                     <div className={s.scoreDetails}>
-                        <span className={s.score}> <p>Puntuación:</p> 
-                         {details.score ? details.score : <p className={s.notFound}>Esta receta no tiene puntuación</p>}
+                        <span className={s.score}> <h3>Puntuación: </h3> 
+                         {details.score ? <h1>{details.score}</h1> : <p className={s.notFound}>Esta receta no tiene puntuación</p>}
                         </span>
                     </div>
 
                     <div className={s.healthScoreDetails}>
-                        <span className={s.healthScore} > <p>Nivel de "comida saludable": </p>
-                         {details.healthScore ? details.healthScore : <p className={s.notFound}>Esta receta no tiene nivel de "comida saludable"</p>}
+                        <span className={s.healthScore} > <h3>Nivel de "comida saludable": </h3>
+                         {details.healthScore ? <h1>{details.healthScore}</h1> : <p className={s.notFound}>Esta receta no tiene nivel de "comida saludable"</p>}
                         </span>
                     </div>
                     
                     <div className={s.stepsDetails}>
                         {details.steps && details.steps[0] ?
-                            <span className={s.steps} >Paso a paso: <ul>{details.steps.map((e, i) => <li key={i}>{e.step}</li>)}</ul>
+                            <span className={s.steps} ><h3>Paso a paso: </h3> <ol className={s.listSteps}>{details.steps.map((e, i) => <li key={i}>{e.step}</li>)}</ol>
                             </span>
                             : <p className={s.notFound}>Esta receta no tiene registrado sus pasos</p>}
                     </div>
 
                     <div className={s.dishTypesDetails}>
                         {details.dishTypes ?
-                            <span className={s.dishTypes} >Tipo de plato:
+                            <span className={s.dishTypes} ><h3>Tipo de plato: </h3>
                                 <ol>{details.dishTypes.map((e, i) => <li key={i+10}>{e}</li>)}</ol>
                             </span>
                             : <p className={s.notFound}>Esta receta no pertenece a ninguna tipo de plato</p>}
@@ -56,7 +57,7 @@ function RecipeDetail({ id, getRecipeDetail, details }) {
 
                     <div className={s.dietsDetails}>
                         {details.diets ?
-                            <span>Tipos de dietas :
+                            <span><h3>Tipos de dietas : </h3>
                                 <ul className={s.diets}>
                                     {details.diets.map(e => <li key={e.id}>{e.name}</li>)}
                                 </ul>

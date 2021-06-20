@@ -13,6 +13,7 @@
     align-items: center;
     margin: 15px;
 }
+
 .recipe a{
     padding-left: 15px;
     padding-right: 15px;
@@ -24,9 +25,43 @@
     color:#357ae8;
 }
 
+
+.titleContainer{
+    width:300px;
+
+    display        : flex;
+    justify-content: center;
+    
+}
+
+
+.imgContainer{
+    width:350px;
+    height: 300px;
+    display        : flex;
+    justify-content: center;
+}
+
 .img{
     width: 270px;
     height: 270px;
+    border-radius: 99px;
+}
+
+.img {overflow:hidden;}
+
+.img:hover {transform:scale(1.1);}
+
+
+
+.dietsContainer{
+    width:350px;
+    height: 225px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
 }
 
 .diets{
@@ -37,8 +72,6 @@
     align-items: flex-start;
     margin: 0;
 }
-
-
 
 .diets h4{
     color:aliceblue;
@@ -51,18 +84,8 @@
 }
 
 
-.titleContainer{
-    width:330px;
-    height: 125px;
-}
 
-.imgContainer{
-    width:350px;
-    height: 300px;
-}
-.dietsContainer{
-    width:350px;
-    height: 225px;
-}
+
+
 
 

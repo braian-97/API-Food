@@ -1,144 +1,202 @@
-.title {
-    padding-top: 1px;
-    margin-bottom : 10px;
-    width: 200px;
-    position: relative;
-    left: 42vw;
-    font-weight: 600;
+.home{
+    background: linear-gradient(358deg, rgb(0 0 0 / 50%) 0%, #888 50%, #f6f6f6 100%);
+}
+
+.home label{
+    font-size: 19px;
+}
+
+.home input {
+    font-size       : 18px;
+}
+
+.home select {
+    background-color: #888;
+    color: #f8f8f8;
+    margin-left        : 20px;
+    transition-duration: 0.4s;
+    padding            : 10px;
+    border-radius      : 10px;
+    margin             : 10px;
+    font-size       : 18px;
+    cursor: pointer;
 }
 
 
+.home button{
+    cursor: pointer;
+}
 
-.content{
-    background-color: #f1f1f1bd;   
-    padding: 1px;
+.title {
+    display: flex;
+    justify-content: center;
+}
+
+.content {
+    padding   : 1px;
     box-shadow: 3px 3px 15px 3px;
 }
 
-
-.add {
-    margin: 30px;
-    font-size: 30px;
-}
-
-.add a {
-    background-color: #357ae8;
-    color: black;
-    padding: 15px;
-    text-decoration: none;
-
-    border-radius: 30px;
-    font-weight: 600;
-}
-
-.add a:hover{
-    background-color: #808080;
-    color: white;   
-}
-
-.form{
-    display: flex;
-    border-radius: 50px;
-    margin: 20px;
-    height: 220px;
-    align-content: center;
+.form {
+    display        : flex;
+    border-radius  : 50px;
+    margin         : 20px;
+    height         : 350px;
+    align-content  : center;
     justify-content: center;
-    align-items: center;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    font-weight: 600;
+    align-items    : center;
+    flex-wrap      : nowrap;
+    flex-direction : row;
+    font-weight    : 600;
 }
 
 .form h3 {
     color: lightgray;
 }
 
-.search {   
-    display: flex;  
-    width: 500px;
-    height: 220px;
-    margin-right: 10px;
-    flex-wrap: nowrap;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    box-shadow: 3px 3px 15px 3px;
+.search {
+    display         : flex;
+    width           : 500px;
+    height          : 350px;
+    margin-right    : 10px;
+    flex-wrap       : nowrap;
+    align-content   : center;
+    justify-content : center;
+    align-items     : center;
+    flex-direction  : column;
+    box-shadow      : 3px 3px 15px 3px;
     background-color: rgb(0 0 0 / 50%);
 }
 
-.form  input{
-    margin-top: 5px;
+.form input {
+    margin-top      : 5px;
     background-color: #303236;
+    color           : lightgray;
+}
+
+.form input::placeholder {
     color: lightgray;
 }
 
-.form  input::placeholder{
-    color: lightgray;
-}
-
-.form  button {
-    background-color: rgba(255, 255, 255, 0.856); 
-    color: #303236;
-    margin-left: 20px;
+.form button {
+    background-color   : rgba(255, 255, 255, 0.856);
+    color              : #303236;
+    margin-left        : 20px;
     transition-duration: 0.4s;
-    padding : 5px;
-    border-radius: 10px;
-    margin: 10px;
+    padding            : 10px;
+    border-radius      : 10px;
+    margin             : 10px;
+    font-size       : 18px;
 }
-  
+
 .form button:hover {
-    background-color: black; 
-    color: white;
-  }
+    background-color: black;
+    color           : white;
+}
 
 .form label {
     padding-right: 10px;
+    font-size       : 18px;
 }
 
-.filters {  
-    width: 500px;
-    height: 220px;
-    margin-left: 10px;
-    box-shadow: 3px 3px 15px 3px;
+
+.filters {
+    width           : 500px;
+    height          : 350px;
+    margin-left     : 10px;
+    box-shadow      : 3px 3px 15px 3px;
     background-color: rgb(0 0 0 / 50%);
-    padding-top: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    align-content: center;
+
+    display         : flex;
+    flex-direction  : column;
+    justify-content: center;
+    flex-wrap       : wrap;
+    align-content   : center;
 }
 
-.sort{
 
-    display: flex;
+.sort {
+    display        : flex;
     justify-content: space-evenly;
-    height: 50px; 
-    align-items: center;
-    margin : 10px;
-    box-shadow: 3px 3px 15px 3px;
-    font-weight: 600;
+    height         : 80px;
+    align-items    : center;
+    margin         : 10px;
+    box-shadow     : 3px 3px 15px 3px;
+    font-weight    : 600;
 }
 
-.refresh{
-    display    : flex;
-    background-color: rgba(255, 255, 255, 0.856); 
-    color: #303236;
-    padding : 15px;
-    border-radius: 50px;
-    font-size: 20px;
-    height: 50px;
-    align-items: center;
+.sort button {
+    background-color   : rgba(255, 255, 255, 0.856);
+    color              : #303236;
+    margin-left        : 20px;
+    transition-duration: 0.4s;
+    padding            : 10px;
+    border-radius      : 10px;
+    margin             : 10px;
+    font-size       : 18px;
+}
+
+.sort button:hover {
+    background-color: black;
+    color           : white;
+}
+
+.refresh {
+    display         : flex;
+    background-color: rgba(255, 255, 255, 0.856);
+    color           : #303236;
+    padding         : 15px;
+    border-radius   : 50px;
+    font-size       : 20px;
+    height          : 50px;
+    align-items     : center;
 }
 
 .refresh:hover {
-    background-color: black; 
-    color: white;
-  }
+    background-color: black;
+    color           : white;
+}
 
-.buttons{
-    display    : flex;
-    justify-content: center;
-    align-items: center;
+.buttons {
+    display        : flex;
+    justify-content: space-evenly;
+    align-items    : center;
+    height: 100px;
+}
+
+.add {
+    font-size: 28px;
+}
+
+.add a {
+    background-color: #303236;
+    color           : white;
+    padding         : 15px;
+    text-decoration : none;
+    border: inset;
+    border-radius: 30px;
+    font-weight  : 600;
+}
+
+.add a:hover {
+    background-color: #808080;
+    color           : black;
+}
+
+
+
+.loading {
+    background-image: url('../../img/loading.svg');
+    background-repeat: no-repeat;
+    background-size: 500px 500px;
+    background-position: center;
+    width: 100vw;
+    height          : 500px;
+    display         : flex;
+    justify-content :center;
+    align-items    : center;
+}
+
+.loading h2{
+    font-family: revert;
 }

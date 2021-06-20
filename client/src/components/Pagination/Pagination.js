@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Recipe from '../Recipe/Recipe'
-import './Pagination.css';
+import s from './Pagination.module.css';
 
-function Pagination({ recipes, diets }) {
+
+function Pagination({ recipes }) {
   const [page, setPage] = useState({
     totalPages: null,
     dataStartingIndex: null,
@@ -13,6 +14,7 @@ function Pagination({ recipes, diets }) {
   const [dataFromPaginate, setDataFromPaginate] = useState(null);
   const [recipePerPage, setRecipePerPage] = useState(null);
   const [data, setData] = useState(recipes);
+  const [totalRecipes, setTotalRecipes] = useState(null);
 
   var { currentClickedNumber, pageData, totalPages } = page;
 
@@ -23,7 +25,7 @@ function Pagination({ recipes, diets }) {
 
   useEffect(() => {
     determineNumberOfPages();
-  }, [data, recipePerPage])
+  }, [data, recipePerPage, totalRecipes])
 
 
   useEffect(
@@ -39,11 +41,11 @@ function Pagination({ recipes, diets }) {
   const determineNumberOfPages = () => {
     let paginatedDataObject = {};
 
-    let index = 0;
-    let dataLength = data.length;
+    let dataLength = totalRecipes ? totalRecipes : data.length;
     let chunkArray = [];
     let displayRecipes = recipePerPage ? parseInt(recipePerPage) : 10
-    for (index = 0; index < dataLength; index += displayRecipes) {
+    
+    for (let index = 0; index < dataLength; index += displayRecipes) {
       let end = index + displayRecipes
       let newChunk = data.slice(index, end);
       chunkArray.push(newChunk);
@@ -129,12 +131,9 @@ function Pagination({ recipes, diets }) {
         </button>
       );
     }
-    let currentPage = (<button
-      className="currentPage"
-      onClick={(e) => { setCurrentClickedNumber(e); }}
-      key={currentClickedNumber}
-    >{currentClickedNumber}
-    </button>)
+    let currentPage = (<button className={s.currentPage} onClick={(e) => { setCurrentClickedNumber(e); }}
+    key={currentClickedNumber}>{currentClickedNumber} </button>)
+
     let points = <button> ... </button>
 
     return [pages[currentClickedNumber - 3] ? points : null, pages[currentClickedNumber - 2], currentPage, pages[currentClickedNumber], pages[currentClickedNumber + 1] ? points : null];
@@ -150,19 +149,49 @@ function Pagination({ recipes, diets }) {
     e.preventDefault();
   }
 
+
+  const handleChange = (e) => {
+    if (e.target.value && e.target.value !== "") {
+      setTotalRecipes(
+        e.target.value
+      )
+    }
+    else {
+      setTotalRecipes(null)
+    }
+  }
+
   return (
-    <div className="pagination">
-      <form className="searchName">
-        <label >Show number of recipes per Page: </label>
-        <input
-          type="number"
-          className="mb-2 form-control"
-          placeholder="Recipes per Page"
-          value={recipePerPage ? recipePerPage : null}
-          onChange={handleInputChangeSearch}
-        />
+    <div className={s.pagination}>
+      <div className={s.filters}>
+      <form className={s.searchName}>
+        <div>
+          <label >Show number of recipes per Page: </label>
+          <input
+            type="number"
+            placeholder="Recipes per Page..."
+            value={recipePerPage ? recipePerPage : null}
+            onChange={handleInputChangeSearch}
+          />
+        </div>
       </form>
-      <div className="recipes">
+      <div className={s.totalRecipes}>
+        <div className={s.total}>
+          <h3>Total Recipes: </h3>
+          <h2>{recipes.length}</h2>
+        </div>
+        <div className={s.totalInput}>
+          <label >Total Recipes to show: </label>
+          <input
+            type="number"
+            placeholder="Total to show..."
+            value={totalRecipes ? totalRecipes : null}
+            onChange={handleChange}
+          />
+        </div>
+      </div>
+      </div>
+      <div className={s.recipes}>
         {dataFromPaginate ?
           dataFromPaginate.map((recipe, i) => (
             <Recipe
@@ -187,47 +216,50 @@ function Pagination({ recipes, diets }) {
             } else {
               return null;
             }
-          })}
+          })}          
       </div>
+
       {data.length > 0 ?
-        <div className="numberPage">
-          <div>
-            {currentClickedNumber > 1 ? (
-              <div>
-                <span>
-                  <button
-                    onClick={() => moveToFirstPage()}>
-                    &lt;&lt;
-                  </button>
-                </span>
-                <span>
-                  <button onClick={() => moveOnePageBackward()}>
-                    &lt;
-                  </button>
-                </span>
-              </div>
-            ) : (
-              <div />
-            )}
-          </div>
-          <div>{pageNumberRender()}</div>
-          <div>
-            {currentClickedNumber !== totalPages ? (
-              <div>
-                <span>
-                  <button onClick={() => moveOnePageForward()}
-                  > &gt;
-                  </button>
-                </span>
-                <span>
-                  <button onClick={() => moveToLastPage()}>
-                    &gt;&gt;
-                  </button>
-                </span>
-              </div>
-            ) : (
-              <div></div>
-            )}
+        <div className={s.numberPage}>
+          <div className={s.totalNumberButtons}>
+            <div>
+              {currentClickedNumber > 1 ? (
+                <div>
+                  <span>
+                    <button
+                      onClick={() => moveToFirstPage()}>
+                      &lt;&lt;
+                    </button>
+                  </span>
+                  <span>
+                    <button onClick={() => moveOnePageBackward()}>
+                      &lt;
+                    </button>
+                  </span>
+                </div>
+              ) : (
+                <div />
+              )}
+            </div>
+            <div>{pageNumberRender()}</div>
+            <div>
+              {currentClickedNumber !== totalPages ? (
+                <div>
+                  <span>
+                    <button onClick={() => moveOnePageForward()}
+                    > &gt;
+                    </button>
+                  </span>
+                  <span>
+                    <button onClick={() => moveToLastPage()}>
+                      &gt;&gt;
+                    </button>
+                  </span>
+                </div>
+              ) : (
+                <div></div>
+              )}
+            </div>
           </div>
         </div>
         : null}

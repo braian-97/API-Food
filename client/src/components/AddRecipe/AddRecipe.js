@@ -171,7 +171,7 @@ function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
             <form onSubmit={handleSubmit} id={s.addForm}>
 
                 <div className={s.addName}>
-                    <label>Name: </label><br></br>
+                    <label>Name: </label>
                     <div className={s.inputName}>
                         <input className={errors.name && s.danger}
                             type="text" name="name" id="name" onChange={handleInputChange} value={recipe.name} size="45" ></input>
@@ -182,7 +182,7 @@ function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
                 </div>
 
                 <div className={s.addSummary}>
-                    <label>Summary: </label><br></br>
+                    <label>Summary: </label>
                     <div className={s.inputSummary}>
                         <textarea className={errors.summary && s.danger}
                             type="text" name="summary" id="summary" onChange={handleInputChange} value={recipe.summary} rows="6" cols="50" ></textarea>
@@ -193,16 +193,19 @@ function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
                 </div>
 
                 <div className={s.addImage}>
-                    <label>Image: </label><br></br>
+                    <label>Image: </label>
                     <div className={s.img} >
                         <div className={s.addImg}>
                             <h5>Ulr of the Image: </h5>
-                            <input placeholder="Url of the image" type="text" name="image" id="image" onChange={handleInputChange} value={recipe.image} size="60" ></input><input type="button" value="Clear" onClick={() => setRecipe({ ...recipe, image: "" })} /> <br></br>
+                            <div className={s.url}>
+                            <input placeholder="Url of the image" type="text" name="image" id="image" onChange={handleInputChange} value={recipe.image} size="60" ></input>
+                            <input type="button" value="Clear" onClick={() => setRecipe({ ...recipe, image: "" })} />
+                           </div>
                             <h5>Select Image: </h5>
                             <p className={s.help}>Tamaño maximo permitido : 100000 Bytes(97.65 Kilobytes)</p>
-                            <input type="file" name="myImage" onChange={onFileChange} /><br></br>
+                            <input type="file" name="myImage" onChange={onFileChange} />
                             {errorImage ? <span className={s.help}><p><strong>Error : Imagen demaciado grande</strong></p><p>{errorImage}</p></span> : null}
-                            <br></br>
+
                             {recipe.image ? <img src={recipe.image} alt="recipe" height="400" width="400" /> : null}
                         </div>
                         {recipe.image ? <img className={s.checkImg} src={check} alt="" width="60" height="60" /> : null}
@@ -211,7 +214,7 @@ function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
                 </div>
 
                 <div className={s.addScore}>
-                    <label>Score: </label><br></br>
+                    <label>Score: </label>
                     <div className={s.addScoreInput}>
                         <input type="number" name="score" onChange={handleInputChange} value={recipe.score} size="5"></input>
                         {recipe.score ? <img className={s.checkImg} src={check} alt="" width="40" height="40" /> : null}
@@ -219,7 +222,7 @@ function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
                 </div>
 
                 <div className={s.addHealthScore}>
-                    <label>HealthScore: </label><br></br>
+                    <label>HealthScore: </label>
                     <div className={s.addHealthScoreInput}>
                         <input type="number" name="healthScore" onChange={handleInputChange} value={recipe.healthScore} size="5"></input>
                         {recipe.healthScore ? <img className={s.checkImg} src={check} alt="" width="40" height="40" /> : null}
@@ -227,8 +230,8 @@ function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
                 </div>
 
                 <div className={s.addSteps}>
-                    <div>
-                        <label>Steps: </label><br></br>
+                    <div className={s.steps}>
+                        <label>Steps: </label>
                         <div className={s.addStepsInput}>
                             <textarea type="text" name="steps" onChange={handleInputChange} value={recipe.steps} rows="6" cols="50"></textarea>
                         </div>
@@ -236,8 +239,9 @@ function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
                     </div>
                 </div>
 
-                <label>Diets: </label><br></br>
+
                 <div className={s.diet}>
+                    <label>Diets: </label>
                     <div className={s.addDiet}>
                         <div className={s.listDiet}>
                             <ul className={s.ulDiet}>
@@ -253,14 +257,14 @@ function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
                             </ul>
                         </div>
                         <div className={s.newDiets}>
-                            <label>Add new diets: </label><br></br>
+                            <label>Add new diets: </label>
                             <div className={s.newDietsInput}>
                                 <input type="text" name="diet" onChange={handleInputChange} value={newDiet.diet} size="45"></input>
                                 <p className={s.help}>When adding more than one new diet, separate the different diets with a ","</p>
                             </div>
                         </div>
                         {addDiets ?
-                            <ol>
+                            <ol className={s.allDiets}>
                                 <h5>List of all diets to add to the recipe: </h5>
                                 {addDiets.map((d, i) => (
                                     <li key={i}>
@@ -269,7 +273,7 @@ function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
                                 )
                                 )}
                             </ol> : null}
-                        {recipe.diet[0] ? <img className={s.checkImg} src={check} alt="" width="60" height="60" /> : null}
+                        {addDiets[0] ? <img className={s.checkImg} src={check} alt="" width="60" height="60" /> : null}
                     </div>
                 </div>
 
