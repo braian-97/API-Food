@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import Recipe from '../Recipe/Recipe'
+import Recipe from '../Recipe/Recipe';
 import s from './Pagination.module.css';
 
 
-function Pagination({ recipes }) {
+export function Pagination({ recipes }) {
   const [page, setPage] = useState({
     totalPages: null,
     dataStartingIndex: null,
@@ -199,6 +199,7 @@ function Pagination({ recipes }) {
               id={recipe.id}
               name={recipe.name}
               image={recipe.image}
+              score={recipe.score}
               diets={recipe.diets}
             />
           ))
@@ -210,6 +211,7 @@ function Pagination({ recipes }) {
                   id={recipe.id}
                   name={recipe.name}
                   image={recipe.image}
+                  score={recipe.score}
                   diets={recipe.diets}
                 />
               );

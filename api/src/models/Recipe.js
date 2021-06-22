@@ -22,10 +22,10 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
     },
     score: {
-      type: DataTypes.DECIMAL,
+      type: DataTypes.FLOAT,
     },
     healthScore: {
-      type: DataTypes.DECIMAL,  
+      type: DataTypes.FLOAT,  
     },
     steps: {
       type: DataTypes.ARRAY(DataTypes.JSON),

@@ -3,7 +3,6 @@ module.exports = {
     './index.js'
   ],
   externals: {
-    jquery: 'jQuery'
   },
   module: {
     loaders: [

@@ -5,7 +5,8 @@ import { getAllRecipes, searchRecipe, getAllDiets } from '../../actions/index';
 
 import Pagination from '../Pagination/Pagination'
 import s from './Home.module.css';
-
+import check from '../../img/check2.png'
+import cross from '../../img/cross.png'
 
 function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRecipes }) {
     const [recipe, setRecipes] = useState();
@@ -18,7 +19,6 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
     const [diet, setDiet] = useState(null);
     const [filterbyName, setFilterbyName] = useState("");
     const [showRecipes, setShowRecipes] = useState();
-
 
 
     useEffect(() => {
@@ -38,7 +38,7 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
 
 
     useEffect(() => {
-        if (newRecipes && recipes) {
+        if (newRecipes && typeof newRecipes !== 'string' && recipes) {
             const hundredRecipes = () => {
                 var iguales = [];
                 for (let i = 0; i < newRecipes.length; i++) {
@@ -58,7 +58,6 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
         }
     }, [newRecipes])
 
-    console.log(recipe)
     useEffect(() => {
         const sortArray = (type) => {
             const types = {
@@ -154,12 +153,10 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
             else {
                 if (showRecipes && showRecipes.length >= 100) {
                     let result = showRecipes.filter(d => d.name.toLowerCase().includes(filterbyName.toLowerCase()))
-                    console.log(result)
                     setRecipes(result);
                 }
                 else {
                     let result = recipes.filter(d => d.name.toLowerCase().includes(filterbyName.toLowerCase()))
-                    console.log(result)
                     setRecipes(result);
                 }
             }
@@ -180,19 +177,17 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
         else {
             setSearch({
                 ...search,
-                [e.target.name]: null,
+                [e.target.name]: undefined,
             })
         };
         e.preventDefault();
     };
 
+
     const handleSubmit = (e) => {
         searchRecipe(search);
         e.preventDefault();
-        setSearch({
-            name: "",
-            number: undefined,
-        })
+        setShowResult(true)
     }
 
     const handleInputChangeSearch = function (e) {
@@ -207,6 +202,13 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
         setFilterbyName("");
     }
 
+    const [showResult, setShowResult] = useState(true)
+
+    const closebtn = () => {
+        setShowResult(false)
+    }
+
+    console.log()
     return (
         <div className={s.home}>
             <div className={s.content}>
@@ -220,7 +222,12 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
                         <label>Number of recipes to load: </label>
                         <input type="number" name="number" onChange={handleInputChange} value={search.number ? search.number : undefined} placeholder="Cantidad de recetas..." size="4"></input>
                         <button type="submit">Search</button>
+
+                        {newRecipes && typeof newRecipes === 'string' && <div className={s.searchError}><span class={s.closebtn} onClick={() => closebtn()}>&times;</span> <img className={s.crossImg} src={cross} alt="" width="80" height="80" /><h4>Error: el nombre es invalido</h4> </div>}
+                        {newRecipes && typeof newRecipes !== 'string' && <div className={s.searchOk}><span class={s.closebtn} onClick={() => closebtn()}>&times;</span> <img className={s.crossImg} src={check} alt="" width="80" height="80" /><h4>Exito!</h4> </div>}
+
                     </form>
+
                     <form className={s.filters}>
                         <label> <h3>Recipe list filters :</h3> </label>
                         <div>
@@ -235,13 +242,23 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
                         </div>
                         <div>
                             <label >Filter by diet type: </label>
-                            <select onChange={(e) => setDiet(e.target.value)}>
-                                <option value="none" >None</option>
-                                {diets.map((d) => (
-                                    <option key={d.id} value={d.name} >{d.name}</option>
-                                )
-                                )}
-                            </select>
+                            {diets ?
+                                <select onChange={(e) => setDiet(e.target.value)}>
+                                    <option value="none" >None</option>
+                                    {diets.map((d) => (
+                                        <option key={d.id} value={d.name} >{d.name}</option>
+                                    )
+                                    )}
+                                </select>
+                                : null}
+                        </div>
+                        <div className={s.buttons}>
+                            <div className={s.add}>
+                                <Link to="./add">
+                                    Add new Recipe
+                                </Link>
+                            </div>
+                            <button className={s.refresh} onClick={() => reload()}>Refresh</button>
                         </div>
                     </form>
                 </div>
@@ -257,18 +274,10 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
                     <div>
                         <label >Choose a sort way: </label>
                         <button name={sort} onClick={(e) => handleClick(e)}
-                        > {sort ? sort : "Ascendente/Descendente"}
+                        > {sort ? sort : "Ascendente"}
                         </button>
                     </div>
                 </div >
-                <div className={s.buttons}>
-                    <div className={s.add}>
-                        <Link to="./add">
-                            Add new Recipe
-                        </Link>
-                    </div>
-                    <button className={s.refresh} onClick={() => reload()}>Refresh</button>
-                </div>
             </div>
             {recipe && <Pagination recipes={recipe} />}
             {recipes ? null : <div className={s.loading}><h2>Loading...</h2>  </div>}
@@ -276,18 +285,20 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
     )
 };
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
+    console.log(state)
     return {
         recipes: state.recipes,
         diets: state.diets,
         newRecipes: state.newRecipes,
+        searchResult: state.searchResult,
     };
 }
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
     return {
-        getAllRecipes: () => dispatch(getAllRecipes()),
         getAllDiets: () => dispatch(getAllDiets()),
+        getAllRecipes: () => dispatch(getAllRecipes()),
         searchRecipe: (name) => dispatch(searchRecipe(name)),
     }
 }

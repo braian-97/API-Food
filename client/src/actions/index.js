@@ -6,59 +6,57 @@ export const ADD_DIET = "ADD_DIET";
 export const SEARCH_RECIPE = "SEARCH_RECIPE";
 export const GET_DETAILS = "GET_DETAILS";
 
+ 
 export function getAllRecipes() {
-    return (dispach) => {
+    return (dispatch) => {
         axios.get("http://localhost:3001/home")
             .then(response => {
-                dispach({ type: SET_RECIPES, payload: response.data })
-            }).catch(err => { console.log(err) })
+                dispatch({ type: SET_RECIPES, payload: response.data }) 
+            })
+            .catch(err => { dispatch({ type: SET_RECIPES, payload: "Error al cargar todas las recetas" })})
     }
 }
 
 export function getAllDiets() {
-    return (dispach) => {
+    return (dispatch) => {
         axios.get("http://localhost:3001/types")
             .then(response => {
-                dispach({ type: SET_DIETS, payload: response.data })
-            }).catch(err => { console.log(err) })
+                dispatch({ type: SET_DIETS, payload: response.data })
+            })
+            .catch(err => { dispatch({ type: SET_DIETS, payload: "Error al cargar todas las dietas" })})
     }
 }
 
 
 export function addRecipe(recipe) {
-    return (dispach) => {
-        axios.post("http://localhost:3001/recipe/add", recipe)
+    return (dispatch) => {
+        axios.post("http://localhost:3001/recipe", recipe)
             .then(response => {
-                console.log(response)
-                dispach({ type: ADD_RECIPE, payload: response.data })
-            }).catch(err => {dispach({ type: ADD_RECIPE, payload: err })})
+                dispatch({ type: ADD_RECIPE, payload: response.data })
+            })
+            .catch(err => { dispatch({ type: ADD_RECIPE, payload: "Error al crear la receta" })})
     }
 }
 
 
 export function searchRecipe({ name, number }) {
-    return (dispach) => {
-        if (name) {
-            axios.get(`http://localhost:3001/recipe/?name=${name}&number=${number}`)
+    return (dispatch) => {   
+            axios.get(`http://localhost:3001/recipes/?name=${name}&number=${number}`)
                 .then(response => {
-                    console.log(response)
-                    dispach({ type: SEARCH_RECIPE, payload: response.data })
-                }).catch(err => { console.log(err) })
-        }
-        else {
-            console.log("Error: falta el name")
-        }
-    }
+                    dispatch({ type: SEARCH_RECIPE, payload: response.data })
+                })
+                .catch(err => { dispatch({ type: SEARCH_RECIPE, payload: "Error: 400" }) })
+        }    
 }
 
+
 export function getRecipeDetail(id) {
-    return (dispach) => {
-        console.log(id)
-        axios.get(`http://localhost:3001/recipe/${id}`)
+    return (dispatch) => {
+        axios.get(`http://localhost:3001/recipes/${id}`)
             .then(response => {
-                console.log(response)
-                dispach({ type: GET_DETAILS, payload: response.data })
-            }).catch(err => {  dispach({ type: GET_DETAILS, payload: "Error: 404" }) })
+                dispatch({ type: GET_DETAILS, payload: response.data })
+            })
+            .catch(err => {  dispatch({ type: GET_DETAILS, payload: "Error: 404" }) })
     }
 }
 

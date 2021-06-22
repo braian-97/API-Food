@@ -8,7 +8,7 @@
     display        : flex;
     align-items    : center;
     flex-direction : column;
-    justify-content: center;
+
     padding-top    : 100px;
     padding-bottom : 100px;
 }
@@ -18,6 +18,63 @@
 
 .recipe {
     width                : 706px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.error{
+    padding: 40px;
+    color: red;
+    border-radius: 30px;
+    background-color: #ffffffc2;
+    margin: 40px;
+}
+
+.navDetails{
+    display: flex;
+    position: fixed;
+    left: 0;
+    top: 20vh;
+    background-color: #f8f8f8e0;
+    width: 170px;
+    border-radius: 20px;
+    font-size: 18px;
+}
+
+.navDetails a{
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: black;
+    width: 170px;
+}
+
+.navDetails a:hover{
+    color: white;
+}
+
+.listDetails{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    padding: 0px;
+}
+
+.listDetails li{
+    display: flex;
+    justify-content: center;
+
+    width: 170px;
+    padding: 8px;
+}
+
+.listDetails li:hover{
+    background-color: darkcyan;
+    border: solid 2px;
 }
 
 
@@ -25,16 +82,16 @@
 
 .nameDetails {
     background-color: rgb(0 0 0 / 69%);
-    color: navajowhite;
-    border               : solid 3px;
-    width          : 700px;
-    display        : flex;
-    align-items    : center;
+    color: #e0e0e0;
+    border: solid 3px;
+    width: 700px;
+    display: flex;
+    align-items: center;
     justify-content: center;
-    padding        : 50px;
+    padding: 50px;
     margin-bottom: 50px;
-
-    font-size: 20px;
+    font-size: 28px;
+    -webkit-text-stroke-width: thin;
 }
 
 /* ----------------------------------- */
@@ -61,14 +118,11 @@
     border-radius: 999px;
 }
 
-.image:hover {}
-
-.imageDetails {}
 
 /* ----------------------------------- */
 
 .summaryDetails {
-    background-color: #f5deb3ba;
+    background-color: #e0e0e0e6;
     border               : solid 3px;
     width          : 700px;
     display        : flex;
@@ -76,7 +130,13 @@
     justify-content: center;
     padding        : 50px;
     margin-bottom: 50px;
+
 }
+
+.summaryDetails span{
+    font-weight: 400;
+}
+
 
 /* ----------------------------------- */
 
@@ -102,7 +162,7 @@
 /* ----------------------------------- */
 
 .healthScoreDetails {
-    background-color: #23910dd4;
+    background-color: #20af0eed;
     border               : solid 3px;
     width          : 700px;
     display        : flex;
@@ -138,32 +198,55 @@
     margin-bottom: 50px;
 }
 
+.stepsDetails h3{
+    margin: 0;
+    padding-bottom: 10px;
+}
+
 .steps{
     display: flex;
 
-    height: 350px;
+    height: 370px;
     width: 520px;
     padding-left: 40px;
     flex-direction: column;
     align-items: center;
+    margin-top: 10px;
 }
 
 .listSteps{
     display: flex;
     overflow-wrap: break-word;
     overflow-y: scroll;
-    height: 350px;
+    height: 370px;
     width: 520px;
     padding-left: 40px;
     flex-direction: column;
     align-items: flex-start;
+    margin: 0;
+    padding-top: 15px;
 }
 
+.listSteps::-webkit-scrollbar {
+    width: 12px;
+}
+
+.listSteps::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.listSteps::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+.listSteps::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
 
 /* ----------------------------------- */
 
 .dishTypesDetails {
-    background-color: #f5deb3ba;
+    background-color: #f5deb3cf;
     border               : solid 3px;
     width          : 700px;
     display        : flex;
@@ -176,7 +259,7 @@
 /* ----------------------------------- */
 
 .dietsDetails {
-    background-color: #f5deb3ba;
+    background-color: #999999ed;
     width          : 700px;
     display        : flex;
     align-items    : center;

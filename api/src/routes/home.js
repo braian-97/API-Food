@@ -39,6 +39,7 @@ router.get("/", function (req, res) {
                         }).then(diet => {
                             console.log("diets created")
                         })
+                        .catch(err => console.log("err"))
                     })
                 }
             });
@@ -47,7 +48,6 @@ router.get("/", function (req, res) {
 
             Promise.all([recipesDb])
                 .then(response => {
-                    console.log(response)
                     let result = response[0].map( (recipe) => {
                         return recipe = {
                             id: recipe.id,
@@ -57,22 +57,19 @@ router.get("/", function (req, res) {
                             diets: recipe.diets.map(e =>  e.name ),
                         };
                     })
-                    console.log(result)
-                    console.log(resultApi)
+
                     return res.send(result.concat(resultApi))
                 })
+                .catch(err => console.log("err"))
         }
     }).then(response => {
         console.log("All recipe send")
     })
     .catch(err => { 
-        console.log("error",err.response.status)
-
         let recipesDb = Recipe.findAll({include: Diet})
 
         Promise.all([recipesDb])
         .then(response => {
-            console.log(response)
             let result = response[0].map( (recipe) => {
                 return recipe = {
                     id: recipe.id,
@@ -82,13 +79,12 @@ router.get("/", function (req, res) {
                     diets: recipe.diets.map(e =>  e.name ),
                 };
             })
-
-            return res.send(result)
+            return res.status(200).send(result)
         })
         .catch( err => {  
-            console.log(err)
+            return  res.status(400).send("Opps! Hubo un error")
         }) 
-    })    
+    })   
   
 })
 

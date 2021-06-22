@@ -1,10 +1,10 @@
 .recipe {
     background-image: url('../../img/card.png');
     background-repeat: no-repeat;
-    background-size: 400px 650px;
+    background-size: 400px 700px;
     border: solid;
     width: 400px;
-    height: 650px;
+    height: 700px;
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -25,7 +25,7 @@
     color:#357ae8;
 }
 
-
+/* ----------------------------- */
 .titleContainer{
     width:300px;
 
@@ -34,6 +34,7 @@
     
 }
 
+/* ----------------------------- */
 
 .imgContainer{
     width:350px;
@@ -52,7 +53,25 @@
 
 .img:hover {transform:scale(1.1);}
 
+/* ----------------------------- */
 
+.scoreContainer{
+    width: 300px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    color: #b300ff;
+    font-size: 30px;
+    padding-bottom: 10px;
+}
+
+.scoreContainer h2{
+    margin: 0;
+}
+
+/* ----------------------------- */
 
 .dietsContainer{
     width:350px;
@@ -74,13 +93,16 @@
 }
 
 .diets h4{
-    color:aliceblue;
+    color: aliceblue;
     height: 20px;
-    margin: 0;
+    padding-bottom: 5px;
+    margin-top: 0;
+    margin-bottom: 8px;
 }
 
 .diets {   
     color: #36ff00;
+    font-size: 18px;
 }
 
 

@@ -3,11 +3,10 @@
      -moz-box-sizing: border-box;
           box-sizing: border-box; 
           
-
-          font-family: 'Merienda', cursive;
+  font-family: 'Merienda', cursive;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Merienda&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Philosopher:ital@1&display=swap');
 
 
