@@ -221,6 +221,7 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
         setShowResult(false)
     }
 
+
     return (
         <div className={s.home}>
             <div className={s.content}>
@@ -237,7 +238,7 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
                                 <input type="number" name="number" onChange={handleInputChange} value={search.number ? search.number : undefined} placeholder="Cantidad de recetas..." size="4"></input>
                                 <button disabled={search.name ? false : true} type="submit">Search</button>
                                 
-}
+
                                 {showResult && newRecipes && typeof newRecipes === 'string' && <div className={s.searchError}><span class={s.closebtn} onClick={() => closebtn()}>&times;</span> <img className={s.crossImg} src={cross} alt="" width="80" height="80" /><h4>No se encontraron resultados con ese nombre</h4> </div>}
                                 {showResult && newRecipes && typeof newRecipes !== 'string' && <div className={s.searchOk}><span class={s.closebtn} onClick={() => closebtn()}>&times;</span> <img className={s.crossImg} src={check} alt="" width="80" height="80" /><h4>Exito!</h4> </div>}
 
