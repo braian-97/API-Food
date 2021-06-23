@@ -5,13 +5,8 @@
     border: solid;
     width: 400px;
     height: 700px;
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-    margin: 15px;
+    
+    margin: 15px 15px 40px 15px;
 }
 
 .recipe a{
@@ -27,9 +22,11 @@
 
 /* ----------------------------- */
 .titleContainer{
-    width:300px;
-
-    display        : flex;
+    width: 380px;
+    padding-top: 10px;
+    padding-left: 40px;
+    height: 150px;
+    display: flex;
     justify-content: center;
     
 }
@@ -37,13 +34,12 @@
 /* ----------------------------- */
 
 .imgContainer{
-    display        : flex;
+    display: flex;
     justify-content: center;
-    overflow:hidden;
+    overflow: hidden;
 
-    width: 290px;
-    height: 290px;
     border-radius: 99px;
+    padding-bottom: 20px;
 }
 
 .img{
@@ -58,40 +54,46 @@
 /* ----------------------------- */
 
 .scoreContainer{
-    width: 300px;
-    height: 60px;
+    color: #a7a060;
     display: flex;
-    align-items: flex-end;
-    justify-content: space-evenly;
-
-    color: #b300ff;
-    font-size: 30px;
-    padding-bottom: 10px;
-    padding-top: 10px;
+    align-items: center;
+    flex-direction: column;
 }
 
 .scoreContainer h2{
+    color: #a7a060;
     margin: 0;
+    width: 70px;
+    height: 70px;
+    border: solid;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #303236;
 }
+
 
 /* ----------------------------- */
 
 .dietsContainer{
-    width:350px;
-    height: 225px;
+    width: 350px;
     display: flex;
     align-items: center;
     flex-direction: column;
     flex-wrap: nowrap;
     align-content: center;
+    height: 180px;
 }
 
 .diets{
+    width:350px;
     display: flex;
     flex-direction: column;
     align-content: center;
     flex-wrap: wrap;
     align-items: flex-start;
+    justify-content: center;
     margin: 0;
 }
 
@@ -104,6 +106,7 @@
 }
 
 .diets {   
+    width:350px;
     color: #36ff00;
     font-size: 18px;
 }

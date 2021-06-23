@@ -6,24 +6,24 @@ export function Recipe({ name, image, diets, id , score}) {
 
     return (
         <div className={s.recipe}>
-            <span className={s.titleContainer}>
+            <div className={s.titleContainer}>
                 <Link to={`/recipe/${id}`}>
                     <h2>{name}</h2>
                 </Link>
-            </span>
-            <span className={s.imgContainer}>
+            </div>
+            <div className={s.imgContainer}>
                 <Link to={`/recipe/${id}`}>
                     {image ? <img  className={s.img} src={image} alt="imagen" height="270" width="270" /> : <p>Imagen no disponible</p>}
                 </Link>
-            </span>
-            <span className={s.scoreContainer}>SCORE: <h2>{score}</h2></span>
-            <span  className={s.dietsContainer}>
+            </div>
+            <div  className={s.dietsContainer}>
                 <ol className={s.diets}> <h4>Diets:</h4>
                     {diets.map((d, i) => (
                         <li key={i} >{d}</li>
                     )
                     )}</ol>
-            </span>
+            </div>
+            <div className={s.scoreContainer}>SCORE: <h2>{score}</h2></div>
         </div>
     )
 }

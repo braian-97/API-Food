@@ -18,7 +18,7 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
     const [sort, setSort] = useState("Ascendente");
     const [diet, setDiet] = useState(undefined);
     const [filterbyName, setFilterbyName] = useState("");
-    const [showRecipes, setShowRecipes] = useState();
+    const [showRecipes, setShowRecipes] = useState(false);
 
 
     useEffect(() => {
@@ -33,7 +33,7 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
 
     useEffect(() => {
         setRecipes(recipes)
-        getAllDiets();     
+        getAllDiets(); 
     }, [newRecipes])
 
 
@@ -265,7 +265,7 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
                                             )
                                             )}
                                         </select>
-                                        : null}
+                                        : <h2>No hay dietas registradas</h2>}
                                 </div>
                                 <div className={s.buttons}>
                                     <div className={s.add}>
