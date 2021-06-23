@@ -260,7 +260,7 @@ export function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
 
                     <div className={s.addDiet}>
                         <h5>Available diets: </h5>
-                        {addDiets[0] ?
+                        {diets[0] ?
                         <div className={s.listDiet}>
              
                             <ul className={s.ulDiet}>

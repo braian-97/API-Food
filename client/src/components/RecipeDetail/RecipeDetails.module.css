@@ -225,7 +225,7 @@
 .listSteps{
     display: flex;
     overflow-wrap: break-word;
-    overflow-y: scroll;
+    overflow-y: auto;
     height: 370px;
     width: 520px;
     padding-left: 40px;
@@ -245,6 +245,7 @@
 
 .listSteps::-webkit-scrollbar-thumb {
     background: #888;
+    border-radius: 10px;
 }
 
 .listSteps::-webkit-scrollbar-thumb:hover {

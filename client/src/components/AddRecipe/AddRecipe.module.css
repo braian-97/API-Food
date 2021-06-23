@@ -181,7 +181,7 @@
 }
 
 .listDiet {
-    overflow-y   : scroll;
+    overflow-y   : auto;
     height       : 400px;
     margin-bottom: 30px;
 }
@@ -196,6 +196,7 @@
 
 .listDiet::-webkit-scrollbar-thumb {
     background: #888;
+    border-radius: 10px;
 }
 
 .listDiet::-webkit-scrollbar-thumb:hover {

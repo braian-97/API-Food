@@ -84,10 +84,30 @@
     flex-wrap: nowrap;
     align-content: center;
     height: 180px;
+    overflow-wrap: break-word;
+    overflow-y: auto;
+    margin-left: 20px;
+}
+
+
+.dietsContainer::-webkit-scrollbar {
+    width: 12px;
+}
+
+.dietsContainer::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.dietsContainer::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.dietsContainer::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 
 .diets{
-    width:350px;
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -105,10 +125,10 @@
     margin-bottom: 8px;
 }
 
-.diets {   
-    width:350px;
-    color: #36ff00;
+.diets { 
+    color: #a7a060;
     font-size: 18px;
+    font-weight: 600;
 }
 
 
