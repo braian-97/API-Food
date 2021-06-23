@@ -23,11 +23,19 @@
 }
 
 .error{
-    padding: 40px;
     color: red;
     border-radius: 30px;
     background-color: #ffffffc2;
-    margin: 40px;
+    display: flex;
+    width: 400px;
+    height: 57.8vh;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.error p{
+    font-size: 20px;
 }
 
 .navDetails{
@@ -162,7 +170,7 @@
 /* ----------------------------------- */
 
 .healthScoreDetails {
-    background-color: #20af0eed;
+    background-color: #1e6609e6;
     border               : solid 3px;
     width          : 700px;
     display        : flex;
