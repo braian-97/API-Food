@@ -15,7 +15,7 @@ const recipe = {
   diet: ["Nueva dieta"],
 };
 
-xdescribe('Recipe routes', () => {
+describe('Recipe routes', () => {
   before(() => conn.authenticate()
     .catch((err) => {
       console.error('Unable to connect to the database:', err);
@@ -32,15 +32,14 @@ xdescribe('Recipe routes', () => {
 
 
   describe('POST /recipe', () => {
-    it('create a recipe in the database', function () {
+    it('create a recipe in the database', function (done) {
       newId_2 = uuidv4()
 
-      return agent.post('/recipe')
+      agent.post('/recipe')
         .send({
           id: newId_2,
           name: 'Milanesa',
           summary: 'Consiste en carne frita en pan rallado, generalmente de vacuno ',
-          diet: ["vegetarian"],
         })
         .then(() => {
           return Recipe.findOne({
@@ -52,18 +51,22 @@ xdescribe('Recipe routes', () => {
         .then(recipe => {
           expect(recipe).to.exist;
         });
+      done();
     });
-    it('should throw an error if the recipe already exists', function () {
-      return agent.post('/recipe')
+
+    it('should throw an error if the recipe already exists', function (done) {
+      agent.post('/recipe')
         .send({
           id: newId_2,
           name: 'Milanesa',
           summary: 'Consiste en carne frita en pan rallado, generalmente de vacuno '
         })
-        .expect(400)
+        .expect(400);
+      done();
     });
-    it('correctly set the diet in the database', function () {
-      return agent.post('/recipe')
+
+    it('correctly set the diet in the database', function (done) {
+      agent.post('/recipe')
         .send({
           id: uuidv4(),
           name: 'Papas fritas',
@@ -83,17 +86,19 @@ xdescribe('Recipe routes', () => {
         .then(recipe => {
           expect(recipe.diets[0].dataValues.name).to.equal('vegetarian');
         });
+      done();
     });
   });
 
 
   describe('GET /types', () => {
-    it('should get 200', function () {
-      return agent.get('/types')
-        .expect(200)
+    it('should get 200', function (done) {
+      agent.get('/types')
+        .expect(200);
+      done();
     })
-    it('should get all diets', function () {
-      return agent.get('/types')
+    it('should get all diets', function (done) {
+      agent.get('/types')
         .then(response => {
           const dietsDb = Diet.findAll()
 
@@ -102,34 +107,42 @@ xdescribe('Recipe routes', () => {
               expect(response.body.length).to.equal(diets[0].length);
             })
         })
+      done();
     })
   });
 
 
   describe("GET /recipes?name=", () => {
-    it('should get 200 if the name is validate', function () {
-      return agent.get(`/recipes?name=pasta`)
-        .expect(200)
+    it('should get 200 if if the recipe is found', function (done) {
+      agent.get(`/recipes?name=milanesa`)
+        .expect(200);
+      done();
     })
-    it('should throw an error if the name is invalidates', function () {
-      return agent.get(`/recipes?name=asdsads`)
-        .expect(404)
-    })
-    it('should get 402 if the daily points limit of 150 has been reached', function () {
-      return agent.get(`/recipes?name=pasta`)
-        .expect(402)
+    it('the answer must have the number of recipes that was passed by query', function (done) {
+      agent.get("GET /recipes?name=pasta&number=9")
+        .then((response) => {
+          expect(response.data).to.have.lengthOf(9);
+        })       
+      done();
+    })    
+    it('should throw an error 404 if the recipe is not found', function (done) {
+      agent.get(`/recipes?name=asdsadss`)
+        .expect(404);
+      done();
     })
   });
 
 
   describe('GET /recipes/:id', () => {
-    it('should get 200 if the id is validate', function () {
-      return agent.get(`/recipes/${newId}`)
-        .expect(200)
+    it('should get 200 if the id is validate', function (done) {
+      agent.get(`/recipes/${newId}`)
+        .expect(200);
+      done();
     })
-    it('should throw an error if the id is invalidates', function () {
-      return agent.get(`/recipes/sadasdsadas121213`)
-        .expect(404)
+    it('should throw an error if the id is invalidates', function (done) {
+      agent.get(`/recipes/sadasdsadas121213`)
+        .expect(404);
+      done();
     })
   });
 

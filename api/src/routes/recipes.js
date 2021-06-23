@@ -8,11 +8,11 @@ const { v4: uuidv4 } = require('uuid');
 
 router.get("/", function (req, res) {
     console.log(req.query.name)
+    console.log(req.query.number)
     if (req.query.name) {
-        axios.get(COMPLEX_SEARCH + `?query=${req.query.name}&apiKey=` + API_KEY + ADD_RECIPE_INFO + `&number=${req.body.number ? req.body.number : 9}`)
+        axios.get(COMPLEX_SEARCH + `?query=${req.query.name}&apiKey=` + API_KEY + ADD_RECIPE_INFO + "&number=" + req.query.number)
             .then(response => {
                 if (response.data.totalResults > 0) {
-
                     let resultApi = response.data.results.map((recipe) => {
                         return recipe = {
                             id: recipe.id,
@@ -45,7 +45,7 @@ router.get("/", function (req, res) {
                     return res.send(resultApi)
                 }
                 else {
-                    return res.status(err.response.status ? err.response.status : 404).send(err.response.statusText ? err.response.statusText : "Esta receta ya no existe")
+                    return res.status(404).send("No se encontraron resultados con ese nombre")
                 }
             })
             .catch(err => {
@@ -54,8 +54,7 @@ router.get("/", function (req, res) {
     }
     else {
         return res.status(400).send(
-            "Ingrese el parametro ?name='...' seguido por el nombre de la receta para realizar la busqueda. Ejemplo : ?name=pasta." 
-            +   "/o ingrese '/' seguido del id de la receta que quiere buscar."
+            "Ingrese el parametro ?name='...' seguido por el nombre de la receta para realizar la busqueda. O ingrese '/' seguido del id de la receta que quiere buscar."
             )
     }
 });
@@ -100,7 +99,7 @@ router.get("/:id", function (req, res) {
                 }
             }
             else {
-                return res.status(400).send("La receta no existe")
+                return res.status(400)
             }
         })}
         else{

@@ -37,21 +37,23 @@
 /* ----------------------------- */
 
 .imgContainer{
-    width:350px;
-    height: 300px;
     display        : flex;
     justify-content: center;
-}
+    overflow:hidden;
 
-.img{
-    width: 270px;
-    height: 270px;
+    width: 290px;
+    height: 290px;
     border-radius: 99px;
 }
 
-.img {overflow:hidden;}
+.img{
+    border-radius: 99px; 
+    border: solid 3px white
+}
 
-.img:hover {transform:scale(1.1);}
+.img:hover {
+    transform:scale(1.2);
+}
 
 /* ----------------------------- */
 
@@ -59,12 +61,13 @@
     width: 300px;
     height: 60px;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-evenly;
 
     color: #b300ff;
     font-size: 30px;
     padding-bottom: 10px;
+    padding-top: 10px;
 }
 
 .scoreContainer h2{

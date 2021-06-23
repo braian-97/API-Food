@@ -24,6 +24,11 @@ export function Pagination({ recipes }) {
 
 
   useEffect(() => {
+    setData(recipes.slice(0, totalRecipes ? totalRecipes : 100 ));
+  }, [totalRecipes])
+
+
+  useEffect(() => {
     determineNumberOfPages();
   }, [data, recipePerPage, totalRecipes])
 
@@ -41,10 +46,10 @@ export function Pagination({ recipes }) {
   const determineNumberOfPages = () => {
     let paginatedDataObject = {};
 
-    let dataLength = totalRecipes ? totalRecipes : data.length;
+    let dataLength = totalRecipes ? totalRecipes : recipes.length;
     let chunkArray = [];
     let displayRecipes = recipePerPage ? parseInt(recipePerPage) : 10
-    
+
     for (let index = 0; index < dataLength; index += displayRecipes) {
       let end = index + displayRecipes
       let newChunk = data.slice(index, end);
@@ -132,12 +137,14 @@ export function Pagination({ recipes }) {
       );
     }
     let currentPage = (<button className={s.currentPage} onClick={(e) => { setCurrentClickedNumber(e); }}
-    key={currentClickedNumber}>{currentClickedNumber} </button>)
+      key={currentClickedNumber}>{currentClickedNumber} </button>)
 
     let points = <button> ... </button>
 
     return [pages[currentClickedNumber - 3] ? points : null, pages[currentClickedNumber - 2], currentPage, pages[currentClickedNumber], pages[currentClickedNumber + 1] ? points : null];
   };
+
+
 
   const handleInputChangeSearch = function (e) {
     if (e.target.value) {
@@ -164,32 +171,32 @@ export function Pagination({ recipes }) {
   return (
     <div className={s.pagination}>
       <div className={s.filters}>
-      <form className={s.searchName}>
-        <div>
-          <label >Show number of recipes per Page: </label>
-          <input
-            type="number"
-            placeholder="Recipes per Page..."
-            value={recipePerPage ? recipePerPage : null}
-            onChange={handleInputChangeSearch}
-          />
+        <form className={s.searchName}>
+          <div>
+            <label >Show number of recipes per Page: </label>
+            <input
+              type="number"
+              placeholder="Recipes per Page..."
+              value={recipePerPage ? recipePerPage : null}
+              onChange={handleInputChangeSearch}
+            />
+          </div>
+        </form>
+        <div className={s.totalRecipes}>
+          <div className={s.total}>
+            <h3>Total Recipes: </h3>
+            <h2>{recipes.length}</h2>
+          </div>
+          <div className={s.totalInput}>
+            <label >Total Recipes to show: </label>
+            <input
+              type="number"
+              placeholder="Total to show..."
+              value={totalRecipes ? totalRecipes : null}
+              onChange={handleChange}
+            />
+          </div>
         </div>
-      </form>
-      <div className={s.totalRecipes}>
-        <div className={s.total}>
-          <h3>Total Recipes: </h3>
-          <h2>{recipes.length}</h2>
-        </div>
-        <div className={s.totalInput}>
-          <label >Total Recipes to show: </label>
-          <input
-            type="number"
-            placeholder="Total to show..."
-            value={totalRecipes ? totalRecipes : null}
-            onChange={handleChange}
-          />
-        </div>
-      </div>
       </div>
       <div className={s.recipes}>
         {dataFromPaginate ?
@@ -218,7 +225,7 @@ export function Pagination({ recipes }) {
             } else {
               return null;
             }
-          })}          
+          })}
       </div>
 
       {data.length > 0 ?
@@ -263,6 +270,7 @@ export function Pagination({ recipes }) {
               )}
             </div>
           </div>
+          <h2>Total Pages: {totalPages}</h2>
         </div>
         : null}
     </div>

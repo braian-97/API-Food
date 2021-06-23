@@ -14,9 +14,9 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
         name: "",
         number: undefined,
     });
-    const [sortType, setSortType] = useState(null);
-    const [sort, setSort] = useState(null);
-    const [diet, setDiet] = useState(null);
+    const [sortType, setSortType] = useState(undefined);
+    const [sort, setSort] = useState("Ascendente");
+    const [diet, setDiet] = useState(undefined);
     const [filterbyName, setFilterbyName] = useState("");
     const [showRecipes, setShowRecipes] = useState();
 
@@ -27,14 +27,21 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
     }, [])
 
     useEffect(() => {
-        getAllDiets();
+        setRecipes(recipes)
+        getAllDiets();     
     }, [recipes])
 
     useEffect(() => {
-        if (recipes) {
-            setRecipes(recipes)
+        setRecipes(recipes)
+        getAllDiets();     
+    }, [newRecipes])
+
+
+    useEffect(() => {
+        if (showRecipes && showRecipes.length >= 100) {
+            setRecipes(showRecipes)
         }
-    }, [recipes])
+    }, [showRecipes])
 
 
     useEffect(() => {
@@ -42,21 +49,23 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
             const hundredRecipes = () => {
                 var iguales = [];
                 for (let i = 0; i < newRecipes.length; i++) {
-                    for (var j = 0; j < recipes.length; j++) {
-                        if (newRecipes[i].name === recipes[j].name) {
+                    for (var j = 0; j < recipe.length; j++) {
+                        if (newRecipes[i].name === recipe[j].name) {
                             iguales.push(j)
                         }
                     }
                 }
-                for (let i = 0; i < recipes.length; i++) {
-                    let noRepeat = newRecipes.concat(recipes.filter((r, i) => i !== iguales[i]))
-                    setShowRecipes(noRepeat)
-                    setRecipes(noRepeat)
+                for (let i = 0; i < recipe.length; i++) {
+                        let noRepeat = newRecipes.concat(recipe.filter((r, i) => i !== iguales[i]))
+                        setShowRecipes(noRepeat)
+                        setRecipes(noRepeat)                    
                 }
             }
+            if(recipe){
             hundredRecipes()
+            }
         }
-    }, [newRecipes])
+    }, [newRecipes, recipes])
 
     useEffect(() => {
         const sortArray = (type) => {
@@ -101,8 +110,7 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
             }
         };
         if (recipe || showRecipes) {
-            sortArray(sortType);
-            setSort("Ascendente")
+            sortArray(sortType);         
         }
     }, [sortType]);
 
@@ -148,7 +156,12 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
     useEffect(() => {
         const recipesByName = (type) => {
             if (type === "") {
-                setRecipes([...recipes]);
+                if (showRecipes && showRecipes.length >= 100) {
+                    setRecipes(showRecipes);
+                }
+                else{
+                    setRecipes([...recipes]);
+                }               
             }
             else {
                 if (showRecipes && showRecipes.length >= 100) {
@@ -185,7 +198,15 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
 
 
     const handleSubmit = (e) => {
-        searchRecipe(search);
+        if(search.number && search.number !== ""){
+            searchRecipe(search);
+        }
+        else {
+            searchRecipe({
+                name: search.name,
+                number: 9,
+            });
+        }
         e.preventDefault();
         setShowResult(true)
     }
@@ -194,91 +215,86 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
         setFilterbyName(e.target.value);
     }
 
-    const reload = () => {
-        getAllRecipes();
-        setSortType(null);
-        setSort(null);
-        setDiet(null);
-        setFilterbyName("");
-    }
-
     const [showResult, setShowResult] = useState(true)
 
     const closebtn = () => {
         setShowResult(false)
     }
 
-    console.log()
     return (
         <div className={s.home}>
             <div className={s.content}>
-                <h1 className={s.title}>Home</h1>
+                <h1 className={s.title}>HOME</h1>
 
-                <div className={s.form}>
-                    <form onSubmit={handleSubmit} className={s.search}>
-                        <label> <h3>Load more recipes:</h3> </label>
-                        <label>Load for Name: </label>
-                        <input type="text" name="name" onChange={handleInputChange} value={search.name ? search.name : undefined} placeholder="Nombre de la receta..."></input><br></br>
-                        <label>Number of recipes to load: </label>
-                        <input type="number" name="number" onChange={handleInputChange} value={search.number ? search.number : undefined} placeholder="Cantidad de recetas..." size="4"></input>
-                        <button type="submit">Search</button>
+                {recipes ?
+                    <div>
+                        <div className={s.form}>
+                            <form onSubmit={handleSubmit} className={s.search}>
+                                <label> <h3>Load more recipes:</h3> </label>
+                                <label>Load recipe by name: </label>
+                                <input type="text" name="name" onChange={handleInputChange} value={search.name ? search.name : undefined} placeholder="Nombre de la receta..."></input><br></br>
+                                <label>Number of recipes: </label>
+                                <input type="number" name="number" onChange={handleInputChange} value={search.number ? search.number : undefined} placeholder="Cantidad de recetas..." size="4"></input>
+                                <button disabled={search.name ? false : true} type="submit">Search</button>
+                                
+}
+                                {showResult && newRecipes && typeof newRecipes === 'string' && <div className={s.searchError}><span class={s.closebtn} onClick={() => closebtn()}>&times;</span> <img className={s.crossImg} src={cross} alt="" width="80" height="80" /><h4>No se encontraron resultados con ese nombre</h4> </div>}
+                                {showResult && newRecipes && typeof newRecipes !== 'string' && <div className={s.searchOk}><span class={s.closebtn} onClick={() => closebtn()}>&times;</span> <img className={s.crossImg} src={check} alt="" width="80" height="80" /><h4>Exito!</h4> </div>}
 
-                        {newRecipes && typeof newRecipes === 'string' && <div className={s.searchError}><span class={s.closebtn} onClick={() => closebtn()}>&times;</span> <img className={s.crossImg} src={cross} alt="" width="80" height="80" /><h4>Error: el nombre es invalido</h4> </div>}
-                        {newRecipes && typeof newRecipes !== 'string' && <div className={s.searchOk}><span class={s.closebtn} onClick={() => closebtn()}>&times;</span> <img className={s.crossImg} src={check} alt="" width="80" height="80" /><h4>Exito!</h4> </div>}
+                            </form>
 
-                    </form>
-
-                    <form className={s.filters}>
-                        <label> <h3>Recipe list filters :</h3> </label>
-                        <div>
-                            <label >Filter by name: </label>
-                            <input
-                                type="text"
-                                className="mb-2 form-control"
-                                placeholder="Buscar receta..."
-                                value={filterbyName}
-                                onChange={handleInputChangeSearch}
-                            />
+                            <form className={s.filters}>
+                                <label> <h3>Recipe list filters :</h3> </label>
+                                <div>
+                                    <label >Filter by name: </label>
+                                    <input
+                                        type="text"
+                                        placeholder="Buscar receta..."
+                                        value={filterbyName}
+                                        onChange={handleInputChangeSearch}
+                                    />
+                                </div>
+                                <div>
+                                    <label >Filter by diet type: </label>
+                                    {diets ?
+                                        <select onChange={(e) => setDiet(e.target.value)}>
+                                            <option value="none" >None</option>
+                                            {diets.map((d) => (
+                                                <option key={d.id} value={d.name} >{d.name}</option>
+                                            )
+                                            )}
+                                        </select>
+                                        : null}
+                                </div>
+                                <div className={s.buttons}>
+                                    <div className={s.add}>
+                                        <Link to="./add">
+                                            Add new Recipe
+                                        </Link>
+                                    </div>                               
+                                </div>
+                            </form>
                         </div>
-                        <div>
-                            <label >Filter by diet type: </label>
-                            {diets ?
-                                <select onChange={(e) => setDiet(e.target.value)}>
-                                    <option value="none" >None</option>
-                                    {diets.map((d) => (
-                                        <option key={d.id} value={d.name} >{d.name}</option>
-                                    )
-                                    )}
+                        <div className={s.sort}>
+                            <div>
+                                <label >Choose an order type: </label>
+                                <select onChange={(e) => setSortType(e.target.value)}>
+                                    <option value="predeterminado">Predeterminado</option>
+                                    <option value="name">Alfabeto</option>
+                                    <option value="score">Puntuación</option>
                                 </select>
-                                : null}
-                        </div>
-                        <div className={s.buttons}>
-                            <div className={s.add}>
-                                <Link to="./add">
-                                    Add new Recipe
-                                </Link>
                             </div>
-                            <button className={s.refresh} onClick={() => reload()}>Refresh</button>
-                        </div>
-                    </form>
-                </div>
-                <div className={s.sort}>
-                    <div>
-                        <label >Choose an order type: </label>
-                        <select onChange={(e) => setSortType(e.target.value)}>
-                            <option value="predeterminado">Predeterminado</option>
-                            <option value="name">Alfabeto</option>
-                            <option value="score">Puntuación</option>
-                        </select>
+                            <div>
+                                <label >Choose a sort way: </label>
+                                <button name={sort} onClick={(e) => handleClick(e)}
+                                > {sort}
+                                </button>
+                            </div>
+                        </div >
                     </div>
-                    <div>
-                        <label >Choose a sort way: </label>
-                        <button name={sort} onClick={(e) => handleClick(e)}
-                        > {sort ? sort : "Ascendente"}
-                        </button>
-                    </div>
-                </div >
+                    : null}
             </div>
+
             {recipe && <Pagination recipes={recipe} />}
             {recipes ? null : <div className={s.loading}><h2>Loading...</h2>  </div>}
         </div >

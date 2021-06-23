@@ -75,69 +75,6 @@ describe('<AddRecipe />', () => {
     it('Renderiza un input con la propiedad "name" igual a "diet"', () => {
       expect(wrapper.find('input[name="diet"]')).toHaveLength(1);
     })
-  })
-
-
-  xdescribe('Manejo de inputs con estado', () => {
-    let wrapper, useState, useStateSpy;
-    beforeEach(() => {
-      useState = jest.fn();
-      useStateSpy = jest.spyOn(React, 'useState')
-      useStateSpy.mockImplementation((init) => [init, useState]);
-      wrapper = shallow(<AddRecipe />)     
-
-    });
-
-
-    xdescribe("Name input", () => {
-
-      it('El form deberia cambiar de estado cuando escriban en el input de Name', () => {
-        wrapper.find('input[name="name"]').simulate('change', { target: { name: 'name', value: 'Milanesa' } });
-        expect(useState).toHaveBeenCalledWith({ "name": "Milanesa" });
-      });
-    });
-
-    xdescribe("Summary input", () => {
-      it('deberia cambiar de estado cuando escriban en el input de "summary"', () => {
-        wrapper.find('textarea[name="summary"]').simulate('change', { target: { name: 'summary', value: 'carne' } });
-        expect(useState).toHaveBeenCalledWith({ "name": "", "summary": "carne", "image": "", "score": "", "healthScore": "", "steps": "", "diet": [] });
-      });
-    });
-
-    xdescribe("Image input", () => {
-      it('deberia cambiar de estado cuando escriban en el input de "place"', () => {
-        wrapper.find('input[name="image"]').simulate('change', { target: { name: 'image', value: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRV-x2HM8arF4SUAWWI76kvuDEeuGlC6dARTA&usqp=CAU' } });
-        expect(useState).toHaveBeenCalledWith({ "name": "", "summary": "", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRV-x2HM8arF4SUAWWI76kvuDEeuGlC6dARTA&usqp=CAU", "score": "", "healthScore": "", "steps": "", "diet": [] });
-      });
-    });
-
-    xdescribe("Score input", () => {
-      it('deberia cambiar de estado cuando escriban en el input de "score"', () => {
-        wrapper.find('input[name="score"]').simulate('change', { target: { name: 'score', value: 90 } });
-        expect(useState).toHaveBeenCalledWith({ "name": "", "summary": "", "image": "", "score": 90, "healthScore": "", "steps": "", "diet": [] });
-      });
-    });
-
-    xdescribe("HealthScore input", () => {
-      it('deberia cambiar de estado cuando escriban en el input de "score"', () => {
-        wrapper.find('input[name="healthScore"]').simulate('change', { target: { name: 'healthScore', value: 95 } });
-        expect(useState).toHaveBeenCalledWith({ "name": "", "summary": "", "image": "", "score": "", "healthScore": "95", "steps": "", "diet": [] });
-      });
-    });
-
-    xdescribe("Steps input", () => {
-      it('deberia cambiar de estado cuando escriban en el input de "score"', () => {
-        wrapper.find('textarea[name="steps"]').simulate('change', { target: { name: 'steps', value: "1 paso: saber cocinar" } });
-        expect(useState).toHaveBeenCalledWith({ "name": "", "summary": "", "image": "", "score": "", "healthScore": "", "steps": "1 paso: saber cocinar", "diet": [] });
-      });
-    });
-
-    xdescribe("Diet input", () => {
-      it('deberia cambiar de estado cuando escriban en el input de "score"', () => {
-        wrapper.find('input[name="diet"]').simulate('change', { target: { name: 'diet', value: ["nueva dieta"] } });
-        expect(useState).toHaveBeenCalledWith({ "name": "", "summary": "", "image": "", "score": "", "healthScore": "", "steps": "", "diet": ["nueva dieta"] });
-      });
-    });
   });
 
 
@@ -152,26 +89,6 @@ describe('<AddRecipe />', () => {
       store.clearActions();
       wrapper = mount(<AddRecipeDefault store={store} />);
     })
-
-    it('deberia hacer un dispatch al store de la action "AddRecipe" con los datos del state cuando se hace un Submit', () => {
-      wrapper = mount(<AddRecipeDefault store={store} />);
-
-      wrapper.find('button[name="enviar"]').simulate('submit', { preventDefault() { } });
-      const expectedAction = [{
-        payload: {
-          name: "nombre",
-          summary: "",
-          image: "",
-          score: "",
-          healthScore: "",
-          steps: "",
-          diet: [],
-        },
-        type: 'ADD_RECIPE'
-      }]
-      expect(store.getActions()).toEqual(expectedAction);
-
-    });
 
     it('deberia llamar al evento `preventDefault()` para evitar que se refresque la pagina al hacer un submit', () => {
       wrapper = mount(<AddRecipeDefault store={store} />);

@@ -29,7 +29,7 @@ router.post("/", function (req, res) {
                 
             }).then(recipes => {
                 recipe = recipes
-                console.log(recipes)
+
                 if(recipes[1] === true){
                 let result = diet.map(diet => {
                     if (diet !== "" && diet) {
@@ -53,8 +53,6 @@ router.post("/", function (req, res) {
             }
             }).then(diets => {
                 if (!diets[0]  ) {
-                    console.log(recipe[1])
-                    console.log("-1")
                     return res.status(201).send( { id : recipe[0].id })
                 }
                 else {
@@ -63,7 +61,7 @@ router.post("/", function (req, res) {
                             return diet[0].setRecipes(recipe[0].id)
                         }).then(diet => {
                             if (diet) {                                
-                               console.log(diet)
+                               console.log("new diet set")
                             }
                         })
                     })

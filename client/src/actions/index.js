@@ -45,7 +45,10 @@ export function searchRecipe({ name, number }) {
                 .then(response => {
                     dispatch({ type: SEARCH_RECIPE, payload: response.data })
                 })
-                .catch(err => { dispatch({ type: SEARCH_RECIPE, payload: "Error: 400" }) })
+                .catch(err => { console.log(err)
+                    console.log(err.status)
+                    dispatch({ type: SEARCH_RECIPE, payload: "Error: 400" })                 
+            })
         }    
 }
 

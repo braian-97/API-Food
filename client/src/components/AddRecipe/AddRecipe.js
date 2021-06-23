@@ -152,18 +152,32 @@ export function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
 
     const restart = () => {
         setRecipe({
-            name: "",
-            summary: "",
-            image: "",
-            score: "",
-            healthScore: "",
-            steps: "",
+            name: undefined,
+            summary: undefined,
+            image: undefined,
+            score: undefined,
+            healthScore: undefined,
+            steps: undefined,
             diet: [],
         })
         setNewDiet({
             diet: []
         });
+        if(inputEl.current[0]){
         inputEl.current.slice(0, diets.length).forEach(d => d.checked = false)
+        }
+    }
+
+    const [showResult, setShowResult] = useState(undefined)
+    const [clicked, setClicked] = useState(undefined)
+
+    const clickedfn = () => {
+        setClicked(true)
+        setShowResult(true)
+    }; 
+    const closebtn = () => {
+        setShowResult(false)
+        setClicked(false)
     }
 
     return (
@@ -246,9 +260,10 @@ export function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
 
                     <div className={s.addDiet}>
                         <h5>Available diets: </h5>
+                        {addDiets[0] ?
                         <div className={s.listDiet}>
+             
                             <ul className={s.ulDiet}>
-
                                 {diets ? diets.map((d, i) => (
                                     <li className={s.listAddDiet} key={d.id}>
                                         <input ref={ref => inputEl.current.push(ref)}
@@ -257,8 +272,9 @@ export function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
                                     </li>
                                 )
                                 ) : null}
-                            </ul>
+                            </ul>                         
                         </div>
+                        : <h2>No hay dietas registradas</h2>}
                         <div className={s.newDiets}>
 
                             <label>Add new diets: </label>
@@ -268,7 +284,7 @@ export function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
                             </div>
                         </div>
 
-                        {addDiets ?
+                 
                             <ol className={s.allDiets}>
                                 <h5>List of all diets to add to the recipe: </h5>
                                 {addDiets.map((d, i) => (
@@ -277,30 +293,32 @@ export function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
                                     </li>
                                 )
                                 )}
-                            </ol> : null}
+                            </ol> 
 
                         {addDiets[0] ? <img className={s.checkImg} src={check} alt="" width="60" height="60" /> : null}
                     </div>
                 </div>
 
                 <div className={s.buttonsContainer}>
-                    <button className={s.addButton} name="enviar" type="submit" disabled={recipe.name && recipe.summary ? false : true} >Create recipe</button>
+                    <button className={s.addButton} onClick={() => clickedfn()} name="enviar" type="submit" disabled={recipe.name && recipe.summary ? false : true} >Create recipe</button>
                     <input className={s.restartInput} type="button" value="Restart all" onClick={() => restart()} />
                 </div>
 
-                {result && result.id ?
+                {showResult && result && result.id ?
                     <div className={s.created}>
+                        <span class={s.closebtn} onClick={() => closebtn()}>&times;</span>
                         <img src={created} alt="" width="80" height="80" />
                         <h4>Recipe successfully created: </h4>
                         <button className={s.goButton} onClick={goNewRecipe}> Go to recipe </button>
                     </div> : null}
 
-                {result && Array.isArray(result) ?
-                    <div className="resultError"><img className={s.crossImg} src={cross} alt="" width="80" height="80" /><h4 className={s.help}>{result[0]}</h4>
+                {showResult && result && Array.isArray(result) ?
+                    <div className={s.resultError}><span class={s.closebtn} onClick={() => closebtn()}>&times;</span><img className={s.crossImg} src={cross} alt="" width="80" height="80" /><h4 className={s.help}>{result[0]}</h4>
                         <button className={s.goButton} onClick={goOldRecipe}> Go to recipe </button>
                     </div> : null}
 
-                {typeof result === 'string' &&   <div><img className={s.crossImg} src={cross} alt="" width="80" height="80" /><h4 className={s.help}>{result}</h4></div> }
+                {showResult && typeof result === 'string' &&   <div className={s.resultError}><span class={s.closebtn} onClick={() => closebtn()}>&times;</span> <img className={s.crossImg} src={cross} alt="" width="80" height="80" /><h4 className={s.help}>{result}</h4></div> }
+                {clicked && !showResult && <h2>Loading...</h2>}
             </form>
         </div>
     )

@@ -1,5 +1,5 @@
 .navbar {
-    height: 60px;
+    height: 80px;
     top: 0;
     left: 0;
     background-color: #303236;
@@ -17,7 +17,7 @@
 
 
 .list {
-    height: 60px;
+    height: 80px;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -27,7 +27,7 @@
 }
 
 .list-item {
-    height: 60px;
+    height: 80px;
     margin: 0;
     display: flex;
     width: auto;
@@ -36,7 +36,7 @@
 
 
 .list-item a {
-    height: 60px;
+    height: 80px;
     display: flex;
     align-items: center;
     color: white;
