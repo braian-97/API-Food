@@ -37,7 +37,7 @@
     display: flex;
     justify-content: center;
     overflow: hidden;
-
+    height: 270px;
     border-radius: 99px;
     padding-bottom: 20px;
 }
@@ -83,10 +83,11 @@
     flex-direction: column;
     flex-wrap: nowrap;
     align-content: center;
-    height: 180px;
+    height: 220px;
     overflow-wrap: break-word;
     overflow-y: auto;
     margin-left: 20px;
+    padding-top: 20px;
 }
 
 
