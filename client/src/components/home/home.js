@@ -10,62 +10,87 @@ import cross from '../../img/cross.png'
 
 function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRecipes }) {
     const [recipe, setRecipes] = useState();
+    const [allNewRecipes, setAllNewRecipes] = useState([]);
+    const [showRecipes, setShowRecipes] = useState(false);
+
     const [search, setSearch] = useState({
         name: "",
         number: undefined,
     });
+    const [filterbyName, setFilterbyName] = useState("");
     const [sortType, setSortType] = useState(undefined);
     const [sort, setSort] = useState("Ascendente");
     const [diet, setDiet] = useState(undefined);
-    const [filterbyName, setFilterbyName] = useState("");
-    const [showRecipes, setShowRecipes] = useState(false);
 
+    const [b, setB] = useState()
 
+    useEffect(() => {
+        if(b && b.length === 0){
+        setB(newRecipes)}
+        else if(b){
+            setB([...newRecipes, ...b])
+        }
+    }, [])
+
+    console.log("b",b)
     useEffect(() => {
         getAllRecipes();
         getAllDiets();
+        if (!recipe) {
+            setRecipes(recipes)
+        }
     }, [])
 
     useEffect(() => {
-        setRecipes(recipes)
-        getAllDiets();     
-    }, [recipes])
-
-    useEffect(() => {
-        setRecipes(recipes)
-        getAllDiets(); 
+        if (newRecipes && newRecipes !== 'string') {
+            if (newRecipes && allNewRecipes) {
+                setAllNewRecipes([...newRecipes, ...allNewRecipes])
+            }
+            else {
+                setAllNewRecipes([...newRecipes])
+            }             
+        }
     }, [newRecipes])
 
+    console.log(allNewRecipes)
 
     useEffect(() => {
-        if (showRecipes && showRecipes.length >= 100) {
-            setRecipes(showRecipes)
+        if (recipes && allNewRecipes) {
+            let hash = {};
+            let arr = allNewRecipes.filter(o => hash[o.name] ? false : hash[o.name] = true)
+            console.log("arr",arr)
+            setShowRecipes([...arr, ...recipes])      
+            getAllDiets();
         }
+    }, [allNewRecipes, recipes])
+
+
+    useEffect(() => {
+        setRecipes(showRecipes)
     }, [showRecipes])
 
-
-    useEffect(() => {
-        if (newRecipes && typeof newRecipes !== 'string' && recipes) {
-            const hundredRecipes = () => {
-                var iguales = [];
-                for (let i = 0; i < newRecipes.length; i++) {
-                    for (var j = 0; j < recipe.length; j++) {
-                        if (newRecipes[i].name === recipe[j].name) {
-                            iguales.push(j)
-                        }
-                    }
-                }
-                for (let i = 0; i < recipe.length; i++) {
-                        let noRepeat = newRecipes.concat(recipe.filter((r, i) => i !== iguales[i]))
-                        setShowRecipes(noRepeat)
-                        setRecipes(noRepeat)                    
-                }
-            }
-            if(recipe){
-            hundredRecipes()
-            }
-        }
-    }, [newRecipes, recipes])
+    // useEffect(() => {
+    //     if (allNewRecipes && recipes) {
+    //         const hundredRecipes = () => {
+    //             var iguales = [];
+    //             for (let i = 0; i < allNewRecipes.length; i++) {
+    //                 for (var j = 0; j < recipe.length; j++) {
+    //                     if (allNewRecipes[i].name === recipe[j].name) {
+    //                         iguales.push(j)
+    //                     }
+    //                 }
+    //             }
+    //             for (let i = 0; i < recipe.length; i++) {
+    //                     let noRepeat = allNewRecipes.concat(recipe.filter((r, i) => i !== iguales[i]))
+    //                     setShowRecipes(noRepeat)
+    //                     setRecipes(noRepeat)                    
+    //             }
+    //         }
+    //         if(recipe){
+    //         hundredRecipes()
+    //         }
+    //     }
+    // }, [newRecipes, recipes])
 
     useEffect(() => {
         const sortArray = (type) => {
@@ -110,7 +135,8 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
             }
         };
         if (recipe || showRecipes) {
-            sortArray(sortType);         
+            sortArray(sortType);
+            setSort("Ascendente")
         }
     }, [sortType]);
 
@@ -152,6 +178,7 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
         }
         setSort(sort === "Ascendente" ? "Descendente" : "Ascendente")
     }
+    console.log(sort)
 
     useEffect(() => {
         const recipesByName = (type) => {
@@ -159,9 +186,9 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
                 if (showRecipes && showRecipes.length >= 100) {
                     setRecipes(showRecipes);
                 }
-                else{
+                else {
                     setRecipes([...recipes]);
-                }               
+                }
             }
             else {
                 if (showRecipes && showRecipes.length >= 100) {
@@ -198,7 +225,7 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
 
 
     const handleSubmit = (e) => {
-        if(search.number && search.number !== ""){
+        if (search.number && search.number !== "") {
             searchRecipe(search);
         }
         else {
@@ -221,7 +248,9 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
         setShowResult(false)
     }
 
-
+    console.log(showRecipes)
+    console.log(recipe)
+    console.log(recipes)
     return (
         <div className={s.home}>
             <div className={s.content}>
@@ -237,7 +266,7 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
                                 <label>Number of recipes: </label>
                                 <input type="number" name="number" onChange={handleInputChange} value={search.number ? search.number : undefined} placeholder="Cantidad de recetas..." size="4"></input>
                                 <button disabled={search.name ? false : true} type="submit">Search</button>
-                                
+
 
                                 {showResult && newRecipes && typeof newRecipes === 'string' && <div className={s.searchError}><span class={s.closebtn} onClick={() => closebtn()}>&times;</span> <img className={s.crossImg} src={cross} alt="" width="80" height="80" /><h4>No se encontraron resultados con ese nombre</h4> </div>}
                                 {showResult && newRecipes && typeof newRecipes !== 'string' && <div className={s.searchOk}><span class={s.closebtn} onClick={() => closebtn()}>&times;</span> <img className={s.crossImg} src={check} alt="" width="80" height="80" /><h4>Exito!</h4> </div>}
@@ -272,7 +301,7 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
                                         <Link to="./add">
                                             Add new Recipe
                                         </Link>
-                                    </div>                               
+                                    </div>
                                 </div>
                             </form>
                         </div>

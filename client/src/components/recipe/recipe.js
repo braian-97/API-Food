@@ -18,7 +18,7 @@ export function Recipe({ name, image, diets, id , score}) {
             </div>
             <div  className={s.dietsContainer}>
                 <ol className={s.diets}> <h4>Diets:</h4>
-                    {diets.map((d, i) => (
+                    {diets && diets.map((d, i) => (
                         <li key={i} >{d}</li>
                     )
                     )}</ol>

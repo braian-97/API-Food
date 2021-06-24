@@ -1,7 +1,7 @@
 import './App.css';
 import React from "react"
 import { Route } from "react-router-dom"
-import  Home  from './components/Home/Home'
+import Home from './components/Home/Home'
 import LandingPage from './components/LandingPage/LandingPage'
 import AddRecipe from './components/AddRecipe/AddRecipe';
 import RecipeDetail from './components/RecipeDetail/RecipeDetail'

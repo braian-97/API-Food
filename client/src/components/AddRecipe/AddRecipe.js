@@ -260,7 +260,7 @@ export function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
 
                     <div className={s.addDiet}>
                         <h5>Available diets: </h5>
-                        {diets[0] ?
+                        {diets && diets[0] ?
                         <div className={s.listDiet}>
              
                             <ul className={s.ulDiet}>
@@ -299,7 +299,8 @@ export function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
                     </div>
                 </div>
 
-                <div className={s.buttonsContainer}>
+                <p>The name and summary of the recipe are required</p>
+                <div className={s.buttonsContainer}>                    
                     <button className={s.addButton} onClick={() => clickedfn()} name="enviar" type="submit" disabled={recipe.name && recipe.summary ? false : true} >Create recipe</button>
                     <input className={s.restartInput} type="button" value="Restart all" onClick={() => restart()} />
                 </div>

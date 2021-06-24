@@ -207,6 +207,7 @@ export function Pagination({ recipes }) {
               name={recipe.name}
               image={recipe.image}
               score={recipe.score}
+              healthScore={recipe.healthScore}
               diets={recipe.diets}
             />
           ))
@@ -214,6 +215,7 @@ export function Pagination({ recipes }) {
             if (i < recipePerPage) {
               return (
                 <Recipe
+                  healthScore={recipe.healthScore}
                   key={recipe.id}
                   id={recipe.id}
                   name={recipe.name}

@@ -43,7 +43,6 @@ const recipes = (state = initialState, action) => {
             }
 
         case SEARCH_RECIPE:
-
                 return {
                     ...state,
                     newRecipes: action.payload,
