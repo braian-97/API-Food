@@ -347,6 +347,7 @@
     margin-top: 20px;
 }
 
+/* ---------------------------------- */
 .goButton {
     width        : 150px;
     height       : 50px;
@@ -359,6 +360,7 @@
     color           : white;
 }
 
+/* ---------------------------------- */
 .restartInput {
     width        : 150px;
     height       : 50px;
@@ -372,13 +374,14 @@
     color           : white;
 }
 
+/* ---------------------------------- */
 .buttonsContainer {
     display        : flex;
     width          : 500px;
     margin-top     : 25px;
     justify-content: space-evenly;
 }
-
+/* ---------------------------------- */
 .created {
     display        : flex;
     align-items    : center;
@@ -391,7 +394,7 @@
     margin-top: 10px;
     border-radius: 20px;
 }
-
+/* ---------------------------------- */
 .resultError{
     display: flex;
     flex-direction: column;
@@ -401,7 +404,7 @@
     margin-top: 10px;
     border-radius: 20px;
 }
-
+/* ---------------------------------- */
 .closebtn {
     margin-left: 225px;
     color: red;
@@ -424,3 +427,80 @@
   .closebtn:hover {
    background-color: white;
   }
+
+/* ---------------------------------- */
+
+  .navDetails{
+    display: flex;
+    position: fixed;
+    left: 0;
+    top: 17vh;
+    width: 170px;
+    border-radius: 20px;
+    font-size: 17px;
+    flex-direction: column;
+}
+
+.navDetails p{
+    margin: 0;
+    color: white;
+    padding-left: 5px;
+    background-color: rgb(53 141 255);
+    border-radius: 10px;
+    padding: 5px;
+    padding-left: 15px;
+}
+
+.navDetails a{
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 170px;
+}
+
+.listDetails{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    padding: 0px;
+    margin-top: 5px;
+    background-color: #f8f8f8e0;
+    border-radius: 25px;
+}
+
+.liAdd{
+    display: flex;
+    justify-content: center;
+
+    width: 170px;
+    padding: 8px;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.liCheck{
+    display: flex;
+    justify-content: space-between;
+    width: 170px;
+    padding: 8px;
+    background-color: #303236;
+    align-items: center;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+}
+
+.liCheck h4{
+    margin: 0;   
+}
+
+.checkAdd{
+    color: green
+}
+
+.emptyAdd{
+    color: red
+}

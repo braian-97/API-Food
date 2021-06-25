@@ -32,7 +32,6 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
         }
     }, [])
 
-    console.log("b",b)
     useEffect(() => {
         getAllRecipes();
         getAllDiets();
@@ -52,8 +51,6 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
         }
     }, [newRecipes])
 
-    console.log(allNewRecipes)
-
     useEffect(() => {
         if (recipes && allNewRecipes) {
             let hash = {};
@@ -69,28 +66,6 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
         setRecipes(showRecipes)
     }, [showRecipes])
 
-    // useEffect(() => {
-    //     if (allNewRecipes && recipes) {
-    //         const hundredRecipes = () => {
-    //             var iguales = [];
-    //             for (let i = 0; i < allNewRecipes.length; i++) {
-    //                 for (var j = 0; j < recipe.length; j++) {
-    //                     if (allNewRecipes[i].name === recipe[j].name) {
-    //                         iguales.push(j)
-    //                     }
-    //                 }
-    //             }
-    //             for (let i = 0; i < recipe.length; i++) {
-    //                     let noRepeat = allNewRecipes.concat(recipe.filter((r, i) => i !== iguales[i]))
-    //                     setShowRecipes(noRepeat)
-    //                     setRecipes(noRepeat)                    
-    //             }
-    //         }
-    //         if(recipe){
-    //         hundredRecipes()
-    //         }
-    //     }
-    // }, [newRecipes, recipes])
 
     useEffect(() => {
         const sortArray = (type) => {
@@ -248,9 +223,6 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
         setShowResult(false)
     }
 
-    console.log(showRecipes)
-    console.log(recipe)
-    console.log(recipes)
     return (
         <div className={s.home}>
             <div className={s.content}>

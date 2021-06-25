@@ -1,13 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Nav.css'
-import Logo from '../../img/logo-henry.png'
+import Logo from '../../img/logo.png'
 
 export function Nav() {
   return (
-    <div className="navbar">      
-      <img className="logo" src={Logo} alt="Logo Henry" width="140" height="50"/>    
-      <h2>API-Food</h2>
+    <div className="navbar">
+      <div className="title"><h2>API-Food</h2><img className="logo" src={Logo} alt="Logo Henry" width="80" height="80"/></div> 
       <nav>
         <ul className="list">     
           <li className="list-item"><Link to='/'><span>Landing Page</span></Link></li>

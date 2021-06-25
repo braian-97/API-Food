@@ -11,10 +11,14 @@
     font-size: 19px;
 }
 
-.navbar h2{
-    margin-left: 200px;
-}
+.title{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      align-content: center;
 
+      margin-left: 42vw;
+}
 
 .list {
     height: 80px;

@@ -48,14 +48,5 @@
   "devDependencies": {
     "@babel/preset-react": "^7.14.5",
     "redux-mock-store": "^1.5.4"
-  },
-
-  "jest": {
-    "coverageReporters": [
-      "jest-junit"
-    ]
-  },
-  "jest-junit": {
-    "outputName": "junit.xml"
   }
 }
