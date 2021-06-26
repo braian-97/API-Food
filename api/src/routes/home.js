@@ -37,11 +37,12 @@ router.get("/", function (req, res) {
                                 name: diet,
                               }                    
                         }).then(diet => {
-                            console.log("diets created")
+                            console.log("recipe loaded")
                         })
                         .catch(err => console.log("err"))
                     })
                 }
+                console.log("recipe loaded")
             });
 
             let recipesDb = Recipe.findAll({include: Diet})

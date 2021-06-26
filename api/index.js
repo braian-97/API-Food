@@ -34,7 +34,9 @@ conn.sync({ force: true }).then(() => {
       Diet.create({ 
         id: newId,
         name: diet,
-      }).then( r => console.log("dietas precargadas"))
+      })
+      .then( r => console.log("dietas precargadas"))
+      .catch(err => console.log(err));
     })
 
     //PRE-LOADED RECIPES
@@ -116,11 +118,11 @@ conn.sync({ force: true }).then(() => {
       }
     ]
 
-
-
     recipes.forEach( recipe => {
       const newId = uuidv4();
       const {title, summary, image, spoonacularScore, dishTypes, steps, diets} = recipe
+
+      var newRecipe;
       Recipe.findOrCreate({
         where: {
           id: newId,
@@ -132,7 +134,7 @@ conn.sync({ force: true }).then(() => {
           steps: steps,
         }        
     }).then(recipes => {
-        recipe = recipes
+        newRecipe = recipes[0]
 
         if(diets[0]){
         let result = diets.map(diet => {
@@ -153,13 +155,10 @@ conn.sync({ force: true }).then(() => {
         return result
       }
     }).then(diet => {
-            console.log("1",diet)
             if(diet && diet[0]){
             diet.forEach(e => {
-              console.log("2",e)
                 e.then(diet => {
-                  console.log("3",diet)
-                    return diet[0].setRecipes(recipe[0].id)
+                    return diet[0].setRecipes(newRecipe.id)
                 }).then(diet => {
                     if (diet) {                                
                       console.log("new diet set")
@@ -171,5 +170,7 @@ conn.sync({ force: true }).then(() => {
       .then( r => console.log("pre-loaded recipes "))
       .catch(err => console.log(err));
     })
-  }).catch(err => console.log(err));
-}).catch(err => console.log(err));
+  })
+  .catch(err => console.log(err));
+})
+.catch(err => console.log(err));

@@ -154,7 +154,6 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
         }
         setSort(sort === "Ascendente" ? "Descendente" : "Ascendente")
     }
-    console.log(sort)
 
     useEffect(() => {
         const recipesByName = (type) => {
@@ -313,7 +312,6 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
 };
 
 const mapStateToProps = (state) => {
-    console.log(state)
     return {
         recipes: state.recipes,
         diets: state.diets,

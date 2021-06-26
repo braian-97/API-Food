@@ -85,7 +85,6 @@ function RecipeDetail({ id, getRecipeDetail, details }) {
 }
 
 function mapStateToProps(state) {
-    console.log(state)
     return {
         ...state,
         details: state.recipeDetails,

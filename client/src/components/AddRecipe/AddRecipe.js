@@ -196,7 +196,6 @@ export function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
         setClicked(false)
     }
 
-    console.log(recipe)
     return (
         <div className={s.addRecipe}>
             <div>
@@ -371,7 +370,6 @@ export function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
 }
 
 function mapStateToProps(state) {
-    console.log(state)
     return {
         result: state.result,
         diets: state.diets,

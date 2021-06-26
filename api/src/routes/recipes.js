@@ -7,8 +7,6 @@ const { v4: uuidv4 } = require('uuid');
 
 
 router.get("/", function (req, res) {
-    console.log(req.query.name)
-    console.log(req.query.number)
     if (req.query.name) {
         axios.get(COMPLEX_SEARCH + `?query=${req.query.name}&apiKey=` + API_KEY + ADD_RECIPE_INFO + "&number=" + req.query.number)
             .then(response => {

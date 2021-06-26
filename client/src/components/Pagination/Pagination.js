@@ -166,8 +166,6 @@ export function Pagination({ recipes }) {
     }
   }
 
-  console.log(data)
-  console.log(page)
   return (
     <div className={s.pagination}>
       <div className={s.filters}>
