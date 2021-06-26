@@ -32,14 +32,14 @@ export function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
         if (e.target.name === "name" || e.target.name === "summary" || e.target.name === "image" || e.target.name === "steps") {
             setRecipe({
                 ...recipe,
-                [e.target.name]: e.target.value 
+                [e.target.name]: e.target.value
             });
             setErrors(validate({
                 ...recipe,
                 [e.target.name]: e.target.value
             }));
         }
-        else if(e.target.name === "diet") {
+        else if (e.target.name === "diet") {
             if (e.target.type === "checkbox") {
                 if (e.target.checked === true) {
                     setRecipe({
@@ -63,15 +63,15 @@ export function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
                 });
             }
         }
-        else if(e.target.name === "score" || e.target.name === "healthScore"){
-            if(e.target.value <= 100){
-            setRecipe({
-                ...recipe,
-                [e.target.name]: e.target.value 
-            });
+        else if (e.target.name === "score" || e.target.name === "healthScore") {
+            if (e.target.value <= 100) {
+                setRecipe({
+                    ...recipe,
+                    [e.target.name]: e.target.value
+                });
             }
         }
-        else if(e.target.name === "dishTypes"){
+        else if (e.target.name === "dishTypes") {
             setRecipe({
                 ...recipe,
                 [e.target.name]: [...e.target.value.split(",")]
@@ -158,7 +158,7 @@ export function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
 
 
     const inputEl = React.useRef([]);
-    
+
     if (inputEl.current[0]) {
         for (let i = 0; i >= diets.length; i++) {
             inputEl.current[i + 1].focus();
@@ -179,8 +179,8 @@ export function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
         setNewDiet({
             diet: []
         });
-        if(inputEl.current[0]){
-        inputEl.current.slice(0, diets.length).forEach(d => d.checked = false)
+        if (inputEl.current[0]) {
+            inputEl.current.slice(0, diets.length).forEach(d => d.checked = false)
         }
     }
 
@@ -190,7 +190,7 @@ export function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
     const clickedfn = () => {
         setClicked(true)
         setShowResult(true)
-    }; 
+    };
     const closebtn = () => {
         setShowResult(false)
         setClicked(false)
@@ -200,12 +200,12 @@ export function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
     return (
         <div className={s.addRecipe}>
             <div>
-            <nav className={s.navDetails}>
+                <nav className={s.navDetails}>
                     <p>See what you have complete</p>
-                    <ul className={s.listDetails}>     
+                    <ul className={s.listDetails}>
                         <li className={s.liCheck}>
-                        <h4 className={s.checkAdd}>Complete</h4>-
-                        <h4 className={s.emptyAdd}>Empty</h4>
+                            <h4 className={s.checkAdd}>Complete</h4>-
+                            <h4 className={s.emptyAdd}>Empty</h4>
                         </li>
                         <li className={s.liAdd}><a className={recipe.name && recipe.name.trim() !== "" ? s.checkAdd : s.emptyAdd} href="#name">Name</a></li>
                         <li className={s.liAdd}><a className={recipe.summary && recipe.summary.trim() !== "" ? s.checkAdd : s.emptyAdd} href="#summary">Summary</a></li>
@@ -220,7 +220,7 @@ export function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
             </div>
             <form onSubmit={handleSubmit} className={s.addForm}>
 
-                <div id="name"  className={s.addName}>
+                <div id="name" className={s.addName}>
                     <label>Name</label>
                     <div className={s.inputName}>
                         <input className={errors.name && s.danger}
@@ -260,22 +260,23 @@ export function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
                         </div>
                         {recipe.image ? <img className={s.checkImg} src={check} alt="" width="60" height="60" /> : null}
                     </div>
-
                 </div>
 
-                <div id="score" className={s.addScore}>
-                    <label>Score</label>
-                    <div className={s.addScoreInput}>
-                        <input type="number" name="score" onChange={handleInputChange} value={recipe.score} min="0" max="100" size="5"></input>
-                        {recipe.score ? <img className={s.checkImg} src={check} alt="" width="40" height="40" /> : null}
+                <div className={s.addNumber}>
+                    <div id="score" className={s.addScore}>
+                        <label>Score</label>
+                        <div className={s.addScoreInput}>
+                            <input type="number" name="score" onChange={handleInputChange} value={recipe.score} min="0" max="100" size="5"></input>
+                            {recipe.score ? <img className={s.checkImg} src={check} alt="" width="40" height="40" /> : null}
+                        </div>
                     </div>
-                </div>
 
-                <div id="healthscore" className={s.addHealthScore}>
-                    <label>HealthScore</label>
-                    <div className={s.addHealthScoreInput}>
-                        <input type="number" name="healthScore" onChange={handleInputChange} value={recipe.healthScore} min="0" max="100" size="5"></input>
-                        {recipe.healthScore ? <img className={s.checkImg} src={check} alt="" width="40" height="40" /> : null}
+                    <div id="healthscore" className={s.addHealthScore}>
+                        <label>HealthScore</label>
+                        <div className={s.addHealthScoreInput}>
+                            <input type="number" name="healthScore" onChange={handleInputChange} value={recipe.healthScore} min="0" max="100" size="5"></input>
+                            {recipe.healthScore ? <img className={s.checkImg} src={check} alt="" width="40" height="40" /> : null}
+                        </div>
                     </div>
                 </div>
 
@@ -305,20 +306,20 @@ export function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
                     <div className={s.addDiet}>
                         <h5>Available diets: </h5>
                         {diets && diets[0] ?
-                        <div className={s.listDiet}>
-             
-                            <ul className={s.ulDiet}>
-                                {diets ? diets.map((d, i) => (
-                                    <li className={s.listAddDiet} key={d.id}>
-                                        <input ref={ref => inputEl.current.push(ref)}
-                                            className={s.check} type="checkbox" name="diet" onChange={handleInputChange} value={d.name}></input>
-                                        <label className={s.labelDiet}>{d.name}</label>
-                                    </li>
-                                )
-                                ) : null}
-                            </ul>                         
-                        </div>
-                        : <h2>No hay dietas registradas</h2>}
+                            <div className={s.listDiet}>
+
+                                <ul className={s.ulDiet}>
+                                    {diets ? diets.map((d, i) => (
+                                        <li className={s.listAddDiet} key={d.id}>
+                                            <input ref={ref => inputEl.current.push(ref)}
+                                                className={s.check} type="checkbox" name="diet" onChange={handleInputChange} value={d.name}></input>
+                                            <label className={s.labelDiet}>{d.name}</label>
+                                        </li>
+                                    )
+                                    ) : null}
+                                </ul>
+                            </div>
+                            : <h2>No hay dietas registradas</h2>}
                         <div className={s.newDiets}>
 
                             <label>Add new diets: </label>
@@ -328,24 +329,24 @@ export function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
                             </div>
                         </div>
 
-                 
-                            <ol className={s.allDiets}>
-                                <h5>List of all diets to add to the recipe: </h5>
-                                {addDiets.map((d, i) => (
-                                    <li key={i}>
-                                        {d}
-                                    </li>
-                                )
-                                )}
-                            </ol> 
+
+                        <ol className={s.allDiets}>
+                            <h5>List of all diets to add to the recipe: </h5>
+                            {addDiets.map((d, i) => (
+                                <li key={i}>
+                                    {d}
+                                </li>
+                            )
+                            )}
+                        </ol>
 
                         {addDiets[0] ? <img className={s.checkImg} src={check} alt="" width="60" height="60" /> : null}
                     </div>
                 </div>
 
                 <p>The name and summary of the recipe are required</p>
-                <div className={s.buttonsContainer}>                    
-                    <button className={s.addButton} onClick={() => clickedfn()} name="enviar" type="submit" disabled={(recipe.name && recipe.summary)  && (recipe.name.trim() && recipe.summary.trim()) !== "" ? false : true} >Create recipe</button>
+                <div className={s.buttonsContainer}>
+                    <button className={s.addButton} onClick={() => clickedfn()} name="enviar" type="submit" disabled={(recipe.name && recipe.summary) && (recipe.name.trim() && recipe.summary.trim()) !== "" ? false : true} >Create recipe</button>
                     <input className={s.restartInput} type="button" value="Restart all" onClick={() => restart()} />
                 </div>
 
@@ -362,7 +363,7 @@ export function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
                         <button className={s.goButton} onClick={goOldRecipe}> Go to recipe </button>
                     </div> : null}
 
-                {showResult && typeof result === 'string' &&   <div className={s.resultError}><span class={s.closebtn} onClick={() => closebtn()}>&times;</span> <img className={s.crossImg} src={cross} alt="" width="80" height="80" /><h4 className={s.help}>{result}</h4></div> }
+                {showResult && typeof result === 'string' && <div className={s.resultError}><span class={s.closebtn} onClick={() => closebtn()}>&times;</span> <img className={s.crossImg} src={cross} alt="" width="80" height="80" /><h4 className={s.help}>{result}</h4></div>}
                 {clicked && !showResult && <h2>Loading...</h2>}
             </form>
         </div>

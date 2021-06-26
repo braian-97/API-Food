@@ -263,8 +263,16 @@
 
 /* ---------------------------------- */
 
+.addNumber{
+    display       : flex;
+    width: 600px;
+    justify-content: space-evenly;
+}
+
+/* ---------------------------------- */
+
 .addScore {
-    width         : 350px;
+    width         : 250px;
     margin-bottom : 20px;
     margin-top    : 20px;
     display       : flex;
@@ -288,7 +296,7 @@
 
 
 .addHealthScore {
-    width         : 350px;
+    width         : 250px;
     margin-bottom : 20px;
     margin-top    : 20px;
     display       : flex;
