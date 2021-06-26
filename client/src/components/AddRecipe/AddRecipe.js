@@ -345,7 +345,7 @@ export function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
 
                 <p>The name and summary of the recipe are required</p>
                 <div className={s.buttonsContainer}>                    
-                    <button className={s.addButton} onClick={() => clickedfn()} name="enviar" type="submit" disabled={(recipe.name.trim() && recipe.summary.trim()) !== "" ? false : true} >Create recipe</button>
+                    <button className={s.addButton} onClick={() => clickedfn()} name="enviar" type="submit" disabled={(recipe.name && recipe.summary)  && (recipe.name.trim() && recipe.summary.trim()) !== "" ? false : true} >Create recipe</button>
                     <input className={s.restartInput} type="button" value="Restart all" onClick={() => restart()} />
                 </div>
 
