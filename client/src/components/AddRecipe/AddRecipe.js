@@ -15,6 +15,7 @@ export function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
         score: undefined,
         healthScore: undefined,
         steps: undefined,
+        dishTypes: [],
         diet: [],
     })
     const [errors, setErrors] = useState({});
@@ -28,17 +29,17 @@ export function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
     }, []);
 
     const handleInputChange = function (e) {
-        if (e.target.name !== "diet") {
+        if (e.target.name === "name" || e.target.name === "summary" || e.target.name === "image" || e.target.name === "steps") {
             setRecipe({
                 ...recipe,
-                [e.target.name]: e.target.value
+                [e.target.name]: e.target.value 
             });
             setErrors(validate({
                 ...recipe,
                 [e.target.name]: e.target.value
             }));
         }
-        else {
+        else if(e.target.name === "diet") {
             if (e.target.type === "checkbox") {
                 if (e.target.checked === true) {
                     setRecipe({
@@ -62,6 +63,20 @@ export function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
                 });
             }
         }
+        else if(e.target.name === "score" || e.target.name === "healthScore"){
+            if(e.target.value <= 100){
+            setRecipe({
+                ...recipe,
+                [e.target.name]: e.target.value 
+            });
+            }
+        }
+        else if(e.target.name === "dishTypes"){
+            setRecipe({
+                ...recipe,
+                [e.target.name]: [...e.target.value.split(",")]
+            });
+        }
     }
 
 
@@ -71,10 +86,11 @@ export function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
         addRecipe({
             name: recipe.name,
             summary: recipe.summary,
-            image: recipe.image !== "" ? recipe.image : null,
-            score: recipe.score !== "" ? recipe.score : null,
-            healthScore: recipe.healthScore !== "" ? recipe.healthScore : null,
-            steps: recipe.steps !== "" ? recipe.steps : null,
+            image: recipe.image.trim() !== "" ? recipe.image : null,
+            score: recipe.score.trim() !== "" ? recipe.score : null,
+            healthScore: recipe.healthScore.trim() !== "" ? recipe.healthScore : null,
+            steps: recipe.steps.trim() !== "" ? recipe.steps : null,
+            dishTypes: recipe.dishTypes && recipe.dishTypes[0] && recipe.dishTypes[0] !== "" ? recipe.dishTypes : null,
             diet: addDiets
         });
 
@@ -151,12 +167,13 @@ export function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
 
     const restart = () => {
         setRecipe({
-            name: undefined,
-            summary: undefined,
-            image: undefined,
-            score: undefined,
-            healthScore: undefined,
-            steps: undefined,
+            name: "",
+            summary: "",
+            image: "",
+            score: "",
+            healthScore: "",
+            dishTypes: [],
+            steps: "",
             diet: [],
         })
         setNewDiet({
@@ -179,6 +196,7 @@ export function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
         setClicked(false)
     }
 
+    console.log(recipe)
     return (
         <div className={s.addRecipe}>
             <div>
@@ -189,12 +207,13 @@ export function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
                         <h4 className={s.checkAdd}>Complete</h4>-
                         <h4 className={s.emptyAdd}>Empty</h4>
                         </li>
-                        <li className={s.liAdd}><a className={recipe.name && recipe.name !== "" ? s.checkAdd : s.emptyAdd} href="#name">Name</a></li>
-                        <li className={s.liAdd}><a className={recipe.summary && recipe.summary !== "" ? s.checkAdd : s.emptyAdd} href="#summary">Summary</a></li>
-                        <li className={s.liAdd}><a className={recipe.image && recipe.image !== "" ? s.checkAdd : s.emptyAdd} href="#image">Image</a></li>
-                        <li className={s.liAdd}><a className={recipe.score && recipe.score !== "" ? s.checkAdd : s.emptyAdd} href="#score">Score</a></li>
-                        <li className={s.liAdd}><a className={recipe.healthScore && recipe.healthScore !== "" ? s.checkAdd : s.emptyAdd} href="#healthscore">Health Score</a></li>
-                        <li className={s.liAdd}><a className={recipe.steps && recipe.steps !== "" ? s.checkAdd : s.emptyAdd} href="#steps">Steps</a></li>
+                        <li className={s.liAdd}><a className={recipe.name && recipe.name.trim() !== "" ? s.checkAdd : s.emptyAdd} href="#name">Name</a></li>
+                        <li className={s.liAdd}><a className={recipe.summary && recipe.summary.trim() !== "" ? s.checkAdd : s.emptyAdd} href="#summary">Summary</a></li>
+                        <li className={s.liAdd}><a className={recipe.image && recipe.image.trim() !== "" ? s.checkAdd : s.emptyAdd} href="#image">Image</a></li>
+                        <li className={s.liAdd}><a className={recipe.score && recipe.score.trim() !== "" ? s.checkAdd : s.emptyAdd} href="#score">Score</a></li>
+                        <li className={s.liAdd}><a className={recipe.healthScore && recipe.healthScore.trim() !== "" ? s.checkAdd : s.emptyAdd} href="#healthscore">Health Score</a></li>
+                        <li className={s.liAdd}><a className={recipe.dishTypes && recipe.dishTypes[0] && recipe.dishTypes[0].trim() !== "" ? s.checkAdd : s.emptyAdd} href="#dishTypes">dishTypes</a></li>
+                        <li className={s.liAdd}><a className={recipe.steps && recipe.steps.trim() !== "" ? s.checkAdd : s.emptyAdd} href="#steps">Steps</a></li>
                         <li className={s.liAdd}><a className={addDiets.length > 0 ? s.checkAdd : s.emptyAdd} href="#diets">Diets</a></li>
                     </ul>
                 </nav>
@@ -229,7 +248,7 @@ export function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
                         <div className={s.addImg}>
                             <h5>Ulr of the Image: </h5>
                             <div className={s.url}>
-                                <input placeholder="Url of the image" type="text" name="image" id="image" onChange={handleInputChange} value={recipe.image} size="60" ></input>
+                                <input placeholder="Url of the image" type="text" name="image" id="image" onChange={handleInputChange} value={recipe.image} size="40" ></input>
                                 <input type="button" value="Clear" onClick={() => setRecipe({ ...recipe, image: "" })} />
                             </div>
                             <h5>Select Image: </h5>
@@ -247,7 +266,7 @@ export function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
                 <div id="score" className={s.addScore}>
                     <label>Score</label>
                     <div className={s.addScoreInput}>
-                        <input type="number" name="score" onChange={handleInputChange} value={recipe.score} size="5"></input>
+                        <input type="number" name="score" onChange={handleInputChange} value={recipe.score} min="0" max="100" size="5"></input>
                         {recipe.score ? <img className={s.checkImg} src={check} alt="" width="40" height="40" /> : null}
                     </div>
                 </div>
@@ -255,8 +274,16 @@ export function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
                 <div id="healthscore" className={s.addHealthScore}>
                     <label>HealthScore</label>
                     <div className={s.addHealthScoreInput}>
-                        <input type="number" name="healthScore" onChange={handleInputChange} value={recipe.healthScore} size="5"></input>
+                        <input type="number" name="healthScore" onChange={handleInputChange} value={recipe.healthScore} min="0" max="100" size="5"></input>
                         {recipe.healthScore ? <img className={s.checkImg} src={check} alt="" width="40" height="40" /> : null}
+                    </div>
+                </div>
+
+                <div id="dishTypes" className={s.addDishTypes}>
+                    <label>Dish Types</label>
+                    <div className={s.addDishTypesInput}>
+                        <input type="text" name="dishTypes" onChange={handleInputChange} value={recipe.dishTypes} ></input>
+                        {recipe.dishTypes[0] ? <img className={s.checkImg} src={check} alt="" width="40" height="40" /> : null}
                     </div>
                 </div>
 
@@ -318,7 +345,7 @@ export function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
 
                 <p>The name and summary of the recipe are required</p>
                 <div className={s.buttonsContainer}>                    
-                    <button className={s.addButton} onClick={() => clickedfn()} name="enviar" type="submit" disabled={recipe.name && recipe.summary ? false : true} >Create recipe</button>
+                    <button className={s.addButton} onClick={() => clickedfn()} name="enviar" type="submit" disabled={(recipe.name.trim() && recipe.summary.trim()) !== "" ? false : true} >Create recipe</button>
                     <input className={s.restartInput} type="button" value="Restart all" onClick={() => restart()} />
                 </div>
 

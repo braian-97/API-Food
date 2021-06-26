@@ -25,9 +25,10 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
     const [b, setB] = useState()
 
     useEffect(() => {
-        if(b && b.length === 0){
-        setB(newRecipes)}
-        else if(b){
+        if (b && b.length === 0) {
+            setB(newRecipes)
+        }
+        else if (b) {
             setB([...newRecipes, ...b])
         }
     }, [])
@@ -47,16 +48,16 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
             }
             else {
                 setAllNewRecipes([...newRecipes])
-            }             
+            }
         }
     }, [newRecipes])
+
 
     useEffect(() => {
         if (recipes && allNewRecipes) {
             let hash = {};
             let arr = allNewRecipes.filter(o => hash[o.name] ? false : hash[o.name] = true)
-            console.log("arr",arr)
-            setShowRecipes([...arr, ...recipes])      
+            setShowRecipes([...arr, ...recipes])
             getAllDiets();
         }
     }, [allNewRecipes, recipes])
@@ -232,11 +233,11 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
                     <div>
                         <div className={s.form}>
                             <form onSubmit={handleSubmit} className={s.search}>
-                                <label> <h3>Load more recipes:</h3> </label>
+                                <h3>Load more recipes:</h3>
                                 <label>Load recipe by name: </label>
-                                <input type="text" name="name" onChange={handleInputChange} value={search.name ? search.name : undefined} placeholder="Nombre de la receta..."></input><br></br>
+                                <input className={s.inputHome} type="text" name="name" onChange={handleInputChange} value={search.name ? search.name : undefined} placeholder="Nombre de la receta..."></input><br></br>
                                 <label>Number of recipes: </label>
-                                <input type="number" name="number" onChange={handleInputChange} value={search.number ? search.number : undefined} placeholder="Cantidad de recetas..." size="4"></input>
+                                <input className={s.inputHome} type="number" name="number" onChange={handleInputChange} value={search.number ? search.number : undefined} placeholder="Cantidad de recetas..." size="4"></input>
                                 <button disabled={search.name ? false : true} type="submit">Search</button>
 
 
@@ -246,18 +247,18 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
                             </form>
 
                             <form className={s.filters}>
-                                <label> <h3>Recipe list filters :</h3> </label>
-                                <div>
+                                <h3> Recipe list filters : </h3>
+                                <div className={s.filtersDiv}>
                                     <label >Filter by name: </label>
-                                    <input
+                                    <input className={s.inputHome}
                                         type="text"
                                         placeholder="Buscar receta..."
                                         value={filterbyName}
                                         onChange={handleInputChangeSearch}
                                     />
                                 </div>
-                                <div>
-                                    <label >Filter by diet type: </label>
+                                <div className={s.filtersDiv}>
+                                    <h3 >Filter by diet type: </h3>
                                     {diets ?
                                         <select onChange={(e) => setDiet(e.target.value)}>
                                             <option value="none" >None</option>
@@ -276,23 +277,31 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
                                     </div>
                                 </div>
                             </form>
+                            <div className={s.filters}>
+                                <h3>Choose an order: </h3>
+                                <div className={s.orderRadio}>
+
+                                    <div className={s.radioDiv}>
+                                        <label>Predeterminado</label><br></br>
+                                        <input type="radio" name="sort" value="predeterminado" onChange={(e) => setSortType(e.target.value)} checked></input>
+                                    </div>
+                                    <div className={s.radioDiv}>
+                                        <label>Name</label><br></br>
+                                        <input type="radio" name="sort" value="name" onChange={(e) => setSortType(e.target.value)}></input>
+                                    </div>
+                                    <div className={s.radioDiv}>
+                                        <label>Puntuación</label><br></br>
+                                        <input type="radio" name="sort" value="score" onChange={(e) => setSortType(e.target.value)}></input>
+                                    </div>
+                                </div>
+                                <div className={s.filtersDiv}>
+                                    <label >Choose a sort way: </label>
+                                    <button name={sort} onClick={(e) => handleClick(e)}
+                                    > {sort}
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                        <div className={s.sort}>
-                            <div>
-                                <label >Choose an order type: </label>
-                                <select onChange={(e) => setSortType(e.target.value)}>
-                                    <option value="predeterminado">Predeterminado</option>
-                                    <option value="name">Alfabeto</option>
-                                    <option value="score">Puntuación</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label >Choose a sort way: </label>
-                                <button name={sort} onClick={(e) => handleClick(e)}
-                                > {sort}
-                                </button>
-                            </div>
-                        </div >
                     </div>
                     : null}
             </div>

@@ -18,6 +18,9 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
       allowNull: false,
     },
+    dishTypes:{
+      type: DataTypes.ARRAY(DataTypes.TEXT),
+    },
     image: {
       type: DataTypes.TEXT,
     },

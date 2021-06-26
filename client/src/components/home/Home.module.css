@@ -3,11 +3,7 @@
 }
 
 .home label{
-    font-size: 22px;
-}
-
-.home input {
-    font-size       : 18px;
+    font-size: 19px;
 }
 
 .home select {
@@ -43,6 +39,8 @@
 .title {
     display: flex;
     justify-content: center;
+    margin: 0;
+    padding-top: 10px;
 }
 
 
@@ -51,7 +49,6 @@
     display        : flex;
     border-radius  : 50px;
     margin         : 20px;
-    height         : 500px;
     align-content  : center;
     justify-content: center;
     align-items    : center;
@@ -61,12 +58,13 @@
 }
 
 .form h3 {
-    color: lightgray;
+    color: beige;
+    font-size: 22px;
 }
 
 .search {
     display         : flex;
-    width           : 500px;
+    width           : 300px;
     height          : 500px;
     margin-right    : 10px;
     flex-wrap       : nowrap;
@@ -126,13 +124,15 @@
     font-size: 40px;
   }
 
-.form input {
+.inputHome {
     margin-top      : 5px;
     background-color: #303236;
     color           : lightgray;
+    font-size       : 18px;
+    padding-left: 10px;
 }
 
-.form input::placeholder {
+.inputHome::placeholder {
     color: lightgray;
 }
 
@@ -152,52 +152,41 @@
 
 
 .filters {
-    width: 500px;
     height: 500px;
+    width           : 300px;
     margin-left: 10px;
     box-shadow: 3px 3px 15px 3px;
     background-color: #888888d6;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-content: center;
     flex-wrap: wrap;
     align-items: center;
 }
 
-.filters div{
+.filtersDiv{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.sort {
-    display        : flex;
-    justify-content: space-evenly;
-    height         : 80px;
-    align-items    : center;
-    margin         : 10px;
-    box-shadow     : 3px 3px 15px 3px;
-    font-weight    : 600;
+.orderRadio{
+    display: flex;
+    flex-direction: column;
 }
 
-.sort button {
-    background-color   : rgba(255, 255, 255, 0.856);
-    color              : #303236;
-    margin-left        : 20px;
-    transition-duration: 0.4s;
-    padding            : 10px;
-    border-radius      : 10px;
-    margin             : 10px;
-    font-size       : 18px;
+.radioDiv{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
-.sort button:hover {
-    background-color: black;
-    color           : white;
+.radioDiv input{
+    width: 20px;
+    height: 20px;
 }
-
 
 .buttons {
     display        : flex;

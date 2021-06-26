@@ -5,7 +5,7 @@
     padding         : 30px;
     align-items     : center;
     flex-wrap       : nowrap;
-    background-color: #adadad;
+    background-color: #adadade3;
     box-shadow      : 0px 0px 5px 0px black;
     color           : black;
 }
@@ -337,6 +337,30 @@
 
 /* ---------------------------------- */
 
+.addDishTypes{
+    display       : flex;
+    align-items   : center;
+    flex-direction: column;
+
+    width        : 650px;
+    margin-bottom: 20px;
+    padding-left : 20px;
+    margin-top   : 20px;
+
+    box-shadow: 0px 0px 5px 2px;
+    padding   : 20px;
+}
+
+.addDishTypesInput {
+    padding-top: 15px;
+}
+
+
+.addDishTypesInput input{
+    width        : 500px;
+}
+
+/* ---------------------------------- */
 
 .checkImg {
     background-color: #ffffff91;
@@ -435,20 +459,24 @@
     position: fixed;
     left: 0;
     top: 17vh;
-    width: 170px;
+    width: 205px;
     border-radius: 20px;
     font-size: 17px;
     flex-direction: column;
+    background-color: #f8f8f8e0;
+    border: solid 2px black;
 }
 
 .navDetails p{
     margin: 0;
-    color: white;
+    color: #978b24;
     padding-left: 5px;
-    background-color: rgb(53 141 255);
-    border-radius: 10px;
+    background-color: rgb(0 0 0);
     padding: 5px;
+    border: solid 2px;
     padding-left: 15px;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
 }
 
 .navDetails a{
@@ -457,7 +485,7 @@
     justify-content: center;
     align-items: center;
 
-    width: 170px;
+    width: 200px;
 }
 
 .listDetails{
@@ -467,8 +495,8 @@
     align-items: flex-start;
     flex-wrap: nowrap;
     padding: 0px;
-    margin-top: 5px;
-    background-color: #f8f8f8e0;
+    margin-top: 0;
+
     border-radius: 25px;
 }
 
@@ -476,7 +504,7 @@
     display: flex;
     justify-content: center;
 
-    width: 170px;
+    width: 200px;
     padding: 8px;
     font-size: 17px;
     font-weight: 600;
@@ -485,12 +513,11 @@
 .liCheck{
     display: flex;
     justify-content: space-between;
-    width: 170px;
+    width: 203px;
     padding: 8px;
-    background-color: #303236;
+    background-color: white;
     align-items: center;
-    border-top-right-radius: 20px;
-    border-top-left-radius: 20px;
+    border: solid 2px black;
 }
 
 .liCheck h4{

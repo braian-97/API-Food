@@ -62,7 +62,7 @@ export function Pagination({ recipes }) {
 
     setPage({
       ...page,
-      totalPages: chunkArray.length,
+      totalPages: recipePerPage ? Math.ceil(data.length/recipePerPage) : Math.ceil (data.length/10),
       dataStartingIndex: recipePerPage,
       pageData: paginatedDataObject,
       clickedOnNumber: 1
@@ -126,6 +126,7 @@ export function Pagination({ recipes }) {
   const pageNumberRender = () => {
     const { totalPages, currentClickedNumber } = page;
     let pages = [];
+
     for (let i = 1; i < totalPages + 1; i++) {
       pages.push(
         <button onClick={(e) => {
@@ -144,8 +145,6 @@ export function Pagination({ recipes }) {
     return [pages[currentClickedNumber - 3] ? points : null, pages[currentClickedNumber - 2], currentPage, pages[currentClickedNumber], pages[currentClickedNumber + 1] ? points : null];
   };
 
-
-
   const handleInputChangeSearch = function (e) {
     if (e.target.value) {
       setRecipePerPage(e.target.value);
@@ -155,7 +154,6 @@ export function Pagination({ recipes }) {
     }
     e.preventDefault();
   }
-
 
   const handleChange = (e) => {
     if (e.target.value && e.target.value !== "") {
@@ -168,11 +166,13 @@ export function Pagination({ recipes }) {
     }
   }
 
+  console.log(data)
+  console.log(page)
   return (
     <div className={s.pagination}>
       <div className={s.filters}>
         <form className={s.searchName}>
-          <div>
+         
             <label >Show number of recipes per Page: </label>
             <input
               type="number"
@@ -180,7 +180,7 @@ export function Pagination({ recipes }) {
               value={recipePerPage ? recipePerPage : null}
               onChange={handleInputChangeSearch}
             />
-          </div>
+         
         </form>
         <div className={s.totalRecipes}>
           <div className={s.total}>
