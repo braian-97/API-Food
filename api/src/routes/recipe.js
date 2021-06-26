@@ -7,7 +7,7 @@ const { v4: uuidv4 } = require('uuid');
 router.post("/", function (req, res) {
     try {
         const isEmpty = str => !str.trim().length;
-        let { name, image, summary, score, healthScore, steps, diet } = req.body
+        let { name, image, summary, score, healthScore, steps, diet, dishTypes } = req.body
 
         if ((!isEmpty(name)) && (!isEmpty(summary))) {
             const newId = uuidv4();
@@ -23,7 +23,8 @@ router.post("/", function (req, res) {
                     image,
                     summary,
                     score,
-                    healthScore,                   
+                    healthScore,    
+                    dishTypes,               
                     steps: [{step:[steps,]}]
                 }
                 
@@ -53,7 +54,7 @@ router.post("/", function (req, res) {
             }
             }).then(diets => {
                 if (!diets[0]  ) {
-                    return res.status(201).send( { id : recipe[0].id })
+                    return res.send( { id : recipe[0].id })
                 }
                 else {
                     diets.forEach(e => {
@@ -65,9 +66,13 @@ router.post("/", function (req, res) {
                             }
                         })
                     })
-                    return res.status(201).send( { id : recipe[0].id })                
+                    return res.send( { id : recipe[0].id })                
             }
             })
+            .catch(err => {  
+                console.log(err)
+                return res.status(400).send("Error al crear la receta")            
+           }) 
         }
         else {
             return res.status(400).send("Debe llenar el name y summary antes de enviar")

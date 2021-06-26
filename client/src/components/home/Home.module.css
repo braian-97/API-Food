@@ -1,5 +1,11 @@
 .home{
-    background-color: #ffffffbd;
+    background-color: #3c3c3c;
+    width: 100vw;
+}
+@media (max-width: 500px) {
+    .home {
+        display: contents;
+    }
 }
 
 .home label{
@@ -27,15 +33,40 @@
     cursor: pointer;
 }
 
+/* ------------------------------------------------------- */
+.inputHome {
+    margin-top      : 5px;
+    background-color: #303236;
+    color           : lightgray;
+    font-size       : 18px;
+    padding-left: 10px;
+}
 
+.inputHome::placeholder {
+    color: lightgray;
+}
+
+/* ------------------------------------------------------- */
 .content {
     background-image: url('../../img/fondo5.jpg');
-    background-size: 100vw 90vh;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     padding   : 1px;
     box-shadow: 3px 3px 15px 3px;
 }
 
+@media (max-width: 500px) {
+    .content {
+        display: flex;
+        flex-direction: column;
+        width: auto;
+        align-items: center;
+        background-attachment: fixed;
+        background-size: 100% 100%;
+    }
+}
+
+/* ------------------------------------------------------- */
 .title {
     display: flex;
     justify-content: center;
@@ -44,29 +75,50 @@
 }
 
 
-
+/* ------------------------------------------------------- */
 .form {
     display        : flex;
-    border-radius  : 50px;
-    margin         : 20px;
-    align-content  : center;
     justify-content: center;
-    align-items    : center;
-    flex-wrap      : nowrap;
-    flex-direction : row;
+    align-items: center;
     font-weight    : 600;
 }
 
-.form h3 {
-    color: beige;
-    font-size: 22px;
+@media (max-width: 500px) {
+    .form {
+        flex-direction : column;
+    }
 }
 
+
+.form h3 {
+    color: white;
+    font-size: 24px;
+    font-family: 'Philosopher';
+}
+
+
+
+.form button {
+    color              : #303236;
+    margin-left        : 20px;
+    transition-duration: 0.4s;
+    padding            : 10px;
+    border-radius      : 10px;
+    margin             : 10px;
+    font-size       : 18px;
+}
+
+.form label {
+    padding-right: 10px;
+}
+
+
+/* ------------------------------------------------------- */
 .search {
     display         : flex;
     width           : 300px;
     height          : 500px;
-    margin-right    : 10px;
+
     flex-wrap       : nowrap;
     align-content   : center;
     justify-content : center;
@@ -76,6 +128,14 @@
     background-color: #888888d6;
 }
 
+@media (max-width: 500px) {
+    .search {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      margin-bottom: 15px;
+    }
+}
 
 .searchError{
     display: flex;
@@ -87,6 +147,7 @@
     justify-content: center;
     align-items: center;
     padding-left: 15px;
+    margin: 15px;
 }
 
 .searchError h4{
@@ -102,6 +163,7 @@
     border-radius: 40px;
     flex-direction: column;
     justify-content: center;
+    margin: 15px;
 }
 
 .searchOk h4{
@@ -124,32 +186,7 @@
     font-size: 40px;
   }
 
-.inputHome {
-    margin-top      : 5px;
-    background-color: #303236;
-    color           : lightgray;
-    font-size       : 18px;
-    padding-left: 10px;
-}
-
-.inputHome::placeholder {
-    color: lightgray;
-}
-
-.form button {
-    color              : #303236;
-    margin-left        : 20px;
-    transition-duration: 0.4s;
-    padding            : 10px;
-    border-radius      : 10px;
-    margin             : 10px;
-    font-size       : 18px;
-}
-
-.form label {
-    padding-right: 10px;
-}
-
+/* ------------------------------------------------------- */
 
 .filters {
     height: 500px;
@@ -165,6 +202,15 @@
     align-items: center;
 }
 
+@media (max-width: 500px) {
+    .filters {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      margin-bottom: 15px;
+    }
+}
+
 .filtersDiv{
     display: flex;
     flex-direction: column;
@@ -172,6 +218,7 @@
     align-items: center;
 }
 
+/* ------------------------------------------------------- */
 .orderRadio{
     display: flex;
     flex-direction: column;
@@ -186,8 +233,20 @@
 .radioDiv input{
     width: 20px;
     height: 20px;
+
+    appearance: none;
+    border-radius: 50%;
+    border: 2px solid #000;
+    transition: 0.2s all linear;
+
+    background-color: #ffffff;
+  }
+  
+.radioDiv  input:checked {
+    border: 7px solid black;
 }
 
+/* ------------------------------------------------------- */
 .buttons {
     display        : flex;
     justify-content: space-evenly;
@@ -197,14 +256,14 @@
 }
 
 .add {
-    font-size: 28px;
+    font-size: 24px;
     padding: 0;
 }
 
 
 .add a {
     background-color: #303236;
-    color           : #20af0e;
+    color           : #b3a847;
     padding         : 15px;
     text-decoration : none;
     border: inset;
@@ -217,7 +276,7 @@
     color           : black;
 }
 
-
+/* ------------------------------------------------------- */
 
 .loading {
     background-image: url('../../img/loading.svg');

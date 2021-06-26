@@ -1,13 +1,156 @@
-.addForm {
-    display         : flex;
-    flex-direction  : column;
-    margin          : 100px;
-    padding         : 30px;
+.addRecipe {
+    background-image     : url('../../img/fondo4.jpg');
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    background-repeat    : no-repeat;
+
+    border: 2px solid;
+
+    display        : flex;
+    flex-direction : row;
+    justify-content: center;
+    width          : 98.5vw;
+}
+
+@media (max-width: 900px) {
+    .addRecipe {
+        display        : inline-flex;
+        flex-direction : row;
+        justify-content: flex-start;
+        width          : auto;
+    }
+}
+
+@media (max-width: 500px) {
+    .addRecipe {
+        display        : inline-flex;
+        flex-direction : row;
+        justify-content: flex-start;
+    }
+}
+
+
+/* ---------------------------------- */
+
+.navContainer {
+    display    : flex;
+    align-items: flex-end;
+}
+
+.navDetails {
+    width           : 205px;
+    border-radius   : 20px;
+    font-size       : 17px;
+    background-color: #f8f8f8e0;
+    border          : solid 2px black;
+}
+
+@media (max-width: 500px) {
+    .navDetails {
+        width: 105px;
+    }
+}
+
+.navDetails p {
+    margin                 : 0;
+    color                  : #978b24;
+    padding-left           : 5px;
+    background-color       : rgb(0 0 0);
+    padding                : 5px;
+    border                 : solid 2px;
+    padding-left           : 15px;
+    border-top-right-radius: 20px;
+    border-top-left-radius : 20px;
+}
+
+.navDetails a {
+    text-decoration: none;
+    display        : flex;
+    justify-content: center;
+    align-items    : center;
+    width          : 200px;
+}
+
+@media (max-width: 500px) {
+    .navDetails a {
+        width: 100px;
+    }
+}
+
+.listDetails {
+    list-style    : none;
+    display       : flex;
+    flex-direction: column;
+    align-items   : flex-start;
+    flex-wrap     : nowrap;
+    padding       : 0px;
+    margin-top    : 0;
+
+    border-radius: 25px;
+}
+
+.liAdd {
+    display        : flex;
+    justify-content: center;
+
+    width      : 200px;
+    padding    : 8px;
+    font-size  : 17px;
+    font-weight: 600;
+}
+
+@media (max-width: 500px) {
+    .liAdd {
+        width: 100px;
+    }
+}
+
+.liCheck {
+    display       : flex;
+    flex-direction: column;
+
+    width           : 203px;
+    padding         : 8px;
+    background-color: white;
     align-items     : center;
-    flex-wrap       : nowrap;
-    background-color: #adadade3;
-    box-shadow      : 0px 0px 5px 0px black;
-    color           : black;
+    border          : solid 2px black;
+}
+
+@media (max-width: 500px) {
+    .liCheck {
+        width: 103px;
+    }
+}
+
+.liCheck h4 {
+    margin: 0;
+}
+
+.checkAdd {
+    color: green
+}
+
+.emptyAdd {
+    color: red
+}
+
+/* ---------------------------------- */
+.addForm {
+    display       : flex;
+    flex-direction: column;
+    padding       : 30px;
+    align-items   : center;
+    flex-wrap     : nowrap;
+}
+
+@media (max-width: 500px) {
+    .addForm {
+        display       : flex;
+        flex-direction: column;
+        padding       : 30px;
+        align-items   : center;
+        flex-wrap     : nowrap;
+    }
 }
 
 .addForm textarea {
@@ -15,6 +158,20 @@
     font-size   : 19px;
     font-weight : 600;
     padding-left: 10px;
+    width       : 400px;
+    height      : 150px;
+}
+
+@media (max-width: 500px) {
+    .addForm textarea {
+        resize      : none;
+        font-size   : 17px;
+        font-weight : 600;
+        padding-left: 10px;
+        width       : 100%;
+        height      : 100%;
+    }
+
 }
 
 .addForm label {
@@ -26,25 +183,76 @@
     border-radius   : 10px;
 }
 
-.addForm input {
+@media (max-width: 500px) {
+    .addForm label {
+        font-size: 17px;
+        padding  : 5px;
+    }
+}
+
+.inputText {
     font-size   : 19px;
     font-weight : 600;
     padding-left: 10px;
+    width       : 500px;
+    height      : 30px;
 }
 
-
-.addButton {
-    width           : 150px;
-    height          : 50px;
-    font-size       : 20px;
-    border-radius   : 50px;
-    cursor          : pointer;
+@media (max-width: 500px) {
+    .inputText {
+        width    : 100%;
+        font-size: 17px;
+    }
 }
+
+.inputNumber {
+    font-size   : 19px;
+    font-weight : 600;
+    padding-left: 10px;
+    width       : 80px;
+    height      : 30px;
+}
+
+@media (max-width: 500px) {
+    .inputText {
+        font-size: 17px;
+        width    : 100%;
+    }
+}
+
+.inputButton {
+    font-size   : 18px;
+    font-weight : 600;
+    padding-left: 10px;
+    width       : 80px;
+    height      : 30px;
+}
+
+@media (max-width: 500px) {
+    .inputButton {
+        font-size: 17px;
+        width    : 100%;
+    }
+}
+
+.inputFile {
+    font-size   : 18px;
+    font-weight : 600;
+}
+
+@media (max-width: 500px) {
+    .inputFile {
+        font-size: 17px;
+        width    : 100%;
+    }
+}
+
 
 /* ---------------------------------- */
 
 .addName {
-    width        : 600px;
+    background-color: #adadade3;
+
     margin-bottom: 40px;
     padding-left : 20px;
 
@@ -54,7 +262,22 @@
 
     box-shadow: 0px 0px 5px 2px;
     padding   : 20px;
+    width: 100%;
+
+    border-top-right-radius: 80px;
+    border-top-left-radius: 80px;
 }
+
+@media (max-width: 500px) {
+    .addName {
+        background-color: white;
+        width           : 80%;
+        display         : flex;
+        flex-direction  : column;
+        align-items     : center;
+    }
+}
+
 
 .inputName {
     display     : flex;
@@ -67,7 +290,7 @@
 /* ---------------------------------- */
 
 .addSummary {
-    width: 650px;
+    background-color: #adadade3;
 
     margin-bottom : 40px;
     padding-left  : 20px;
@@ -77,6 +300,17 @@
 
     box-shadow: 0px 0px 5px 2px;
     padding   : 20px;
+    width: 100%;
+}
+
+@media (max-width: 500px) {
+    .addSummary {
+        background-color: white;
+        width           : 80%;
+        display         : flex;
+        flex-direction  : column;
+        align-items     : center;
+    }
 }
 
 
@@ -114,26 +348,51 @@
     font-weight     : 600;
 }
 
+@media (max-width: 500px) {
+    .help {
+        font-size: 17px;
+    }
+}
+
 /* ---------------------------------- */
 
 .addImage {
-    display       : flex;
-    flex-direction: column;
-    align-items   : center;
-    width         : 860px;
-    margin-bottom : 30px;
+    background-color: #adadade3;
+    display         : flex;
+    flex-direction  : column;
+    align-items     : center;
+
+    margin-bottom: 30px;
 
     box-shadow: 0px 0px 5px 2px;
     padding   : 20px;
+    width: 100%;
 }
 
+@media (max-width: 500px) {
+    .addImage {
+        background-color: white;
+        width           : 80%;
+    }
+}
+
+.addImg img {
+    margin-top: 20px;
+}
+
+
 .img {
-    width          : 860px;
     display        : flex;
     align-items    : center;
     padding-top    : 15px;
     justify-content: center;
 
+}
+
+@media (max-width: 500px) {
+    .img {
+        width: 100%;
+    }
 }
 
 .addImg {
@@ -142,6 +401,12 @@
     display       : flex;
     flex-direction: column;
     align-items   : center;
+}
+
+@media (max-width: 500px) {
+    .addImg {
+        width: 100%;
+    }
 }
 
 .url {
@@ -155,19 +420,31 @@
     margin-bottom: 5px;
 }
 
-.addImg img{
+.addImg img {
     margin-top: 20px;
 }
 
 /* ---------------------------------- */
 
 .diet {
-    display       : flex;
-    align-items   : center;
-    flex-direction: column;
+    background-color: #adadade3;
+    display         : flex;
+    align-items     : center;
+    flex-direction  : column;
 
     box-shadow: 0px 0px 5px 2px;
     padding   : 20px;
+    width: 100%;
+
+    border-bottom-left-radius: 80px;
+    border-bottom-right-radius: 80px;
+}
+
+@media (max-width: 500px) {
+    .diet {
+        background-color: white;
+        width           : 80%;
+    }
 }
 
 .addDiet {
@@ -195,7 +472,7 @@
 }
 
 .listDiet::-webkit-scrollbar-thumb {
-    background: #888;
+    background   : #888;
     border-radius: 10px;
 }
 
@@ -263,24 +540,39 @@
 
 /* ---------------------------------- */
 
-.addNumber{
-    display       : flex;
-    width: 600px;
+.addNumber {
+    width: 100%;
+    display        : flex;
     justify-content: space-evenly;
+}
+
+@media (max-width: 500px) {
+    .addNumber {
+        width: 80%;
+    }
 }
 
 /* ---------------------------------- */
 
 .addScore {
-    width         : 250px;
-    margin-bottom : 20px;
-    margin-top    : 20px;
-    display       : flex;
-    flex-direction: column;
-    align-items   : center;
+    background-color: #adadade3;
+
+    margin-bottom   : 20px;
+    margin-top      : 20px;
+    display         : flex;
+    flex-direction  : column;
+    align-items     : center;
 
     box-shadow: 0px 0px 5px 2px;
     padding   : 20px;
+    width: 45%;
+}
+
+@media (max-width: 500px) {
+    .addScore {
+        background-color: white;
+        width           : 48%;
+    }
 }
 
 .addScoreInput {
@@ -296,15 +588,24 @@
 
 
 .addHealthScore {
-    width         : 250px;
-    margin-bottom : 20px;
-    margin-top    : 20px;
-    display       : flex;
-    flex-direction: column;
-    align-items   : center;
+    background-color: #adadade3;
+
+    margin-bottom   : 20px;
+    margin-top      : 20px;
+    display         : flex;
+    flex-direction  : column;
+    align-items     : center;
 
     box-shadow: 0px 0px 5px 2px;
     padding   : 20px;
+    width: 45%;
+}
+
+@media (max-width: 500px) {
+    .addHealthScore {
+        background-color: white;
+        width           : 48%;
+    }
 }
 
 .addHealthScoreInput {
@@ -318,17 +619,25 @@
 /* ---------------------------------- */
 
 .addSteps {
-    display       : flex;
-    align-items   : center;
-    flex-direction: column;
+    background-color: #adadade3;
+    display         : flex;
+    align-items     : center;
+    flex-direction  : column;
 
-    width        : 650px;
     margin-bottom: 20px;
     padding-left : 20px;
     margin-top   : 20px;
 
     box-shadow: 0px 0px 5px 2px;
     padding   : 20px;
+    width: 100%;
+}
+
+@media (max-width: 500px) {
+    .addSteps {
+        background-color: white;
+        width           : 80%;
+    }
 }
 
 .steps {
@@ -345,27 +654,145 @@
 
 /* ---------------------------------- */
 
-.addDishTypes{
-    display       : flex;
-    align-items   : center;
-    flex-direction: column;
+.addDishTypes {
+    background-color: #adadade3;
+    display         : flex;
+    align-items     : center;
+    flex-direction  : column;
 
-    width        : 650px;
     margin-bottom: 20px;
     padding-left : 20px;
     margin-top   : 20px;
 
     box-shadow: 0px 0px 5px 2px;
     padding   : 20px;
+    width: 100%;
+}
+
+@media (max-width: 500px) {
+    .addDishTypes {
+        background-color: white;
+        width           : 80%;
+    }
 }
 
 .addDishTypesInput {
     padding-top: 15px;
 }
 
+.DishTypes{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-.addDishTypesInput input{
-    width        : 500px;
+/* ---------------------------------- */
+.buttonsContainer {
+    display        : flex;
+    width: 100%;
+    margin-top     : 25px;
+    justify-content: space-evenly;
+}
+
+@media (max-width: 500px) {
+    .buttonsContainer {
+        width: 70%;
+    }
+}
+
+.add {
+    display        : flex;
+    flex-direction : column;
+    justify-content: center;
+}
+
+.addButton {
+    background-color: #adadade3;
+    width           : 150px;
+    height          : 50px;
+    font-size       : 20px;
+    border-radius   : 50px;
+    cursor          : pointer;
+}
+
+@media (max-width: 500px) {
+    .addButton {
+        width    : 100%;
+        font-size: 16px;
+    }
+}
+
+.restartInput {
+    width        : 150px;
+    height       : 50px;
+    font-size    : 20px;
+    border-radius: 50px;
+    cursor       : pointer;
+}
+
+@media (max-width: 500px) {
+    .restartInput {
+        width    : 100%;
+        font-size: 16px;
+    }
+}
+
+.restartInput:hover {
+    background-color: #4d90fe;
+    color           : white;
+}
+
+/* ---------------------------------- */
+.created {
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    flex-direction : column;
+
+    margin-top: 20px;
+    box-shadow: 1px 1px 2px 1px;
+
+    padding         : 15px;
+    margin-top      : 10px;
+    border-radius   : 20px;
+    background-color: white;
+}
+
+/* ---------------------------------- */
+.resultError {
+    display       : flex;
+    flex-direction: column;
+    align-items   : center;
+    box-shadow    : 1px 1px 2px 1px;
+    ;
+    padding         : 15px;
+    margin-top      : 10px;
+    border-radius   : 20px;
+    background-color: white;
+}
+
+/* ---------------------------------- */
+.closebtn {
+    margin-left    : 225px;
+    color          : red;
+    font-weight    : bold;
+    float          : right;
+    font-size      : 22px;
+    line-height    : 20px;
+    cursor         : pointer;
+    transition     : 0.3s;
+    border         : solid 2px;
+    border-radius  : 9999px;
+    padding        : 4px;
+    height         : 30px;
+    width          : 30px;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+}
+
+.closebtn:hover {
+    background-color: white;
 }
 
 /* ---------------------------------- */
@@ -373,6 +800,8 @@
 .checkImg {
     background-color: #ffffff91;
     border-radius   : 999px;
+    width           : 40px;
+    height          : 40px;
 }
 
 .crossImg {
@@ -390,152 +819,4 @@
 .goButton:hover {
     background-color: #4d90fe;
     color           : white;
-}
-
-/* ---------------------------------- */
-.restartInput {
-    width        : 150px;
-    height       : 50px;
-    font-size    : 20px;
-    border-radius: 50px;
-    cursor       : pointer;
-}
-
-.restartInput:hover {
-    background-color: #4d90fe;
-    color           : white;
-}
-
-/* ---------------------------------- */
-.buttonsContainer {
-    display        : flex;
-    width          : 500px;
-    margin-top     : 25px;
-    justify-content: space-evenly;
-}
-/* ---------------------------------- */
-.created {
-    display        : flex;
-    align-items    : center;
-    justify-content: center;
-    flex-direction : column;
-
-    margin-top: 20px;
-    box-shadow: 1px 1px 2px 1px;;
-    padding: 15px;
-    margin-top: 10px;
-    border-radius: 20px;
-}
-/* ---------------------------------- */
-.resultError{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 1px 1px 2px 1px;;
-    padding: 15px;
-    margin-top: 10px;
-    border-radius: 20px;
-}
-/* ---------------------------------- */
-.closebtn {
-    margin-left: 225px;
-    color: red;
-    font-weight: bold;
-    float: right;
-    font-size: 22px;
-    line-height: 20px;
-    cursor: pointer;
-    transition: 0.3s;
-    border: solid 2px;
-    border-radius: 9999px;
-    padding: 4px;
-    height: 30px;
-    width: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .closebtn:hover {
-   background-color: white;
-  }
-
-/* ---------------------------------- */
-
-  .navDetails{
-    display: flex;
-    position: fixed;
-    left: 0;
-    top: 17vh;
-    width: 205px;
-    border-radius: 20px;
-    font-size: 17px;
-    flex-direction: column;
-    background-color: #f8f8f8e0;
-    border: solid 2px black;
-}
-
-.navDetails p{
-    margin: 0;
-    color: #978b24;
-    padding-left: 5px;
-    background-color: rgb(0 0 0);
-    padding: 5px;
-    border: solid 2px;
-    padding-left: 15px;
-    border-top-right-radius: 20px;
-    border-top-left-radius: 20px;
-}
-
-.navDetails a{
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 200px;
-}
-
-.listDetails{
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    flex-wrap: nowrap;
-    padding: 0px;
-    margin-top: 0;
-
-    border-radius: 25px;
-}
-
-.liAdd{
-    display: flex;
-    justify-content: center;
-
-    width: 200px;
-    padding: 8px;
-    font-size: 17px;
-    font-weight: 600;
-}
-
-.liCheck{
-    display: flex;
-    justify-content: space-between;
-    width: 203px;
-    padding: 8px;
-    background-color: white;
-    align-items: center;
-    border: solid 2px black;
-}
-
-.liCheck h4{
-    margin: 0;   
-}
-
-.checkAdd{
-    color: green
-}
-
-.emptyAdd{
-    color: red
 }

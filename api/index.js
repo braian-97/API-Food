@@ -35,7 +35,7 @@ conn.sync({ force: true }).then(() => {
         id: newId,
         name: diet,
       })
-      .then( r => console.log("dietas precargadas"))
+      .then( r => console.log("pre.load diets"))
       .catch(err => console.log(err));
     })
 

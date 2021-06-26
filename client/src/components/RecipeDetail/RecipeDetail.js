@@ -10,10 +10,22 @@ function RecipeDetail({ id, getRecipeDetail, details }) {
         getRecipeDetail(id);
     }, [id])
 
+
+    const navRef = useRef()
+    const nav = navRef.current
+    const showNav = () => {    
+        if (nav.style.display === "none") {
+            nav.style.display = "block";
+        } else {
+            nav.style.display = "none";
+        }
+    }
+
     return (
         <div className={s.details}>
             <div>
-                <nav className={s.navDetails}>
+                <button className={s.ShowNavDetails} onClick={() => showNav()}>Click to Show details index</button>
+                <nav ref={navRef} id="myNav" className={s.navDetails}>
                     <ul className={s.listDetails}>
                         <li><a href="#name">Name</a></li>
                         <li><a href="#summary">Summary</a></li>
@@ -25,9 +37,10 @@ function RecipeDetail({ id, getRecipeDetail, details }) {
                         <li><a href="#diets">Diets</a></li>
                     </ul>
                 </nav>
+
                 {typeof details === 'string' && <div className={s.error}><h1>Error: 404</h1> <p>No se encontro la receta</p></div>}
                 {details && typeof details !== 'string' ?
-                    <div className={s.recipe}>
+                    <div className={s.recipeContainer}>
                         <span id="name" className={s.nameDetails}> <h3 >{details.name}</h3> </span>
 
                         <div id="image" className={s.imageDetails}>

@@ -11,15 +11,32 @@
 
     padding-top    : 100px;
     padding-bottom : 100px;
+
+    width: 100vw;
+}
+
+@media (max-width: 750px) {
+    .details {
+        width: 100%;
+    }
 }
 
 /* ----------------------------------- */
 
 
-.recipe {
+.recipeContainer {
     width                : 706px;
     font-size: 20px;
     font-weight: 600;
+}
+
+@media (max-width: 500px) {
+    .recipeContainer {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }
 
 .error{
@@ -38,15 +55,54 @@
     font-size: 20px;
 }
 
+
+.ShowNavDetails{
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+    left: 0;
+    top: 85px;
+
+    height: 70px;
+    width: 170px;
+    border-radius: 10px;
+    background-color: green;
+    color: #ffffff;
+    font-size: 14px;
+    cursor: pointer;
+}
+.ShowNavDetails:hover{
+    background-color: rgb(200, 0, 0);
+    color: white;
+}
+
+@media (max-width: 500px) {
+    .ShowNavDetails{
+        height: 120px;
+        width: 100px;
+        padding: 8px;
+    }
+}
+
 .navDetails{
     display: flex;
     position: fixed;
+    flex-direction: column;
+
     left: 0;
-    top: 20vh;
+    top: 24vh;
     background-color: #f8f8f8e0;
     width: 170px;
     border-radius: 20px;
     font-size: 18px;
+}
+
+@media (max-width: 500px) {
+    .navDetails{
+        width: 70px;
+        font-size: 15px;
+        top: 32vh;
+    }
 }
 
 .navDetails a{
@@ -57,6 +113,11 @@
 
     color: black;
     width: 170px;
+}
+@media (max-width: 500px) {
+    .navDetails a{
+        width: 70px;
+    }
 }
 
 .navDetails a:hover{
@@ -78,6 +139,11 @@
 
     width: 170px;
     padding: 8px;
+}
+@media (max-width: 500px) {
+    .listDetails li{
+        width: 70px;
+    }
 }
 
 .listDetails li:hover{
@@ -102,6 +168,13 @@
     -webkit-text-stroke-width: thin;
 }
 
+@media (max-width: 500px) {
+    .nameDetails {
+        width: 50%;
+        font-size: 17px;
+    }
+}
+
 /* ----------------------------------- */
 .imageDetails {
     background-image     : url('../../img/plato.jpg');
@@ -119,13 +192,25 @@
 
     margin-bottom: 50px;
 }
+@media (max-width: 500px) {
+    .imageDetails {
+        width: 70%;
+        height: 50%
+    }
+}
 
 .image{
     margin-left: 25px;
     margin-bottom: 25px;
     border-radius: 999px;
 }
-
+@media (max-width: 500px) {
+    .image {
+        width: 70%;
+        height: 70%;
+        margin-top: 25px;
+    }
+}
 
 /* ----------------------------------- */
 
@@ -140,12 +225,28 @@
     margin-bottom: 50px;
 
 }
+@media (max-width: 500px) {
+    .summaryDetails {
+        width: 70%;
+    }
+}
+
+@media (max-width: 500px) {
+    .summary {
+        width: 70%;
+        overflow-wrap: break-word;
+    }
+}
 
 .summaryDetails span{
     font-weight: 400;
 }
 
-
+@media (max-width: 500px) {
+.summaryDetails span{
+        width: 70%;
+    }
+}
 /* ----------------------------------- */
 
 .scoreDetails {
@@ -158,6 +259,12 @@
     padding        : 50px;
     margin-bottom: 50px;
 }
+@media (max-width: 500px) {
+    .scoreDetails {
+        width: 50%;
+    }
+}
+
 
 .score{
     display: flex;
@@ -178,6 +285,11 @@
     justify-content: center;
     padding        : 50px;
     margin-bottom: 50px;
+}
+@media (max-width: 500px) {
+    .healthScoreDetails {
+        width: 50%;
+    }
 }
 
 .healthScore{
@@ -205,6 +317,12 @@
     padding: 50px;
     margin-bottom: 50px;
 }
+@media (max-width: 500px) {
+    .stepsDetails {
+        width: 70%;
+        height: 70%;
+    }
+}
 
 .stepsDetails h3{
     margin: 0;
@@ -222,6 +340,12 @@
     margin-top: 10px;
 }
 
+@media (max-width: 500px) {
+    .steps {
+        width: 100%;
+    }
+}
+
 .listSteps{
     display: flex;
     overflow-wrap: break-word;
@@ -233,6 +357,12 @@
     align-items: flex-start;
     margin: 0;
     padding-top: 15px;
+}
+
+@media (max-width: 500px) {
+    .listSteps {
+        width: 100%;
+    }
 }
 
 .listSteps::-webkit-scrollbar {
@@ -264,6 +394,11 @@
     padding        : 50px;
     margin-bottom: 50px;
 }
+@media (max-width: 500px) {
+    .dishTypesDetails {
+        width: 50%;
+    }
+}
 
 /* ----------------------------------- */
 
@@ -277,6 +412,12 @@
     margin-bottom: 50px;
     border               : solid 3px;
 }
+@media (max-width: 500px) {
+    .dietsDetails {
+        width: 50%;
+    }
+}
+
 .dietsDetails ul{
     list-style: none;
 }

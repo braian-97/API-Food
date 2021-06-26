@@ -11,13 +11,18 @@
     font-size: 19px;
 }
 
+@media (max-width: 500px) {
+  .navbar {
+      display: inline-flex;
+  }
+}
+
+
 .title{
       display: flex;
       flex-direction: row;
       align-items: center;
       align-content: center;
-
-      margin-left: 42vw;
 }
 
 .list {
@@ -38,6 +43,11 @@
     align-items: center;
 }
 
+@media (max-width:500px){
+  .list-item {
+    width:100%
+  }
+}
 
 .list-item a {
     height: 80px;

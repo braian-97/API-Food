@@ -1,17 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import s from  './LandingPage.css';
+import s from  './LandingPage.module.css';
 import logoCooking from '../../img/cooking.png'
 
 function LandingPage () {
     return (
-        <div className="page">
-            <img className="logoCooking" src={logoCooking} alt="logo cooking" width="400" height="400"/>
-            <Link className="goHome" to="./home">
+        <div className={s.page}>
+            <img className={s.logoCooking} src={logoCooking} alt="logo cooking" width="400" height="400"/>
+            <Link className={s.goHome} to="./home">
             <h2>Ir a la pagina principal</h2> 
             </Link>
-            <h3>By Braian Silva</h3>
+            <h3 className={s.by}>By Braian Silva</h3>
         </div>
     )
 }

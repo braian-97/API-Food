@@ -2,9 +2,15 @@
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box; 
-          
+        
   font-family: 'Merienda', cursive;
 }
+
+.App{
+  display: inline-flex;
+  flex-direction: column;
+}
+
 
 @import url('https://fonts.googleapis.com/css2?family=Merienda&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Philosopher:ital@1&display=swap');

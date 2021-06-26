@@ -22,17 +22,6 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
     const [sort, setSort] = useState("Ascendente");
     const [diet, setDiet] = useState(undefined);
 
-    const [b, setB] = useState()
-
-    useEffect(() => {
-        if (b && b.length === 0) {
-            setB(newRecipes)
-        }
-        else if (b) {
-            setB([...newRecipes, ...b])
-        }
-    }, [])
-
     useEffect(() => {
         getAllRecipes();
         getAllDiets();
@@ -217,18 +206,19 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
         setFilterbyName(e.target.value);
     }
 
-    const [showResult, setShowResult] = useState(true)
+    const [showResult, setShowResult] = useState()
 
     const closebtn = () => {
         setShowResult(false)
     }
+
 
     return (
         <div className={s.home}>
             <div className={s.content}>
                 <h1 className={s.title}>HOME</h1>
 
-                {recipes ?
+
                     <div>
                         <div className={s.form}>
                             <form onSubmit={handleSubmit} className={s.search}>
@@ -240,8 +230,8 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
                                 <button disabled={search.name ? false : true} type="submit">Search</button>
 
 
-                                {showResult && newRecipes && typeof newRecipes === 'string' && <div className={s.searchError}><span class={s.closebtn} onClick={() => closebtn()}>&times;</span> <img className={s.crossImg} src={cross} alt="" width="80" height="80" /><h4>No se encontraron resultados con ese nombre</h4> </div>}
-                                {showResult && newRecipes && typeof newRecipes !== 'string' && <div className={s.searchOk}><span class={s.closebtn} onClick={() => closebtn()}>&times;</span> <img className={s.crossImg} src={check} alt="" width="80" height="80" /><h4>Exito!</h4> </div>}
+                                {showResult && newRecipes && typeof newRecipes === 'string' && <div className={s.searchError}><span className={s.closebtn} onClick={() => closebtn()}>&times;</span> <img className={s.crossImg} src={cross} alt="" width="80" height="80" /><h4>No se encontraron resultados con ese nombre</h4> </div>}
+                                {showResult && newRecipes && typeof newRecipes !== 'string' && <div className={s.searchOk}><span className={s.closebtn} onClick={() => closebtn()}>&times;</span> <img className={s.crossImg} src={check} alt="" width="80" height="80" /><h4>Exito!</h4> </div>}
 
                             </form>
 
@@ -266,7 +256,7 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
                                             )
                                             )}
                                         </select>
-                                        : <h2>No hay dietas registradas</h2>}
+                                        : <h4>No hay dietas registradas</h4>}
                                 </div>
                                 <div className={s.buttons}>
                                     <div className={s.add}>
@@ -277,12 +267,12 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
                                 </div>
                             </form>
                             <div className={s.filters}>
-                                <h3>Choose an order: </h3>
-                                <div className={s.orderRadio}>
+                                <h3>Choose a type of Sort: </h3>
+                                <form className={s.orderRadio}>
 
                                     <div className={s.radioDiv}>
                                         <label>Predeterminado</label><br></br>
-                                        <input type="radio" name="sort" value="predeterminado" onChange={(e) => setSortType(e.target.value)} checked></input>
+                                        <input type="radio" name="sort" value="predeterminado" onChange={(e) => setSortType(e.target.value)} checked={!sortType || sortType === "predeterminado" ? true : false}></input>
                                     </div>
                                     <div className={s.radioDiv}>
                                         <label>Name</label><br></br>
@@ -292,7 +282,7 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
                                         <label>Puntuación</label><br></br>
                                         <input type="radio" name="sort" value="score" onChange={(e) => setSortType(e.target.value)}></input>
                                     </div>
-                                </div>
+                                </form>
                                 <div className={s.filtersDiv}>
                                     <label >Choose a sort way: </label>
                                     <button name={sort} onClick={(e) => handleClick(e)}
@@ -302,7 +292,7 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
                             </div>
                         </div>
                     </div>
-                    : null}
+
             </div>
 
             {recipe && <Pagination recipes={recipe} />}

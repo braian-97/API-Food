@@ -7,7 +7,7 @@
 }
 
 .filters {
-    background-color: rgb(57 84 140 / 61%);
+    background-color: #3c3c3c;
     padding         : 20px;
     display         : flex;
     height          : 150px;
@@ -16,6 +16,15 @@
     flex-direction  : row;
 
 }
+
+@media (max-width: 500px) {
+    .filters {
+        flex-direction  : column;
+        width: 100%;
+        height: 100%;
+    }
+}
+
 
 .searchName {
     background-color: rgb(0 0 0 / 80%);
@@ -26,12 +35,29 @@
     border-radius: 30px;
 }
 
+
+@media (max-width: 500px) {
+    .searchName {
+        flex-direction  : column;
+        width: 100%;
+        height: 100%;
+        margin: 10px;
+    }
+}
+
 .searchName input{
     margin-top      : 5px;
     background-color: #555;
     color           : white;
     font-size       : 18px;
     padding-left: 10px;
+}
+
+
+@media (max-width: 500px) {
+    .searchName input{
+        width: 100%;
+    }
 }
 
 .searchName input::placeholder {
@@ -45,6 +71,16 @@
     align-items: center;
     justify-content: space-evenly;
     height: 120px;
+}
+
+
+@media (max-width: 500px) {
+    .numberPage {
+        flex-direction  : column;
+        width: 100%;
+        height: 100%;
+        margin: 10px;
+    }
 }
 
 .numberPage h2 {
@@ -85,11 +121,28 @@
     flex-direction  : row;
 }
 
+@media (max-width:500px){
+    .totalRecipes {
+        flex-direction  : column;
+        align-items: center;
+        width      : 100%;
+    }
+}
 
 .total {
     display    : flex;
     align-items: center;
     width      : 300px;
+}
+
+
+@media (max-width:500px){
+    .total {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: center;
+    }
 }
 
 .total h2 {
@@ -104,6 +157,11 @@
     margin-left     : 10px;
     border          : solid;
 }
+@media (max-width: 500px) {
+    .total h2{
+        width: 50%;
+    }
+}
 
 .totalInput {
     display       : flex;
@@ -117,6 +175,13 @@
     font-size       : 18px;
     padding-left: 10px;
 }
+
+@media (max-width: 500px) {
+    .totalInput input{
+        width: 100%;
+    }
+}
+
 
 .totalInput input::placeholder {
     color: lightgray;
