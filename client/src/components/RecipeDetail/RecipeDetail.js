@@ -20,7 +20,7 @@ function RecipeDetail({ id, getRecipeDetail, details }) {
             nav.style.display = "none";
         }
     }
-
+    console.log(details.diets)
     return (
         <div className={s.details}>
             <div>
@@ -50,39 +50,39 @@ function RecipeDetail({ id, getRecipeDetail, details }) {
                         </div>
 
                         <div id="summary" className={s.summaryDetails}>
-                            <div className={s.summary} ><h3>Resumen: </h3> <span>{details.summary}</span></div>
+                            <div className={s.summary} ><h3>Summary: </h3> <span>{details.summary}</span></div>
                         </div>
 
                         <div id="score" className={s.scoreDetails}>
-                            <span className={s.score}> <h3>Puntuación: </h3>
-                                {details.score ? <h1>{details.score}</h1> : <p className={s.notFound}>Esta receta no tiene puntuación</p>}
+                            <span className={s.scoreContaint}> <h3>Score: </h3>
+                                {details.score ? <div className={s.score}><h1>{details.score}</h1></div> : <p className={s.notFound}>Esta receta no tiene puntuación</p>}
                             </span>
                         </div>
 
                         <div id="healthscore" className={s.healthScoreDetails}>
-                            <span className={s.healthScore} > <h3>Nivel de "comida saludable": </h3>
-                                {details.healthScore ? <h1>{details.healthScore}</h1> : <p className={s.notFound}>Esta receta no tiene nivel de "comida saludable"</p>}
+                            <span className={s.healthScoreContaint} > <h3>Health Score: </h3>
+                                {details.healthScore ? <div className={s.healthScore}><h1>{details.healthScore}</h1></div> : <p className={s.notFound}>Esta receta no tiene nivel de "comida saludable"</p>}
                             </span>
                         </div>
 
                         <div id="steps" className={s.stepsDetails}>
                             {details.steps && details.steps[0] ?
-                                <span className={s.steps} ><h3>Paso a paso: </h3> <ol className={s.listSteps}>{details.steps.map((e, i) => <li key={i}><p>{e.step}</p></li>)}</ol>
+                                <span className={s.steps} ><h3>Steps: </h3> <ol className={s.listSteps}>{details.steps.map((e, i) => <li key={i}><p>{e.step}</p></li>)}</ol>
                                 </span>
                                 : <p className={s.notFound}>Esta receta no tiene registrado sus pasos</p>}
                         </div>
 
                         <div id="dishtypes" className={s.dishTypesDetails}>
                             {details.dishTypes ?
-                                <span className={s.dishTypes} ><h3>Tipo de plato: </h3>
+                                <span className={s.dishTypes} ><h3>Dish Types: </h3>
                                     <ol>{details.dishTypes.map((e, i) => <li key={i + 10}><p>{e}</p></li>)}</ol>
                                 </span>
                                 : <p className={s.notFound}>Esta receta no pertenece a ninguna tipo de plato</p>}
                         </div>
 
                         <div id="diets" className={s.dietsDetails}>
-                            {details.diets ?
-                                <span><h3>Tipos de dietas : </h3>
+                            {details.diets && details.diets[0] ?
+                                <span><h3>Types of diets : </h3>
                                     <ul className={s.diets}>
                                         {details.diets.map(e => <li key={e.id}>{e.name}</li>)}
                                     </ul>

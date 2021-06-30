@@ -19,7 +19,7 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
     });
     const [filterbyName, setFilterbyName] = useState("");
     const [sortType, setSortType] = useState(undefined);
-    const [sort, setSort] = useState("Ascendente");
+    const [sort, setSort] = useState("Ascending");
     const [diet, setDiet] = useState(undefined);
 
     useEffect(() => {
@@ -60,12 +60,12 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
     useEffect(() => {
         const sortArray = (type) => {
             const types = {
-                predeterminado: 'predeterminado',
+                none: 'none',
                 name: 'name',
                 score: 'score',
             };
             const sortProperty = types[type];
-            if (sortProperty === "predeterminado" || !type) {
+            if (sortProperty === "none" || !type) {
                 if (showRecipes && showRecipes.length >= 100) {
                     setRecipes(showRecipes);
                 }
@@ -101,7 +101,7 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
         };
         if (recipe || showRecipes) {
             sortArray(sortType);
-            setSort("Ascendente")
+            setSort("Ascending")
         }
     }, [sortType]);
 
@@ -141,7 +141,7 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
         if (recipe) {
             reverseOrder()
         }
-        setSort(sort === "Ascendente" ? "Descendente" : "Ascendente")
+        setSort(sort === "Ascending" ? "Descending" : "Ascending")
     }
 
     useEffect(() => {
@@ -218,85 +218,91 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
             <div className={s.content}>
                 <h1 className={s.title}>HOME</h1>
 
+                <div className={s.load}>
+                    <div className={s.form}>
+                        <form onSubmit={handleSubmit} className={s.search}>
+                            <h3>Load more recipes:</h3>
+                            <label>Load recipe by name: </label>
+                            <input className={s.inputHome} type="text" name="name" onChange={handleInputChange} value={search.name ? search.name : undefined} placeholder="Nombre de la receta..."></input><br></br>
+                            <label>Number of recipes: </label>
+                            <input className={s.inputHome} type="number" name="number" onChange={handleInputChange} value={search.number ? search.number : undefined} placeholder="Cantidad de recetas..." size="4"></input>
+                            <button disabled={search.name ? false : true} type="submit">Search</button>
 
-                    <div>
-                        <div className={s.form}>
-                            <form onSubmit={handleSubmit} className={s.search}>
-                                <h3>Load more recipes:</h3>
-                                <label>Load recipe by name: </label>
-                                <input className={s.inputHome} type="text" name="name" onChange={handleInputChange} value={search.name ? search.name : undefined} placeholder="Nombre de la receta..."></input><br></br>
-                                <label>Number of recipes: </label>
-                                <input className={s.inputHome} type="number" name="number" onChange={handleInputChange} value={search.number ? search.number : undefined} placeholder="Cantidad de recetas..." size="4"></input>
-                                <button disabled={search.name ? false : true} type="submit">Search</button>
 
+                            {showResult && newRecipes && typeof newRecipes === 'string' && <div className={s.searchError}><span className={s.closebtn} onClick={() => closebtn()}>&times;</span> <img className={s.crossImg} src={cross} alt="" width="80" height="80" /><h4>No se encontraron resultados con ese nombre</h4> </div>}
+                            {showResult && newRecipes && typeof newRecipes !== 'string' && <div className={s.searchOk}><span className={s.closebtn} onClick={() => closebtn()}>&times;</span> <img className={s.crossImg} src={check} alt="" width="80" height="80" /><h4>Exito!</h4> </div>}
 
-                                {showResult && newRecipes && typeof newRecipes === 'string' && <div className={s.searchError}><span className={s.closebtn} onClick={() => closebtn()}>&times;</span> <img className={s.crossImg} src={cross} alt="" width="80" height="80" /><h4>No se encontraron resultados con ese nombre</h4> </div>}
-                                {showResult && newRecipes && typeof newRecipes !== 'string' && <div className={s.searchOk}><span className={s.closebtn} onClick={() => closebtn()}>&times;</span> <img className={s.crossImg} src={check} alt="" width="80" height="80" /><h4>Exito!</h4> </div>}
-
-                            </form>
-
-                            <form className={s.filters}>
-                                <h3> Recipe list filters : </h3>
-                                <div className={s.filtersDiv}>
-                                    <label >Filter by name: </label>
-                                    <input className={s.inputHome}
-                                        type="text"
-                                        placeholder="Buscar receta..."
-                                        value={filterbyName}
-                                        onChange={handleInputChangeSearch}
-                                    />
-                                </div>
-                                <div className={s.filtersDiv}>
-                                    <h3 >Filter by diet type: </h3>
-                                    {diets ?
-                                        <select onChange={(e) => setDiet(e.target.value)}>
-                                            <option value="none" >None</option>
-                                            {diets.map((d) => (
-                                                <option key={d.id} value={d.name} >{d.name}</option>
-                                            )
-                                            )}
-                                        </select>
-                                        : <h4>No hay dietas registradas</h4>}
-                                </div>
-                                <div className={s.buttons}>
-                                    <div className={s.add}>
-                                        <Link to="./add">
-                                            Add new Recipe
-                                        </Link>
-                                    </div>
-                                </div>
-                            </form>
-                            <div className={s.filters}>
-                                <h3>Choose a type of Sort: </h3>
-                                <form className={s.orderRadio}>
-
-                                    <div className={s.radioDiv}>
-                                        <label>Predeterminado</label><br></br>
-                                        <input type="radio" name="sort" value="predeterminado" onChange={(e) => setSortType(e.target.value)} checked={!sortType || sortType === "predeterminado" ? true : false}></input>
-                                    </div>
-                                    <div className={s.radioDiv}>
-                                        <label>Name</label><br></br>
-                                        <input type="radio" name="sort" value="name" onChange={(e) => setSortType(e.target.value)}></input>
-                                    </div>
-                                    <div className={s.radioDiv}>
-                                        <label>Puntuación</label><br></br>
-                                        <input type="radio" name="sort" value="score" onChange={(e) => setSortType(e.target.value)}></input>
-                                    </div>
-                                </form>
-                                <div className={s.filtersDiv}>
-                                    <label >Choose a sort way: </label>
-                                    <button name={sort} onClick={(e) => handleClick(e)}
-                                    > {sort}
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                        </form>
                     </div>
+                </div>
 
             </div>
+            <div className={s.recipes}>
+                <div className={s.filtersContainer}>
+                    <div className={s.allFilters}>
+                    <form className={s.filtersName}>
+                        <h3> Recipe list filters : </h3>
+                        <div className={s.filtersDiv}>
+                            <label >Filter by name: </label>
+                            <input className={s.inputHome}
+                                type="text"
+                                placeholder="Buscar receta..."
+                                value={filterbyName}
+                                onChange={handleInputChangeSearch}
+                            />
+                        </div>
+                        <div className={s.filtersDiv}>
+                            <label>Filter by diet type: </label>
+                            {diets ?
+                                <select onChange={(e) => setDiet(e.target.value)}>
+                                    <option value="none" >None</option>
+                                    {diets.map((d) => (
+                                        <option key={d.id} value={d.name} >{d.name}</option>
+                                    )
+                                    )}
+                                </select>
+                                : <h4>No hay dietas registradas</h4>}
+                        </div>
+                        <div className={s.buttons}>
+                            <div className={s.add}>
+                                <Link to="./add">
+                                    Add new Recipe
+                                </Link>
+                            </div>
+                        </div>
+                    </form>
+                    <div className={s.filtersSort}>
+                        <label>Choose a type of Sort: </label>
+                        <form className={s.orderRadio}>
 
-            {recipe && <Pagination recipes={recipe} />}
-            {recipes ? null : <div className={s.loading}><h2>Loading...</h2>  </div>}
+                            <div className={s.radioDiv}>
+                                <label>None</label><br></br>
+                                <input type="radio" name="sort" value="none" onChange={(e) => setSortType(e.target.value)} checked={!sortType || sortType === "none" ? true : false}></input>
+                            </div>
+                            <div className={s.radioDiv}>
+                                <label>Name</label><br></br>
+                                <input type="radio" name="sort" value="name" onChange={(e) => setSortType(e.target.value)}></input>
+                            </div>
+                            <div className={s.radioDiv}>
+                                <label>Score</label><br></br>
+                                <input type="radio" name="sort" value="score" onChange={(e) => setSortType(e.target.value)}></input>
+                            </div>
+                        </form>
+                        <div className={s.filtersDiv}>
+                            <label >Choose a sort way: </label>
+                            <button name={sort} onClick={(e) => handleClick(e)}
+                            > {sort}
+                            </button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div className={s.pagination}>
+                    {recipe && <Pagination recipes={recipe} />}
+                    {recipes ? null : <div className={s.loading}><h2>Loading...</h2>  </div>}
+                </div>
+            </div>
+
         </div >
     )
 };

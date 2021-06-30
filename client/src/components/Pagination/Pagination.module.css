@@ -1,20 +1,21 @@
-.pagination {}
+.pagination {
+    width: 100%;    
+}
 
 .recipes {
     display        : flex;
     flex-wrap      : wrap;
     justify-content: space-evenly;
+    background-color: #303236;
 }
 
 .filters {
-    background-color: #3c3c3c;
+    background-color: #888888;
     padding         : 20px;
     display         : flex;
-    height          : 150px;
     align-items     : center;
     justify-content : space-around;
-    flex-direction  : row;
-
+    flex-direction  : column;
 }
 
 @media (max-width: 500px) {
@@ -25,14 +26,18 @@
     }
 }
 
+.filters label{
+    color: black;
+}
 
 .searchName {
-    background-color: rgb(0 0 0 / 80%);
-
     padding      : 20px;
     font-weight  : 600;
     color        : white;
     border-radius: 30px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 
@@ -41,7 +46,7 @@
         flex-direction  : column;
         width: 100%;
         height: 100%;
-        margin: 10px;
+        padding: 10px;
     }
 }
 
@@ -111,17 +116,17 @@
 }
 
 .totalRecipes {
-    background-color: rgb(0 0 0 / 80%);
-    display         : flex;
-    align-items     : center;
-    padding         : 10px;
-    font-weight     : 600;
-    color           : white;
-    border-radius   : 30px;
-    flex-direction  : row;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    font-weight: 600;
+    border-radius: 30px;
+    flex-direction: row;
+    width: 90%;
+    justify-content: space-around;
 }
 
-@media (max-width:500px){
+@media (max-width:750px){
     .totalRecipes {
         flex-direction  : column;
         align-items: center;
@@ -132,7 +137,6 @@
 .total {
     display    : flex;
     align-items: center;
-    width      : 300px;
 }
 
 

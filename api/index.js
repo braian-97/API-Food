@@ -136,7 +136,7 @@ conn.sync({ force: true }).then(() => {
     }).then(recipes => {
         newRecipe = recipes[0]
 
-        if(diets[0]){
+        if(diets && diets[0]){
         let result = diets.map(diet => {
             if (diet) {
                 return Diet.findOrCreate({
@@ -149,7 +149,7 @@ conn.sync({ force: true }).then(() => {
                     }
                 }).then(diet => {
                     return diet
-                })
+                }).catch(err => console.log(err));
             }
         })
         return result
@@ -158,12 +158,14 @@ conn.sync({ force: true }).then(() => {
             if(diet && diet[0]){
             diet.forEach(e => {
                 e.then(diet => {
+                  if(diet){
                     return diet[0].setRecipes(newRecipe.id)
+                  }
                 }).then(diet => {
                     if (diet) {                                
                       console.log("new diet set")
                     }
-                })
+                }).catch(err => console.log(err));
             })
           }
         })
@@ -171,6 +173,5 @@ conn.sync({ force: true }).then(() => {
       .catch(err => console.log(err));
     })
   })
-  .catch(err => console.log(err));
 })
 .catch(err => console.log(err));

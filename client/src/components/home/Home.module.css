@@ -9,7 +9,9 @@
 }
 
 .home label{
-    font-size: 19px;
+    font-size: 20px;
+    font-family: 'Philosopher';
+    font-weight: 600;
 }
 
 .home select {
@@ -22,7 +24,9 @@
     margin             : 10px;
     font-size       : 18px;
     cursor: pointer;
+    width: 100%;
 }
+
 
 .home select:hover {
     background-color: black;
@@ -40,10 +44,17 @@
     color           : lightgray;
     font-size       : 18px;
     padding-left: 10px;
+    width: 100%;
 }
 
 .inputHome::placeholder {
     color: lightgray;
+}
+
+@media (max-width: 750px) {
+    .inputHome {
+        width: 100%;
+    }
 }
 
 /* ------------------------------------------------------- */
@@ -73,7 +84,12 @@
     margin: 0;
     padding-top: 10px;
 }
-
+/* ------------------------------------------------------- */
+.load{
+    display: flex;
+    justify-content: center;
+    height: 510px;
+}
 
 /* ------------------------------------------------------- */
 .form {
@@ -81,6 +97,10 @@
     justify-content: center;
     align-items: center;
     font-weight    : 600;
+    width: 500px;
+    height: 500px;
+    box-shadow: 3px 3px 15px 3px;
+    background-color: #f1f1f180;
 }
 
 @media (max-width: 500px) {
@@ -91,7 +111,7 @@
 
 
 .form h3 {
-    color: white;
+    color: red;
     font-size: 24px;
     font-family: 'Philosopher';
 }
@@ -124,15 +144,11 @@
     justify-content : center;
     align-items     : center;
     flex-direction  : column;
-    box-shadow      : 3px 3px 15px 3px;
-    background-color: #888888d6;
 }
 
 @media (max-width: 500px) {
     .search {
       margin: 0;
-      width: 100%;
-      height: 100%;
       margin-bottom: 15px;
     }
 }
@@ -188,22 +204,69 @@
 
 /* ------------------------------------------------------- */
 
-.filters {
-    height: 500px;
-    width           : 300px;
-    margin-left: 10px;
-    box-shadow: 3px 3px 15px 3px;
-    background-color: #888888d6;
+.filtersContainer{
+    width           : 30%;
+    background-color: #888888;
+}
+
+/* ------------------------------------------------------- */
+
+.allFilters{
+    position: sticky;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+/* ------------------------------------------------------- */
+.filtersDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+/* ------------------------------------------------------- */
+.filtersName {
+    width: 80%;
+
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-content: center;
     flex-wrap: wrap;
     align-items: center;
+    border: groove;
+    
 }
 
 @media (max-width: 500px) {
-    .filters {
+    .filtersName {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      margin-bottom: 15px;
+    }
+}
+/* ------------------------------------------------------- */
+.filtersSort {
+    width: 80%;
+
+    display: flex;
+    justify-content: center;
+
+    align-items: center;
+    padding: 20px;
+    flex-direction: column;
+    border: groove;
+}
+
+@media (max-width: 500px) {
+    .filtersSort {
       margin: 0;
       width: 100%;
       height: 100%;
@@ -211,17 +274,12 @@
     }
 }
 
-.filtersDiv{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
 
 /* ------------------------------------------------------- */
 .orderRadio{
     display: flex;
     flex-direction: column;
+    padding-top: 10px;
 }
 
 .radioDiv{
@@ -259,7 +317,17 @@
     font-size: 24px;
     padding: 0;
 }
+@media (max-width:950px){
+    .add {
+        font-size: 16px;
+    }
+}
 
+@media (max-width:690px){
+    .add {
+        font-size: 10px;
+    }
+}
 
 .add a {
     background-color: #303236;
@@ -293,3 +361,11 @@
     font-family: revert;
 }
 
+.recipes{
+    display: flex;
+    flex-direction: row;
+}
+
+.pagination{
+    width: 70%;
+}

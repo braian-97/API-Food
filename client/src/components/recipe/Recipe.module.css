@@ -36,19 +36,19 @@
 .imgContainer{
     display: flex;
     justify-content: center;
-    overflow: hidden;
+
     height: 270px;
     border-radius: 99px;
     padding-bottom: 20px;
 }
 
 .img{
-    border-radius: 99px; 
+    border-radius: 9999px; 
     border: solid 3px white
 }
 
 .img:hover {
-    transform:scale(1.2);
+    transform:scale(1.1);
 }
 
 /* ----------------------------- */
