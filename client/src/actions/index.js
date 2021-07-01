@@ -9,7 +9,7 @@ export const GET_DETAILS = "GET_DETAILS";
  
 export function getAllRecipes() {
     return (dispatch) => {
-        axios.get("http://localhost:3001/home")
+        axios.get("http://localhost:5000/home")
             .then(response => {
                 dispatch({ type: SET_RECIPES, payload: response.data }) 
             })
@@ -19,7 +19,7 @@ export function getAllRecipes() {
 
 export function getAllDiets() {
     return (dispatch) => {
-        axios.get("http://localhost:3001/types")
+        axios.get(" http://localhost:5000/types")
             .then(response => {
                 dispatch({ type: SET_DIETS, payload: response.data })
             })
@@ -30,7 +30,7 @@ export function getAllDiets() {
 
 export function addRecipe(recipe) {
     return (dispatch) => {
-        axios.post("http://localhost:3001/recipe", recipe)
+        axios.post(" http://localhost:5000/recipe", recipe)
             .then(response => {
                 dispatch({ type: ADD_RECIPE, payload: response.data })
             })
@@ -41,7 +41,7 @@ export function addRecipe(recipe) {
 
 export function searchRecipe({ name, number }) {
     return (dispatch) => {   
-            axios.get(`http://localhost:3001/recipes/?name=${name}&number=${number}`)
+            axios.get(` http://localhost:5000/recipes/?name=${name}&number=${number}`)
                 .then(response => {
                     dispatch({ type: SEARCH_RECIPE, payload: response.data })
                 })
@@ -55,7 +55,7 @@ export function searchRecipe({ name, number }) {
 
 export function getRecipeDetail(id) {
     return (dispatch) => {
-        axios.get(`http://localhost:3001/recipes/${id}`)
+        axios.get(`http://localhost:5000/recipes/${id}`)
             .then(response => {
                 dispatch({ type: GET_DETAILS, payload: response.data })
             })
