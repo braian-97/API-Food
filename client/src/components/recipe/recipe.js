@@ -13,7 +13,7 @@ export function Recipe({ name, image, diets, id , score}) {
             </div>
             <div className={s.imgContainer}>
                 <Link to={`/recipe/${id}`}>
-                    {image ? <img  className={s.img} src={image} alt="imagen" height="270" width="270" /> : <p>Imagen no disponible</p>}
+                    {image ? <img  className={s.img} src={image} alt="imagen" height="220" width="220" /> : <p>Imagen no disponible</p>}
                 </Link>
             </div>
             <div  className={s.dietsContainer}>

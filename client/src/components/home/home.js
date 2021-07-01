@@ -215,7 +215,7 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
 
     return (
         <div className={s.home}>
-            <div className={s.content}>
+            <div className={s.homeContainer}>
                 <h1 className={s.title}>HOME</h1>
 
                 <div className={s.load}>
@@ -223,14 +223,14 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
                         <form onSubmit={handleSubmit} className={s.search}>
                             <h3>Load more recipes:</h3>
                             <label>Load recipe by name: </label>
-                            <input className={s.inputHome} type="text" name="name" onChange={handleInputChange} value={search.name ? search.name : undefined} placeholder="Nombre de la receta..."></input><br></br>
+                            <input className={s.inputHome} type="text" name="name" onChange={handleInputChange} value={search.name ? search.name : undefined} placeholder="recipe name..."></input><br></br>
                             <label>Number of recipes: </label>
-                            <input className={s.inputHome} type="number" name="number" onChange={handleInputChange} value={search.number ? search.number : undefined} placeholder="Cantidad de recetas..." size="4"></input>
+                            <input className={s.inputHome} type="number" name="number" onChange={handleInputChange} value={search.number ? search.number : undefined} placeholder="number of recipes..." size="4"></input>
                             <button disabled={search.name ? false : true} type="submit">Search</button>
 
 
-                            {showResult && newRecipes && typeof newRecipes === 'string' && <div className={s.searchError}><span className={s.closebtn} onClick={() => closebtn()}>&times;</span> <img className={s.crossImg} src={cross} alt="" width="80" height="80" /><h4>No se encontraron resultados con ese nombre</h4> </div>}
-                            {showResult && newRecipes && typeof newRecipes !== 'string' && <div className={s.searchOk}><span className={s.closebtn} onClick={() => closebtn()}>&times;</span> <img className={s.crossImg} src={check} alt="" width="80" height="80" /><h4>Exito!</h4> </div>}
+                            {showResult && newRecipes && typeof newRecipes === 'string' && <div className={s.searchError}><span className={s.closebtn} onClick={() => closebtn()}>&times;</span> <img className={s.crossImg} src={cross} alt="" width="80" height="80" /><h4>No results found with that name</h4> </div>}
+                            {showResult && newRecipes && typeof newRecipes !== 'string' && <div className={s.searchOk}><span className={s.closebtn} onClick={() => closebtn()}>&times;</span> <img className={s.crossImg} src={check} alt="" width="80" height="80" /><h4>Success!</h4> </div>}
 
                         </form>
                     </div>
@@ -246,7 +246,7 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
                             <label >Filter by name: </label>
                             <input className={s.inputHome}
                                 type="text"
-                                placeholder="Buscar receta..."
+                                placeholder="Search recipe..."
                                 value={filterbyName}
                                 onChange={handleInputChangeSearch}
                             />

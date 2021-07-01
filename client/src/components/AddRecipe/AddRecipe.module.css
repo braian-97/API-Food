@@ -4,12 +4,10 @@
     background-attachment: fixed;
     background-repeat    : no-repeat;
 
-    border: 2px solid;
-
     display        : flex;
     flex-direction : row;
     justify-content: center;
-    width          : 98.5vw;
+    width : 98.75vw;
 }
 
 @media (max-width: 900px) {
@@ -141,6 +139,7 @@
     padding       : 30px;
     align-items   : center;
     flex-wrap     : nowrap;
+    background-color: #ffffffb8;
 }
 
 @media (max-width: 500px) {
@@ -176,9 +175,9 @@
 
 .addForm label {
     font-size       : 19px;
-    color           : #000000;
+    color: #b4a200;
     font-weight     : 600;
-    background-color: #f8f8f880;
+    background-color: black;
     padding         : 10px;
     border-radius   : 10px;
 }
@@ -251,8 +250,6 @@
 /* ---------------------------------- */
 
 .addName {
-    background-color: #adadade3;
-
     margin-bottom: 40px;
     padding-left : 20px;
 
@@ -260,7 +257,7 @@
     flex-direction: column;
     align-items   : center;
 
-    box-shadow: 0px 0px 5px 2px;
+    box-shadow: 0px 0px 3px 0px;
     padding   : 20px;
     width: 100%;
 
@@ -290,15 +287,13 @@
 /* ---------------------------------- */
 
 .addSummary {
-    background-color: #adadade3;
-
     margin-bottom : 40px;
     padding-left  : 20px;
     display       : flex;
     flex-direction: column;
     align-items   : center;
 
-    box-shadow: 0px 0px 5px 2px;
+    box-shadow: 0px 0px 3px 0px;
     padding   : 20px;
     width: 100%;
 }
@@ -357,14 +352,13 @@
 /* ---------------------------------- */
 
 .addImage {
-    background-color: #adadade3;
     display         : flex;
     flex-direction  : column;
     align-items     : center;
 
     margin-bottom: 30px;
 
-    box-shadow: 0px 0px 5px 2px;
+    box-shadow: 0px 0px 3px 0px;
     padding   : 20px;
     width: 100%;
 }
@@ -427,12 +421,11 @@
 /* ---------------------------------- */
 
 .diet {
-    background-color: #adadade3;
     display         : flex;
     align-items     : center;
     flex-direction  : column;
 
-    box-shadow: 0px 0px 5px 2px;
+    box-shadow: 0px 0px 3px 0px;
     padding   : 20px;
     width: 100%;
 
@@ -540,6 +533,16 @@
 
 /* ---------------------------------- */
 
+.scores{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 0px 3px 0px;
+}
+
+/* ---------------------------------- */
+
 .addNumber {
     width: 100%;
     display        : flex;
@@ -555,15 +558,13 @@
 /* ---------------------------------- */
 
 .addScore {
-    background-color: #adadade3;
-
     margin-bottom   : 20px;
     margin-top      : 20px;
     display         : flex;
     flex-direction  : column;
     align-items     : center;
 
-    box-shadow: 0px 0px 5px 2px;
+    box-shadow: 0px 0px 3px 0px;
     padding   : 20px;
     width: 45%;
 }
@@ -588,15 +589,13 @@
 
 
 .addHealthScore {
-    background-color: #adadade3;
-
     margin-bottom   : 20px;
     margin-top      : 20px;
     display         : flex;
     flex-direction  : column;
     align-items     : center;
 
-    box-shadow: 0px 0px 5px 2px;
+    box-shadow: 0px 0px 3px 0px;
     padding   : 20px;
     width: 45%;
 }
@@ -619,7 +618,6 @@
 /* ---------------------------------- */
 
 .addSteps {
-    background-color: #adadade3;
     display         : flex;
     align-items     : center;
     flex-direction  : column;
@@ -628,7 +626,7 @@
     padding-left : 20px;
     margin-top   : 20px;
 
-    box-shadow: 0px 0px 5px 2px;
+    box-shadow: 0px 0px 3px 0px;
     padding   : 20px;
     width: 100%;
 }
@@ -655,7 +653,6 @@
 /* ---------------------------------- */
 
 .addDishTypes {
-    background-color: #adadade3;
     display         : flex;
     align-items     : center;
     flex-direction  : column;
@@ -664,7 +661,7 @@
     padding-left : 20px;
     margin-top   : 20px;
 
-    box-shadow: 0px 0px 5px 2px;
+    box-shadow: 0px 0px 3px 0px;
     padding   : 20px;
     width: 100%;
 }
@@ -798,7 +795,6 @@
 /* ---------------------------------- */
 
 .checkImg {
-    background-color: #ffffff91;
     border-radius   : 999px;
     width           : 40px;
     height          : 40px;

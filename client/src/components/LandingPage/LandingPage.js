@@ -9,7 +9,7 @@ function LandingPage () {
         <div className={s.page}>
             <img className={s.logoCooking} src={logoCooking} alt="logo cooking" width="400" height="400"/>
             <Link className={s.goHome} to="./home">
-            <h2>Ir a la pagina principal</h2> 
+            <h2>Go to the main page!</h2> 
             </Link>
             <h3 className={s.by}>By Braian Silva</h3>
         </div>

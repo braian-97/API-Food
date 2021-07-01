@@ -1,10 +1,10 @@
 .recipe {
     background-image: url('../../img/card.png');
     background-repeat: no-repeat;
-    background-size: 400px 700px;
+    background-size: 100% 100%;
     border: solid;
     width: 400px;
-    height: 700px;
+    height: 600px;
     
     margin: 15px 15px 40px 15px;
 }
@@ -37,7 +37,7 @@
     display: flex;
     justify-content: center;
 
-    height: 270px;
+    height: 220px;
     border-radius: 99px;
     padding-bottom: 20px;
 }
@@ -78,12 +78,14 @@
 
 .dietsContainer{
     width: 350px;
+    height: 160px;
+    
     display: flex;
     align-items: center;
     flex-direction: column;
     flex-wrap: nowrap;
     align-content: center;
-    height: 220px;
+    
     overflow-wrap: break-word;
     overflow-y: auto;
     margin-left: 20px;
