@@ -43,16 +43,16 @@ router.get("/", function (req, res) {
                     return res.send(resultApi)
                 }
                 else {
-                    return res.status(404).send("No se encontraron resultados con ese nombre")
+                    return res.status(404).send("No results found with that name")
                 }
             })
             .catch(err => {
-                return res.status(err.response.status ? err.response.status : 400).send(err.response.statusText ? err.response.statusText : "Opps! Hubo un Error")
+                return res.status(err.response.status ? err.response.status : 400).send(err.response.statusText ? err.response.statusText : "Oops! There was a mistake")
             })
     }
     else {
         return res.status(400).send(
-            "Ingrese el parametro ?name='...' seguido por el nombre de la receta para realizar la busqueda. O ingrese '/' seguido del id de la receta que quiere buscar."
+            "Use the parameter ?name='...' Or enter '/' followed by the id of the recipe you want to search for."
         )
     }
 });
@@ -101,11 +101,11 @@ router.get("/:id", function (req, res) {
                                 }
                             })
                             .catch(err => {
-                                return res.status(404).send("La receta no existe")
+                                return res.status(404).send("The recipe does not exist")
                             })
                     }
                     else {
-                        res.status(err.response.status ? err.response.status : 400).send(err.response.statusText ? err.response.statusText : "Opps! hubo un error.")
+                        res.status(err.response.status ? err.response.status : 400).send(err.response.statusText ? err.response.statusText : "Oops! There was a mistake.")
                     }
                 }
                 else {
@@ -114,7 +114,7 @@ router.get("/:id", function (req, res) {
             })
     }
     else {
-        return res.status(400).send("Ingrese un id para realizar la busqueda")
+        return res.status(400).send("Enter an ID to search")
     }
 });
 

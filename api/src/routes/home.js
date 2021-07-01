@@ -83,7 +83,7 @@ router.get("/", function (req, res) {
             return res.status(200).send(result)
         })
         .catch( err => {  
-            return  res.status(400).send("Opps! Hubo un error")
+            return  res.status(400).send("Opps! There was a mistake")
         }) 
     })   
   

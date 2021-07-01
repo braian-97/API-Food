@@ -50,7 +50,7 @@ router.post("/", function (req, res) {
                 return result
             }
             else{
-                return res.send(["Ya existe una receta con ese nombre", { id : recipe[0].id }])
+                return res.send(["A recipe with that name already exists", { id : recipe[0].id }])
             }
             }).then(diets => {
                 if (!diets[0]  ) {
@@ -71,15 +71,15 @@ router.post("/", function (req, res) {
             })
             .catch(err => {  
                 console.log(err)
-                return res.status(400).send("Error al crear la receta")            
+                return res.status(400).send("Error creating recipe")            
            }) 
         }
         else {
-            return res.status(400).send("Debe llenar el name y summary antes de enviar")
+            return res.status(400).send("You must fill in the name and summary before sending")
         }
     }
     catch (err) {  
-        return res.status(400).send("Error al crear la receta")
+        return res.status(400).send("Error creating recipe")
    }
 });
 

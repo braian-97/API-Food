@@ -13,7 +13,7 @@ export function getAllRecipes() {
             .then(response => {
                 dispatch({ type: SET_RECIPES, payload: response.data }) 
             })
-            .catch(err => { dispatch({ type: SET_RECIPES, payload: "Error al cargar todas las recetas" })})
+            .catch(err => { dispatch({ type: SET_RECIPES, payload: "Error loading recipes from database" })})
     }
 }
 
@@ -23,7 +23,7 @@ export function getAllDiets() {
             .then(response => {
                 dispatch({ type: SET_DIETS, payload: response.data })
             })
-            .catch(err => { dispatch({ type: SET_DIETS, payload: "Error al cargar todas las dietas" })})
+            .catch(err => { dispatch({ type: SET_DIETS, payload: "Failed to load all diets" })})
     }
 }
 
@@ -34,7 +34,7 @@ export function addRecipe(recipe) {
             .then(response => {
                 dispatch({ type: ADD_RECIPE, payload: response.data })
             })
-            .catch(err => { dispatch({ type: ADD_RECIPE, payload: "Error al crear la receta" })})
+            .catch(err => { dispatch({ type: ADD_RECIPE, payload: "Error creating recipe" })})
     }
 }
 
