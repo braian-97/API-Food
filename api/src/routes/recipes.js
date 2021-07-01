@@ -53,56 +53,69 @@ router.get("/", function (req, res) {
     else {
         return res.status(400).send(
             "Ingrese el parametro ?name='...' seguido por el nombre de la receta para realizar la busqueda. O ingrese '/' seguido del id de la receta que quiere buscar."
-            )
+        )
     }
 });
 
 
 router.get("/:id", function (req, res) {
-    if(req.params.id){
-    axios.get(BASE_URL + `/${req.params.id}/information?apiKey=` + API_KEY)
-        .then(response => {
+    if (req.params.id) {
+        axios.get(BASE_URL + `/${req.params.id}/information?apiKey=` + API_KEY)
+            .then(response => {
 
-            result = {
-                name: response.data.title,
-                image: response.data.image,
-                summary: response.data.summary,
-                score: response.data.spoonacularScore,
-                healthScore: response.data.healthScore,
-                steps: response.data.analyzedInstructions[0] ? response.data.analyzedInstructions[0].steps : response.data.analyzedInstructions,
-                dishTypes: response.data.dishTypes,
-                diets: response.data.diets,
-            };
+                let result = {
+                    name: response.data.title,
+                    image: response.data.image,
+                    summary: response.data.summary,
+                    score: response.data.spoonacularScore,
+                    healthScore: response.data.healthScore,
+                    steps: response.data.analyzedInstructions[0] ? response.data.analyzedInstructions[0].steps : response.data.analyzedInstructions,
+                    dishTypes: response.data.dishTypes,
+                    diets: response.data.diets,
+                };
 
-            return res.json(result)
-        })
-        .catch(err => {            
-            if (err.response) {
-                if (err.response.status === 404) {
-                    Recipe.findByPk(req.params.id, { include: Diet })
-                        .then(recipe => {
-                            if (recipe) {
-                                return res.send(recipe)
-                            }
-                            else {
-                                return res.send(recipe)
-                            }
-                        })
-                        .catch(err => {
-                            return res.status(404).send("La receta no existe")
-                        })
+                return res.json(result)
+            })
+            .catch(err => {
+                if (err.response) {
+                    if (err.response.status === 404) {
+                        Recipe.findByPk(req.params.id, { include: Diet })
+                            .then(recipe => {
+                                if (recipe) {
+
+                                    let result = {
+                                        name: recipe.name,
+                                        image: recipe.image,
+                                        summary: recipe.summary,
+                                        score: recipe.score,
+                                        healthScore: recipe.healthScore,
+                                        steps: recipe.steps,
+                                        dishTypes: recipe.dishTypes,
+                                        diets: recipe.diets.map( d => d.name )
+                                    };
+
+                                    return res.send(result)
+                                }
+                                else {
+                                    return res.send(recipe)
+                                }
+                            })
+                            .catch(err => {
+                                return res.status(404).send("La receta no existe")
+                            })
+                    }
+                    else {
+                        res.status(err.response.status ? err.response.status : 400).send(err.response.statusText ? err.response.statusText : "Opps! hubo un error.")
+                    }
                 }
                 else {
-                    res.status(err.response.status ? err.response.status : 400).send(err.response.statusText ? err.response.statusText : "Opps! hubo un error.")
+                    return res.status(400)
                 }
-            }
-            else {
-                return res.status(400)
-            }
-        })}
-        else{
-            return res.status(400).send("Ingrese un id para realizar la busqueda")
-        }
+            })
+    }
+    else {
+        return res.status(400).send("Ingrese un id para realizar la busqueda")
+    }
 });
 
 module.exports = router;
