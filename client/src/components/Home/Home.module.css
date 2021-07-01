@@ -66,7 +66,7 @@
     background-image : url('../../img/fondo5.jpg');
     background-size  : 100% 100%;
     background-repeat: no-repeat;
-    padding          : 1px;
+    padding-top: 18px;
     box-shadow       : 3px 3px 15px 3px;
 }
 
@@ -212,7 +212,7 @@
 .filtersContainer {
     width           : 30%;
     background-color: #888888;
-    padding-bottom: 38px;
+    padding-bottom: 40px;
 }
 
 /* ------------------------------------------------------- */
@@ -267,10 +267,10 @@
     display        : flex;
     justify-content: center;
 
-    align-items   : center;
+    align-items: flex-start;
     padding       : 20px;
     flex-direction: column;
-    border        : groove;
+    border        : groove;    
 }
 
 @media (max-width: 500px) {
@@ -295,10 +295,13 @@
 
 /* ------------------------------------------------------- */
 .orderRadio {
-    display       : flex;
+    display: flex;
+    width: 100%;
     flex-direction: column;
     padding-top: 20px;
     padding-bottom: 10px;
+    color: white;
+    align-items: flex-start;
 }
 
 .radioDiv {
@@ -333,7 +336,7 @@
 }
 
 .add {
-    font-size: 24px;
+    font-size: 20px;
     padding  : 0;
 }
 
@@ -354,14 +357,14 @@
     color           : #b3a847;
     padding         : 15px;
     text-decoration : none;
-    border          : inset;
+    border: inset #b3a847;
     border-radius   : 30px;
     font-weight     : 600;
 }
 
 .add a:hover {
-    background-color: lightgray;
-    color           : black;
+    color           : #b3a847;
+    background-color: black;
 }
 
 /* ------------------------------------------------------- */
