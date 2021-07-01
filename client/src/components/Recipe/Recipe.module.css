@@ -1,0 +1,142 @@
+.recipe {
+    background-image: url('../../img/card.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    border: solid;
+    width: 400px;
+    height: 600px;
+    
+    margin: 15px 15px 40px 15px;
+}
+
+.recipe a{
+    padding-left: 15px;
+    padding-right: 15px;
+    text-decoration:none;
+    color: white;
+}
+
+.recipe a:hover{
+    color:#357ae8;
+}
+
+/* ----------------------------- */
+.titleContainer{
+    width: 380px;
+    padding-top: 10px;
+    padding-left: 40px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    
+}
+
+/* ----------------------------- */
+
+.imgContainer{
+    display: flex;
+    justify-content: center;
+
+    height: 220px;
+    border-radius: 99px;
+    padding-bottom: 20px;
+}
+
+.img{
+    border-radius: 9999px; 
+    border: solid 3px white
+}
+
+.img:hover {
+    transform:scale(1.1);
+}
+
+/* ----------------------------- */
+
+.scoreContainer{
+    color: #a7a060;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.scoreContainer h2{
+    color: #a7a060;
+    margin: 0;
+    width: 70px;
+    height: 70px;
+    border: solid;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #303236;
+}
+
+
+/* ----------------------------- */
+
+.dietsContainer{
+    width: 350px;
+    height: 160px;
+    
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    
+    overflow-wrap: break-word;
+    overflow-y: auto;
+    margin-left: 20px;
+    padding-top: 20px;
+}
+
+
+.dietsContainer::-webkit-scrollbar {
+    width: 12px;
+}
+
+.dietsContainer::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.dietsContainer::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.dietsContainer::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.diets{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: center;
+    margin: 0;
+}
+
+.diets h4{
+    color: aliceblue;
+    height: 20px;
+    padding-bottom: 5px;
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.diets { 
+    color: #a7a060;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+
+
+
+
+
+

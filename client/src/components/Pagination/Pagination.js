@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Recipe from '../Recipe/Recipe.js';
+import Recipe from '../Recipe/Recipe';
 import s from './Pagination.module.css';
 
 

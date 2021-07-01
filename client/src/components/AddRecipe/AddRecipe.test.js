@@ -5,7 +5,7 @@ import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 
 import { addRecipe } from '../../actions';
-import AddRecipeDefault, { AddRecipe } from './AddRecipe.js';
+import AddRecipeDefault, { AddRecipe } from './AddRecipe';
 
 configure({ adapter: new Adapter() });
 
