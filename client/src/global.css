@@ -11,6 +11,19 @@
   flex-direction: column;
 }
 
+input:focus {
+  box-shadow: 0px 0px 10px 3px blue;
+  margin    : 5px;
+  outline: none;  
+  border: none;
+}
+
+textarea:focus{
+  box-shadow: 0px 0px 10px 3px blue;
+  margin    : 5px;
+  outline: none;  
+  border: none;
+}
 
 @import url('https://fonts.googleapis.com/css2?family=Merienda&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Philosopher:ital@1&display=swap');

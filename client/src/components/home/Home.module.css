@@ -1,41 +1,44 @@
-.home{
+.home {
     background-color: #3c3c3c;
-    width: 98.75vw;
+    width           : 98.75vw;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
     .home {
         display: contents;
     }
 }
 
-.home label{
-    font-size: 20px;
+.home label {
+    font-size  : 20px;
     font-family: 'Philosopher';
     font-weight: 600;
 }
 
 .home select {
-    background-color: #222222db;
-    color: #f8f8f8;
+    background-color   : #222222db;
+    color              : #f8f8f8;
     margin-left        : 20px;
     transition-duration: 0.4s;
     padding            : 10px;
-    border: solid 2px #e0e0e0;
+    border             : solid 2px #e0e0e0;
     margin             : 10px;
-    font-size       : 18px;
-    cursor: pointer;
-    width: 100%;
+    font-size          : 18px;
+    cursor             : pointer;
+    width              : 100%;
 }
 
 
 .home select:hover {
     background-color: black;
-    color: #f8f8f8;
+    color           : #f8f8f8;
 }
 
-.home button{
-    cursor: pointer;
+.home button {
+    cursor     : pointer;
+    cursor     : pointer;
+    padding    : 5px;
+    font-weight: 600;
 }
 
 /* ------------------------------------------------------- */
@@ -44,8 +47,8 @@
     background-color: #303236;
     color           : lightgray;
     font-size       : 18px;
-    padding-left: 10px;
-    width: 100%;
+    padding-left    : 10px;
+    width           : 100%;
 }
 
 .inputHome::placeholder {
@@ -60,60 +63,61 @@
 
 /* ------------------------------------------------------- */
 .homeContainer {
-    background-image: url('../../img/fondo5.jpg');
-    background-size: 100% 100%;
+    background-image : url('../../img/fondo5.jpg');
+    background-size  : 100% 100%;
     background-repeat: no-repeat;
-    padding   : 1px;
-    box-shadow: 3px 3px 15px 3px;
+    padding          : 1px;
+    box-shadow       : 3px 3px 15px 3px;
 }
 
 @media (max-width: 500px) {
     .homeContainer {
-        display: flex;
-        flex-direction: column;
-        width: auto;
-        align-items: center;
+        display              : flex;
+        flex-direction       : column;
+        width                : auto;
+        align-items          : center;
         background-attachment: fixed;
-        background-size: 100% 100%;
+        background-size      : 100% 100%;
     }
 }
 
 /* ------------------------------------------------------- */
 .title {
-    display: flex;
+    display        : flex;
     justify-content: center;
-    margin: 0;
-    padding-top: 10px;
+    margin         : 0;
+    padding-top    : 10px;
 }
+
 /* ------------------------------------------------------- */
-.load{
-    display: flex;
+.load {
+    display        : flex;
     justify-content: center;
-    height: 510px;
+    height         : 510px;
 }
 
 /* ------------------------------------------------------- */
 .form {
-    display        : flex;
-    justify-content: center;
-    align-items: center;
-    font-weight    : 600;
-    width: 500px;
-    height: 500px;
-    box-shadow: 3px 3px 15px 3px;
+    display         : flex;
+    justify-content : center;
+    align-items     : center;
+    font-weight     : 600;
+    width           : 500px;
+    height          : 500px;
+    box-shadow      : 3px 3px 15px 3px;
     background-color: #f1f1f180;
 }
 
 @media (max-width: 500px) {
     .form {
-        flex-direction : column;
+        flex-direction: column;
     }
 }
 
 
 .form h3 {
-    color: #0a67cb;
-    font-size: 24px;
+    color      : #0a67cb;
+    font-size  : 24px;
     font-family: 'Philosopher';
 }
 
@@ -126,7 +130,7 @@
     padding            : 10px;
     border-radius      : 10px;
     margin             : 10px;
-    font-size       : 18px;
+    font-size          : 18px;
 }
 
 .form label {
@@ -136,172 +140,174 @@
 
 /* ------------------------------------------------------- */
 .search {
-    display         : flex;
-    width           : 300px;
-    height          : 500px;
+    display: flex;
+    width  : 300px;
+    height : 500px;
 
-    flex-wrap       : nowrap;
-    align-content   : center;
-    justify-content : center;
-    align-items     : center;
-    flex-direction  : column;
+    flex-wrap      : nowrap;
+    align-content  : center;
+    justify-content: center;
+    align-items    : center;
+    flex-direction : column;
 }
 
 @media (max-width: 500px) {
     .search {
-      margin: 0;
-      margin-bottom: 15px;
+        margin       : 0;
+        margin-bottom: 15px;
     }
 }
 
-.searchError{
-    display: flex;
-    height: 190px;
-    width: 260px;
+.searchError {
+    display         : flex;
+    height          : 190px;
+    width           : 260px;
     background-color: #f6f6f6a1;
-    border-radius: 40px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-left: 15px;
-    margin: 15px;
+    border-radius   : 40px;
+    flex-direction  : column;
+    justify-content : center;
+    align-items     : center;
+    padding-left    : 15px;
+    margin          : 15px;
 }
 
-.searchError h4{
+.searchError h4 {
     margin: 0;
 }
 
-.searchOk{
-    display: flex;
-    align-items: center;
-    height: 150px;
-    width: 200px;
+.searchOk {
+    display         : flex;
+    align-items     : center;
+    height          : 150px;
+    width           : 200px;
     background-color: #f6f6f6a1;
-    border-radius: 40px;
-    flex-direction: column;
-    justify-content: center;
-    margin: 15px;
+    border-radius   : 40px;
+    flex-direction  : column;
+    justify-content : center;
+    margin          : 15px;
 }
 
-.searchOk h4{
+.searchOk h4 {
     margin: 0;
 }
 
 
 .closebtn {
     margin-left: 150px;
-    color: red;
+    color      : red;
     font-weight: bold;
-    float: right;
-    font-size: 22px;
+    float      : right;
+    font-size  : 22px;
     line-height: 20px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  
-  .closebtn:hover {
+    cursor     : pointer;
+    transition : 0.3s;
+}
+
+.closebtn:hover {
     font-size: 40px;
-  }
+}
 
 /* ------------------------------------------------------- */
 
-.filtersContainer{
+.filtersContainer {
     width           : 30%;
     background-color: #888888;
 }
 
 /* ------------------------------------------------------- */
 
-.allFilters{
-    position: sticky;
-    top: 0;
-    left: 0;
-    display: flex;
+.allFilters {
+    position      : sticky;
+    top           : 0;
+    left          : 0;
+    display       : flex;
     flex-direction: column;
-    align-items: center;
+    align-items   : center;
 
 }
 
 /* ------------------------------------------------------- */
-.filtersDiv{
-    display: flex;
-    flex-direction: column;
+.filtersDiv {
+    display        : flex;
+    flex-direction : column;
     justify-content: center;
-    align-items: center;
-    padding-bottom: 10px;
-    padding-top: 10px;
+    align-items    : center;
+    padding-bottom : 10px;
+    padding-top    : 10px;
 }
+
 /* ------------------------------------------------------- */
 .filtersName {
     width: 80%;
 
-    display: flex;
-    flex-direction: column;
+    display        : flex;
+    flex-direction : column;
     justify-content: space-evenly;
-    align-content: center;
-    flex-wrap: wrap;
-    align-items: center;
-    border: groove;
-    margin-top: 28px;
+    align-content  : center;
+    flex-wrap      : wrap;
+    align-items    : center;
+    border         : groove;
+    margin-top     : 28px;
 }
 
 @media (max-width: 500px) {
     .filtersName {
-      margin: 0;
-      width: 100%;
-      height: 100%;
-      margin-bottom: 15px;
+        margin       : 0;
+        width        : 100%;
+        height       : 100%;
+        margin-bottom: 15px;
     }
 }
+
 /* ------------------------------------------------------- */
 .filtersSort {
     width: 80%;
 
-    display: flex;
+    display        : flex;
     justify-content: center;
 
-    align-items: center;
-    padding: 20px;
+    align-items   : center;
+    padding       : 20px;
     flex-direction: column;
-    border: groove;
+    border        : groove;
 }
 
 @media (max-width: 500px) {
     .filtersSort {
-      margin: 0;
-      width: 100%;
-      height: 100%;
-      margin-bottom: 15px;
+        margin       : 0;
+        width        : 100%;
+        height       : 100%;
+        margin-bottom: 15px;
     }
 }
 
 
 /* ------------------------------------------------------- */
-.orderRadio{
-    display: flex;
+.orderRadio {
+    display       : flex;
     flex-direction: column;
-    padding-top: 10px;
+    padding-top   : 10px;
 }
 
-.radioDiv{
-    display: flex;
+.radioDiv {
+    display       : flex;
     flex-direction: row;
-    align-items: center;
+    align-items   : center;
 }
 
-.radioDiv input{
-    width: 20px;
+.radioDiv input {
+    width : 20px;
     height: 20px;
 
-    appearance: none;
+    appearance   : none;
     border-radius: 50%;
-    border: 2px solid #000;
-    transition: 0.2s all linear;
+    border       : 2px solid #000;
+    transition   : 0.2s all linear;
 
     background-color: #ffffff;
-  }
-  
-.radioDiv  input:checked {
+}
+
+.radioDiv input:checked {
     border: 7px solid black;
 }
 
@@ -310,21 +316,22 @@
     display        : flex;
     justify-content: space-evenly;
     align-items    : center;
-    height: 100px;
-    padding: 0;
+    height         : 100px;
+    padding        : 0;
 }
 
 .add {
     font-size: 24px;
-    padding: 0;
+    padding  : 0;
 }
-@media (max-width:950px){
+
+@media (max-width:950px) {
     .add {
         font-size: 16px;
     }
 }
 
-@media (max-width:690px){
+@media (max-width:690px) {
     .add {
         font-size: 10px;
     }
@@ -335,38 +342,38 @@
     color           : #b3a847;
     padding         : 15px;
     text-decoration : none;
-    border: inset;
-    border-radius: 30px;
-    font-weight  : 600;
+    border          : inset;
+    border-radius   : 30px;
+    font-weight     : 600;
 }
 
 .add a:hover {
-    background-color: #808080;
+    background-color: lightgray;
     color           : black;
 }
 
 /* ------------------------------------------------------- */
 
 .loading {
-    background-image: url('../../img/loading.svg');
-    background-repeat: no-repeat;
-    background-size: 500px 500px;
+    background-image   : url('../../img/loading.svg');
+    background-repeat  : no-repeat;
+    background-size    : 500px 500px;
     background-position: center;
-    height          : 500px;
-    display         : flex;
-    justify-content :center;
-    align-items    : center;
+    height             : 500px;
+    display            : flex;
+    justify-content    : center;
+    align-items        : center;
 }
 
-.loading h2{
+.loading h2 {
     font-family: revert;
 }
 
-.recipes{
-    display: flex;
+.recipes {
+    display       : flex;
     flex-direction: row;
 }
 
-.pagination{
+.pagination {
     width: 70%;
 }

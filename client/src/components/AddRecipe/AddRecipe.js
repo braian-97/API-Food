@@ -298,6 +298,15 @@ export function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
                         </div>
                         <p className={s.help}>When adding more than one Dish Type, separate the different Dish Types with a ","</p>
                     </div>
+                    <ol className={s.allDishTypes}>
+                            <h5>List of all Dish Types to add to the recipe: </h5>
+                            {recipe.dishTypes.map((d, i) => (
+                                <li key={i*10}>
+                                    {d}
+                                </li>
+                            )
+                            )}
+                        </ol>
                 </div>
 
                 <div id="steps" className={s.addSteps}>
@@ -361,7 +370,7 @@ export function AddRecipe({ addRecipe, result, getAllDiets, diets }) {
                     <button className={s.addButton} onClick={() => clickedfn()} name="enviar" type="submit" disabled={(recipe.name && recipe.summary) && (recipe.name.trim() && recipe.summary.trim()) !== "" ? false : true} >Create recipe</button>
                     <h4>The name and summary of the recipe are required</h4>
                     </div>
-                    <input className={s.restartInput} type="button" value="Restart all" onClick={() => restart()} />
+                    <button className={s.restartInput} onClick={() => restart()} >Restart all</button>
                 </div>
                 {showResult && result && result.id ?
                     <div className={s.created}>

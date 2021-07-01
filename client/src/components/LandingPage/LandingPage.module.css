@@ -51,6 +51,9 @@
     background-color: #000000e0;
     border: 3px solid black;
     border-radius: 20px;
+
+    animation-name: goHome;
+    animation-duration: 4s;
 }
 
 .goHome h2:hover {
@@ -66,4 +69,23 @@
 }
 
 
-
+.goHome h2 {
+    animation: bounce 1s infinite alternate;
+    -webkit-animation: bounce 1s infinite alternate;
+  }
+  @keyframes bounce {
+    from {
+      transform: translateY(0px);
+    }
+    to {
+      transform: translateY(-15px);
+    }
+  }
+  @-webkit-keyframes bounce {
+    from {
+      transform: translateY(0px);
+    }
+    to {
+      transform: translateY(-15px);
+    }
+  }

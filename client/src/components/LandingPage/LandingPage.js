@@ -11,7 +11,6 @@ function LandingPage () {
             <Link className={s.goHome} to="./home">
             <h2>Go to the main page!</h2> 
             </Link>
-            <h3 className={s.by}>By Braian Silva</h3>
         </div>
     )
 }
