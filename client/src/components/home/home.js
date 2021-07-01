@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getAllRecipes, searchRecipe, getAllDiets } from '../../actions/index';
+import { getAllRecipes, searchRecipe, getAllDiets } from '../../actions/index.js';
 
-import Pagination from '../Pagination/Pagination'
+import Pagination from '../Pagination/Pagination.js'
 import s from './Home.module.css';
 import check from '../../img/check2.png'
 import cross from '../../img/cross.png'

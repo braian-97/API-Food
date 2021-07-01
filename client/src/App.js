@@ -1,11 +1,11 @@
 import './App.css';
 import React from "react"
 import { Route } from "react-router-dom"
-import Home from './components/Home/Home'
-import LandingPage from './components/LandingPage/LandingPage'
-import AddRecipe from './components/AddRecipe/AddRecipe';
-import RecipeDetail from './components/RecipeDetail/RecipeDetail'
-import Nav from './components/Nav/Nav'
+import Home from './components/Home/Home.js'
+import LandingPage from './components/LandingPage/LandingPage.js'
+import AddRecipe from './components/AddRecipe/AddRecipe.js';
+import RecipeDetail from './components/RecipeDetail/RecipeDetail.js'
+import Nav from './components/Nav/Nav.js'
 
 import './global.css';
 

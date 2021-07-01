@@ -1,4 +1,4 @@
-import { SET_RECIPES, ADD_RECIPE, SET_DIETS, SEARCH_RECIPE, GET_DETAILS } from "../actions/index";
+import { SET_RECIPES, ADD_RECIPE, SET_DIETS, SEARCH_RECIPE, GET_DETAILS } from "../actions/index.js";
 
 const initialState = {
     recipes: undefined,

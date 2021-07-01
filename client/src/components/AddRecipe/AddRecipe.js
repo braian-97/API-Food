@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom';
-import { addRecipe, getAllDiets } from '../../actions'
+import { addRecipe, getAllDiets } from '../../actions/index.js'
 import s from './AddRecipe.module.css'
 import created from '../../img/check1.png'
 import check from '../../img/check2.png'

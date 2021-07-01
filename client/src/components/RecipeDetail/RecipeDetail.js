@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { connect } from 'react-redux';
-import { getRecipeDetail } from '../../actions';
+import { getRecipeDetail } from '../../actions/index.js';
 import s from './RecipeDetails.module.css'
 
 
