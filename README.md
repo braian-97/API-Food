@@ -10,6 +10,7 @@ Algunos features del proyecto: Cache de búsquedas, ordenamientos y filtros, for
 
 ### Lenguajes y herramientas utilizadas:
 
+Javascript<br>
 React<br>
 Redux<br>
 NodeJs<br>
