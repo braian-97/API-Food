@@ -20,7 +20,7 @@
 const server = require('./src/app.js');
 const { conn, Recipe, Diet } = require('./src/db.js');
 const { v4: uuidv4 } = require('uuid');
-const newId = uuidv4();
+
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
   server.listen(3001, () => {
@@ -28,17 +28,15 @@ conn.sync({ force: true }).then(() => {
 
     //PRE-LOADED DIETS
     const diets = ["gluten free", "ketogenic", "vegetarian", "lacto vegetarian", "ovo vegetarian", "vegan", "pescetarian", "paleo", "primal", "whole 30"]
-  
-    diets.forEach( diet => {
-      const newId = uuidv4();
 
-      if(diet === null) {return null}
-      Diet.create({ 
+    diets.forEach(diet => {
+      const newId = uuidv4();
+      Diet.create({
         id: newId,
         name: diet,
       })
-      .then( r => console.log("pre.load diets"))
-      .catch(err => console.log(err));
+        .then(r => console.log("pre.load diets"))
+        .catch(err => console.log(err));
     })
 
     //PRE-LOADED RECIPES
@@ -58,7 +56,6 @@ conn.sync({ force: true }).then(() => {
         steps: ["Crumble sausage into a large skillet. Cook over medium heat, stirring often, until meat is well browned."],
         diets: [
           "dairy free",
-          "pescatarian"
         ],
       },
       {
@@ -120,11 +117,10 @@ conn.sync({ force: true }).then(() => {
       }
     ]
 
-    recipes.forEach( recipe => {
-      const newId = uuidv4();
+    recipes.forEach((recipe) => {
 
-      if(recipe === null) {return null}
-      const {title, summary, image, spoonacularScore, dishTypes, steps, diets} = recipe
+      const newId = uuidv4();
+      const { title, summary, image, spoonacularScore, dishTypes, steps, diets } = recipe
 
       var newRecipe;
       Recipe.findOrCreate({
@@ -134,48 +130,43 @@ conn.sync({ force: true }).then(() => {
           summary: summary,
           image: image,
           score: spoonacularScore,
-          dishTypes: dishTypes,           
+          dishTypes: dishTypes,
           steps: steps,
-        }        
-    }).then(recipes => {
-        newRecipe = recipes[0]
+        }
+      }).then(recipes => {
+        if (recipes && recipes[0]) {
+          newRecipe = recipes[0]
 
-        if(diets && diets[0]){
-        let result = diets.map(diet => {
+          let result = diets.map(diet => {
             if (diet) {
-                return Diet.findOrCreate({
-                    where: {
-                        name: diet,
-                    },
-                    defaults: {
-                        id: newId,
-                        name: diet,
-                    }
-                }).then(diet => {
-                    return diet
-                }).catch(err => console.log(err));
+              return Diet.findOrCreate({
+                where: {
+                  name: diet,
+                },
+                defaults: {
+                  id: newId,
+                  name: diet,
+                }
+              }).then(_diet => {
+                return _diet
+              }).catch(err => console.log(err));
             }
+          })
+          return result
+        }
+      })
+        .then(diet => {
+          diet[0].then(_diet => {
+            if (_diet) {
+              return _diet[0].setRecipes(newRecipe.id)
+            }
+          })
+            .then(d => { console.log("new diet set") })
+            .catch(err => console.log(err));
         })
-        return result
-      }
-    }).then(diet => {
-            if(diet && diet[0]){
-            diet.forEach(e => {
-                e.then(diet => {
-                  if(diet){
-                    return diet[0].setRecipes(newRecipe.id)
-                  }
-                }).then(diet => {
-                    if (diet) {                                
-                      console.log("new diet set")
-                    }
-                }).catch(err => console.log(err));
-            })
-          }
-        })
-      .then( r => console.log("pre-loaded recipes "))
-      .catch(err => console.log(err));
+        .then(r => console.log("pre-loaded recipes "))
+        .catch(err => console.log(err));
     })
   })
 })
-.catch(err => console.log(err));
+  .catch(err => console.log(err));
