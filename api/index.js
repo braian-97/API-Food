@@ -31,6 +31,8 @@ conn.sync({ force: true }).then(() => {
   
     diets.forEach( diet => {
       const newId = uuidv4();
+
+      if(diet === null) {return null}
       Diet.create({ 
         id: newId,
         name: diet,
@@ -120,6 +122,8 @@ conn.sync({ force: true }).then(() => {
 
     recipes.forEach( recipe => {
       const newId = uuidv4();
+
+      if(recipe === null) {return null}
       const {title, summary, image, spoonacularScore, dishTypes, steps, diets} = recipe
 
       var newRecipe;
