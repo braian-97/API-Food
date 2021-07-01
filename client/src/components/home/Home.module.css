@@ -282,12 +282,23 @@
     }
 }
 
+.sort{    
+    display        : flex;
+    flex-direction : column;
+    justify-content: center;
+    align-items    : center;
+}
+
+.sort label{
+    padding-bottom: 15px;
+}
 
 /* ------------------------------------------------------- */
 .orderRadio {
     display       : flex;
     flex-direction: column;
-    padding-top   : 10px;
+    padding-top: 20px;
+    padding-bottom: 10px;
 }
 
 .radioDiv {

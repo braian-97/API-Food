@@ -288,7 +288,7 @@ function Home({ recipes, getAllRecipes, searchRecipe, getAllDiets, diets, newRec
                                 <input type="radio" name="sort" value="score" onChange={(e) => setSortType(e.target.value)}></input>
                             </div>
                         </form>
-                        <div className={s.filtersDiv}>
+                        <div className={s.sort}>
                             <label >Choose a sort way: </label>
                             <button name={sort} onClick={(e) => handleClick(e)}
                             > {sort}
